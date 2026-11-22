@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 44" width="800" height="44" role="img">
+  <!-- Original artwork - BostonHacks 2026 "breadcrumb" team. -->
+  <title>Dotted trail divider</title>
+  <path d="M12 22C81.3 13 140.7 9 210 18C276.5 27 333.5 33 400 24C466.5 15 523.5 8 590 17C659.3 26 718.7 30 788 21" stroke="#E8552D" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 8.5"/><circle cx="12" cy="22" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"/><circle cx="400" cy="24" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"/><circle cx="788" cy="21" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"/>
+</svg>

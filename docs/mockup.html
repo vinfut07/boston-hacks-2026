@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Breadcrumb Screen Mockups</title>
+<link rel="stylesheet" href="archive/boston-bound/styles/tokens.css">
+<link rel="stylesheet" href="archive/boston-bound/styles/components.css">
+<style>
+  body { margin: 0; background: var(--color-gray-50); color: var(--color-text); font-family: var(--font-body); }
+  .page { max-width: 1320px; margin: 0 auto; padding: var(--space-8) var(--gutter) var(--space-16); }
+  .page-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-8); }
+  .page-head h1 { margin: 0; font-size: var(--text-3xl); }
+  .page-head p { margin: var(--space-2) 0 0; max-width: 70ch; color: var(--color-text-muted); }
+  .sample-note { font-family: var(--font-primary); font-weight: 600; background: var(--color-yellow-tint); border-radius: var(--radius-md); padding: var(--space-2) var(--space-3); font-size: var(--text-sm); }
+  .toc { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-10); }
+  .toc a { font-family: var(--font-primary); font-weight: 600; font-size: var(--text-sm); color: var(--color-ink); text-decoration: none; background: #fff; border: 1px solid var(--color-gray-light); border-radius: var(--radius-pill); padding: 6px 12px; }
+  .toc a:hover { border-color: var(--color-ink); }
+
+  .screen { margin-bottom: var(--space-16); scroll-margin-top: var(--space-4); }
+  .screen > header { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2) var(--space-4); margin-bottom: var(--space-3); }
+  .screen > header .eyebrow { color: var(--color-text-muted); margin: 0; }
+  .screen > header h2 { margin: 0; font-family: var(--font-primary); font-size: var(--text-2xl); }
+  .screen > header code { font-size: var(--text-sm); color: var(--color-text-muted); }
+
+  /* Browser frame */
+  .browser { background: var(--color-paper); border: 1.5px solid var(--color-ink); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-md); }
+  .browser__chrome { display: flex; align-items: center; gap: var(--space-3); padding: 10px var(--space-4); background: var(--color-gray-50); border-bottom: 1px solid var(--color-gray-light); }
+  .browser__dots { display: flex; gap: 6px; }
+  .browser__dots i { width: 11px; height: 11px; border-radius: 50%; background: var(--color-gray-light); }
+  .browser__url { flex: 1; max-width: 520px; font-size: var(--text-xs); color: var(--color-text-muted); background: #fff; border: 1px solid var(--color-gray-light); border-radius: var(--radius-pill); padding: 4px 12px; }
+  .browser__viewport { height: 720px; overflow: auto; display: flex; flex-direction: column; }
+
+  /* App header (top nav) */
+  .appbar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: var(--space-6); padding: 0 var(--space-6); height: 64px; background: #fff; border-bottom: 1.5px solid var(--color-ink); }
+  .appbar img { height: 28px; flex: none; }
+  .appbar nav { display: flex; gap: var(--space-1); }
+  .appbar nav a { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 var(--space-3); border-radius: var(--radius-control); font-family: var(--font-primary); font-weight: 600; font-size: var(--text-base); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-ink); text-decoration: none; }
+  .appbar nav a svg { width: 18px; height: 18px; }
+  .appbar nav a.is-active { color: var(--color-active); background: var(--color-active-bg); }
+  .appbar .search { flex: 1; max-width: 320px; margin-left: auto; }
+  .appbar .avatar { flex: none; }
+  .content { flex: 1; width: 100%; max-width: 1180px; margin: 0 auto; padding: var(--space-6); box-sizing: border-box; }
+
+  /* Backend notes */
+  .notes-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-4); }
+  .notes { border-left: 6px solid var(--color-blue); background: var(--color-blue-tint); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: var(--space-3) var(--space-4); font-size: var(--text-sm); line-height: var(--leading-normal); }
+  .notes--layout { border-color: var(--color-ink); background: #fff; }
+  .notes h4 { margin: 0 0 var(--space-1); font-family: var(--font-primary); font-size: var(--text-sm); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+  .notes ul { margin: 0; padding-left: 1.1em; }
+  .notes code { font-size: 0.85em; }
+  .notes .gap { color: var(--color-red-strong); font-weight: 700; }
+
+  /* Shared bits */
+  .filters { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
+  .fchip { flex: none; display: inline-flex; align-items: center; gap: 4px; height: 34px; padding: 0 12px; border: 1px solid var(--color-gray-light); border-radius: var(--radius-pill); font-family: var(--font-primary); font-weight: 600; font-size: var(--text-sm); background: var(--color-paper); }
+  .fchip.is-on { background: var(--color-ink); color: #fff; border-color: var(--color-ink); }
+  .fchip svg { width: 14px; height: 14px; }
+  .curated { display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-primary); font-weight: 700; font-size: var(--text-2xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; background: var(--color-paper); color: var(--color-ink); border-radius: var(--radius-pill); padding: 2px 8px; }
+  .byline { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-primary); font-weight: 600; font-size: var(--text-sm); }
+  .avatar { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--color-sky-tint); border: 1.5px solid var(--color-ink); font-family: var(--font-primary); font-weight: 700; font-size: var(--text-xs); color: var(--color-ink); }
+  .avatar--lg { width: 96px; height: 96px; font-size: var(--text-3xl); }
+  .section-title { margin: 0; font-family: var(--font-primary); font-weight: 700; font-size: var(--text-lg); }
+  .muted { color: var(--color-text-muted); font-weight: 500; }
+  .input { min-height: 42px; display: flex; align-items: center; gap: var(--space-2); padding: 0 var(--space-3); border: 1.5px solid var(--color-ink); border-radius: var(--radius-control); font-size: var(--text-base); background: #fff; box-sizing: border-box; }
+  .input--area { min-height: 96px; align-items: start; padding-top: 10px; }
+  .input .ph { color: var(--color-gray-mid); }
+  .input svg { width: 16px; height: 16px; color: var(--color-text-muted); flex: none; }
+  .ext { font-family: var(--font-primary); font-weight: 600; font-size: var(--text-sm); color: var(--color-link); display: inline-flex; align-items: center; gap: 4px; text-decoration: none; }
+  .ext svg { width: 14px; height: 14px; }
+
+  .feed-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-5); }
+  .feed-head h1 { margin: 0; font-size: var(--text-3xl); }
+  .feed-head p { margin: 4px 0 0; color: var(--color-text-muted); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-5); }
+
+  /* Map placeholder */
+  .map { position: relative; min-height: 200px; border-radius: var(--radius-card); border: 1px solid var(--color-gray-light); overflow: hidden; background: linear-gradient(115deg, transparent 0 64%, var(--color-sky-tint) 64% 100%), #EEF0F1; }
+  .map .park { position: absolute; left: 24%; top: 30%; width: 26%; height: 28%; border-radius: 14px; background: var(--color-green-tint); }
+  .map .marker { position: absolute; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 2.5px solid var(--color-ink); font-family: var(--font-primary); font-weight: 700; font-size: var(--text-xs); transform: translate(-50%, -50%); }
+  .map .me { position: absolute; width: 16px; height: 16px; border-radius: 50%; background: var(--color-blue); border: 3px solid #fff; box-shadow: 0 0 0 9px rgba(32,109,223,.2); transform: translate(-50%, -50%); }
+  .map .tag { position: absolute; left: 10px; bottom: 10px; font-family: var(--font-primary); font-weight: 600; font-size: var(--text-xs); background: rgba(255,255,255,.92); border-radius: var(--radius-sm); padding: 3px 8px; color: var(--color-text-muted); }
+
+  /* Detail */
+  .hero { background: var(--line-rl); color: #fff; border-bottom: 1.5px solid var(--color-ink); }
+  .hero__inner { max-width: 1180px; margin: 0 auto; padding: var(--space-8) var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); box-sizing: border-box; }
+  .hero .pill { background: #fff; color: var(--color-ink); }
+  .hero h1 { margin: 0; font-size: var(--text-4xl); line-height: var(--leading-tight); }
+  .hero__meta { display: flex; gap: var(--space-3); align-items: center; font-family: var(--font-primary); font-weight: 600; font-size: var(--text-sm); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+  .two-col { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: var(--space-8); align-items: start; }
+  .stack { display: flex; flex-direction: column; gap: var(--space-5); min-width: 0; }
+  .side { position: sticky; top: 88px; display: flex; flex-direction: column; gap: var(--space-4); }
+  .side .panel { padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); }
+  .side .btn { width: 100%; box-sizing: border-box; }
+  .side-actions { display: flex; flex-direction: column; gap: var(--space-4); }
+  .ratings-sum { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+  .ratings-sum div { text-align: center; padding: var(--space-3); border: 1px solid var(--color-gray-light); border-radius: var(--radius-md); background: #fff; }
+  .ratings-sum b { display: block; font-family: var(--font-primary); font-size: var(--text-2xl); }
+  .ratings-sum span { font-family: var(--font-primary); font-size: var(--text-2xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--color-text-muted); }
+  .review { padding: var(--space-4) 0; border-top: 1px solid var(--color-gray-light); font-size: var(--text-sm); }
+  .review p { margin: var(--space-2) 0 0; line-height: var(--leading-normal); }
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 6px var(--space-3); font-size: var(--text-sm); }
+  .kv dt { font-family: var(--font-primary); font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: var(--tracking-caps); font-size: var(--text-xs); align-self: center; }
+  .kv dd { margin: 0; font-family: var(--font-primary); font-weight: 600; }
+
+  /* Active quest: split */
+  .split { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) 420px; min-height: 0; }
+  .split .map { border-radius: 0; border: 0; border-right: 1.5px solid var(--color-ink); min-height: 100%; }
+  .split__panel { overflow: auto; padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+  .transit { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-primary); font-weight: 600; font-size: var(--text-sm); }
+  .live { font-size: var(--text-2xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--color-green); font-weight: 700; }
+  .progress { height: 8px; border-radius: 4px; background: var(--color-gray-50); border: 1px solid var(--color-gray-light); overflow: hidden; }
+  .progress > i { display: block; height: 100%; width: 40%; background: var(--color-yellow); }
+  .checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+  .checklist li { display: flex; align-items: center; gap: var(--space-3); padding: 10px var(--space-3); border: 1px solid var(--color-gray-light); border-radius: var(--radius-md); font-family: var(--font-primary); font-weight: 600; cursor: pointer; }
+  .checklist li:hover { background: var(--color-gray-50); }
+  .checklist .box { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border: 2px solid var(--color-ink); border-radius: 6px; }
+  .checklist .done .box { background: var(--color-yellow); }
+  .checklist .done span { text-decoration: line-through; color: var(--color-text-muted); }
+  .checklist .box svg { width: 14px; height: 14px; stroke-width: 3; }
+  .checklist small { margin-left: auto; color: var(--color-text-muted); font-weight: 500; }
+  .map-overlay { position: absolute; top: var(--space-4); left: var(--space-4); max-width: 280px; }
+
+  /* Rate dialog */
+  .scrim { flex: 1; display: grid; place-items: center; padding: var(--space-8); background: rgba(0,0,0,.35); }
+  .dialog { width: 100%; max-width: 560px; background: #fff; border: 1.5px solid var(--color-ink); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); box-sizing: border-box; }
+  .dialog__head { display: flex; align-items: center; gap: var(--space-4); }
+  .dialog__head img { width: 140px; }
+  .dialog__head h3 { margin: 0 0 4px; font-size: var(--text-xl); }
+  .dialog__head p { margin: 0; color: var(--color-text-muted); }
+  .dialog__foot { display: flex; justify-content: flex-end; gap: var(--space-3); }
+
+  /* Create: form + preview */
+  .field { display: grid; gap: 6px; }
+  .field .lbl { font-family: var(--font-primary); font-weight: 600; font-size: var(--text-sm); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--color-text-muted); }
+  .seg { display: flex; }
+  .seg span { flex: 1; text-align: center; padding: 9px 0; border: 1.5px solid var(--color-ink); margin-left: -1.5px; font-family: var(--font-primary); font-weight: 600; }
+  .seg span:first-child { margin-left: 0; border-radius: var(--radius-control) 0 0 var(--radius-control); }
+  .seg span:last-child { border-radius: 0 var(--radius-control) var(--radius-control) 0; }
+  .seg .on { background: var(--color-ink); color: #fff; }
+  .row4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); }
+  .stop-edit { display: flex; align-items: center; gap: var(--space-3); padding: 12px var(--space-3); border: 1px solid var(--color-gray-light); border-radius: var(--radius-md); background: #fff; }
+  .stop-edit .n { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 2.5px solid var(--color-ink); font-family: var(--font-primary); font-weight: 700; font-size: var(--text-xs); }
+  .stop-edit b { display: block; font-family: var(--font-primary); }
+  .stop-edit small { color: var(--color-text-muted); font-size: var(--text-xs); }
+  .stop-edit .tools { margin-left: auto; display: flex; gap: var(--space-2); color: var(--color-text-muted); }
+  .stop-edit .tools svg { width: 18px; height: 18px; }
+  .form-foot { display: flex; justify-content: flex-end; gap: var(--space-3); padding-top: var(--space-2); }
+
+  /* Activity */
+  .tabs { display: flex; gap: var(--space-2); border-bottom: 1.5px solid var(--color-ink); margin-bottom: var(--space-5); }
+  .tabs span { padding: 12px 10px; font-family: var(--font-primary); font-weight: 600; font-size: var(--text-base); letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text-muted); border-bottom: 3px solid transparent; margin-bottom: -1.5px; }
+  .tabs .is-on { color: var(--color-active); border-color: var(--color-blue); }
+  .tabs b { font-size: var(--text-xs); background: var(--color-gray-50); border-radius: var(--radius-pill); padding: 1px 7px; margin-left: 4px; color: var(--color-ink); }
+  .run-row { display: grid; grid-template-columns: 10px minmax(0,1fr) 220px auto; gap: var(--space-4); align-items: center; padding: var(--space-4); border: 1.5px solid var(--color-ink); border-radius: var(--radius-card); background: #fff; }
+  .run-row + .run-row { margin-top: var(--space-3); }
+  .run-row .sw { align-self: stretch; border-radius: 4px; background: var(--line, var(--line-rl)); }
+  .run-row b { display: block; font-family: var(--font-primary); font-size: var(--text-lg); }
+  .run-row small { font-family: var(--font-primary); font-weight: 600; font-size: var(--text-xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--color-text-muted); }
+
+  /* Profile */
+  .profile { display: grid; grid-template-columns: 300px minmax(0,1fr); gap: var(--space-8); align-items: start; }
+  .profile-card { padding: var(--space-6); display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-3); }
+  .profile-card h2 { margin: 0; font-family: var(--font-primary); font-size: var(--text-2xl); }
+  .profile-card p { margin: 0; color: var(--color-text-muted); font-size: var(--text-sm); }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); width: 100%; }
+  .stats div { padding: var(--space-3) 0; border: 1px solid var(--color-gray-light); border-radius: var(--radius-md); }
+  .stats b { display: block; font-family: var(--font-display); font-stretch: 125%; font-size: var(--text-xl); }
+  .stats span { font-family: var(--font-primary); font-size: var(--text-2xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--color-text-muted); }
+
+  .empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-3); padding: var(--space-8) var(--space-4); }
+  .empty h4 { margin: 0; font-family: var(--font-primary); font-size: var(--text-lg); }
+  .empty p { margin: 0; color: var(--color-text-muted); font-size: var(--text-sm); }
+
+  /* Map tab */
+  .explore { flex: 1; display: grid; grid-template-columns: 380px minmax(0,1fr); min-height: 0; }
+  .explore__list { overflow: auto; padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-3); border-right: 1.5px solid var(--color-ink); }
+  .explore .map { border: 0; border-radius: 0; min-height: 100%; }
+
+  .summary h2 { font-size: var(--text-2xl); margin: 0 0 var(--space-4); }
+  .summary .panel { padding: var(--space-2) var(--space-4); }
+  .summary table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+  .summary th, .summary td { text-align: left; vertical-align: top; padding: var(--space-3); border-bottom: 1px solid var(--color-gray-light); }
+  .summary tr:last-child td { border-bottom: 0; }
+  .summary th { font-family: var(--font-primary); letter-spacing: var(--tracking-caps); text-transform: uppercase; font-size: var(--text-xs); color: var(--color-text-muted); }
+  .summary td:first-child { font-family: var(--font-primary); font-weight: 700; white-space: nowrap; }
+  .table-wrap { overflow-x: auto; }
+  .badge { display: inline-block; font-family: var(--font-primary); font-weight: 700; font-size: var(--text-2xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; padding: 2px 8px; border-radius: var(--radius-pill); white-space: nowrap; }
+  .badge--ok { background: var(--color-green-tint); color: var(--color-green-strong); }
+  .badge--new { background: var(--color-red-tint); color: var(--color-red-strong); }
+  .badge--decide { background: var(--color-yellow-tint); }
+
+
+  /* ---- Web + mobile pair ---- */
+  .pair { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: var(--space-6); align-items: start; }
+  .pair > .browser { min-width: 0; }
+  .phone-wrap { display: flex; flex-direction: column; gap: var(--space-2); }
+  .phone-label { color: var(--color-text-muted); font-size: var(--text-xs); }
+  .phone { width: 340px; height: 740px; border: 1.5px solid var(--color-ink); border-radius: 36px; overflow: hidden; background: var(--color-paper); box-shadow: var(--shadow-md); display: flex; flex-direction: column; }
+  .phone__status { flex: none; display: flex; align-items: center; justify-content: space-between; height: 34px; padding: 0 22px; font-family: var(--font-primary); font-weight: 700; font-size: var(--text-xs); }
+  .phone__status i, .phone__status svg { width: 14px; height: 14px; margin-left: 4px; }
+  .phone__notch { width: 90px; height: 22px; border-radius: 0 0 14px 14px; background: var(--color-ink); margin-top: -12px; }
+  .phone__body { position: relative; flex: 1; overflow-y: auto; display: flex; flex-direction: column; min-height: 0; }
+  .phone__nav { flex: none; padding: 4px; border-top: 1.5px solid var(--color-ink); }
+  .phone .nav-tabs { border: 0; padding: 0; gap: 0; }
+  .phone .nav-tabs__item { flex-direction: column; gap: 3px; min-width: 0; padding: 6px 2px; font-size: var(--text-2xs); letter-spacing: 0.04em; }
+  .phone .nav-tabs__item svg { width: 22px; height: 22px; }
+  .m-top { position: sticky; top: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); padding: var(--space-2) var(--space-4) var(--space-3); background: #fff; border-bottom: 1px solid var(--color-gray-light); }
+  .m-top img { height: 24px; }
+  .m-top h3 { margin: 0; font-family: var(--font-primary); font-size: var(--text-lg); }
+  .icon-btn { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--color-gray-light); background: var(--color-paper); color: var(--color-ink); }
+  .icon-btn svg { width: 18px; height: 18px; }
+  .m-pad { padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-4); }
+  .m-scroll { flex-wrap: nowrap; overflow-x: auto; }
+  .m-hero { padding: var(--space-4) !important; }
+  .m-hero h1 { font-size: var(--text-xl) !important; }
+  .m-back { background: transparent !important; border-color: rgba(255,255,255,.5) !important; color: #fff !important; }
+  .m-actions { position: sticky; bottom: 0; margin-top: auto; display: flex; gap: var(--space-3); align-items: center; padding: var(--space-3) var(--space-4); background: rgba(255,255,255,.96); border-top: 1px solid var(--color-gray-light); }
+  .m-actions .btn:last-child { flex: 1; }
+  .m-row2 { grid-template-columns: 1fr 1fr !important; }
+  .m-two { display: grid; grid-template-columns: auto 1fr; gap: var(--space-3); align-items: center; }
+  .m-tabs { margin: 0 !important; padding: 0 var(--space-3); }
+  .m-tabs span { flex: none; font-size: var(--text-sm); }
+  .m-run { display: grid; grid-template-columns: 8px minmax(0,1fr) auto; gap: var(--space-3); align-items: center; padding: var(--space-3); border: 1.5px solid var(--color-ink); border-radius: var(--radius-card); }
+  .m-run .sw { align-self: stretch; border-radius: 4px; background: var(--line, var(--line-rl)); }
+  .m-run b { display: block; font-family: var(--font-primary); font-size: var(--text-base); margin-bottom: 4px; }
+  .m-run small { font-family: var(--font-primary); font-weight: 600; font-size: var(--text-2xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--color-text-muted); }
+  .m-sheet { flex: none; display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-2) var(--space-4) var(--space-4); background: #fff; border-top: 1.5px solid var(--color-ink); border-radius: 18px 18px 0 0; margin-top: -18px; position: relative; z-index: 2; }
+  .m-grab { align-self: center; width: 40px; height: 4px; border-radius: 2px; background: var(--color-gray-light); }
+
+  /* ---- Mobile-native patterns ---- */
+  .phone-wrap .notes--mobile { width: 340px; box-sizing: border-box; border-color: var(--color-red); background: var(--color-red-tint); }
+  .notes--mobile .gap { color: var(--color-red-strong); }
+  .phone__body { background: #fff; }
+  .m-homebar { flex: none; align-self: center; width: 120px; height: 5px; border-radius: 3px; background: var(--color-ink); margin: 8px 0; }
+  .m-tabbar { flex: none; display: flex; align-items: center; justify-content: space-around; padding: 6px 6px 14px; border-top: 1px solid var(--color-gray-light); background: #fff; }
+  .m-tabbar__item { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 56px; font-family: var(--font-primary); font-weight: 600; font-size: 0.6875rem; color: var(--color-text-muted); }
+  .m-tabbar__item svg { width: 24px; height: 24px; }
+  .m-tabbar__item.is-active { color: var(--color-ink); }
+  .m-tabbar__item.is-active svg { stroke-width: 2.5; }
+  .m-tabbar__create { display: grid; place-items: center; width: 52px; height: 52px; margin-top: -26px; border-radius: 50%; background: var(--color-red); color: #fff; border: 3px solid var(--color-ink); box-shadow: var(--shadow-button-sm); }
+  .m-tabbar__create svg { width: 26px; height: 26px; stroke-width: 3; }
+  .m-head { position: sticky; top: 0; z-index: 4; display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); padding: 6px var(--space-4) 10px; background: rgba(255,255,255,.96); }
+  .m-seg { display: flex; padding: 3px; background: var(--color-gray-50); border-radius: 999px; }
+  .m-seg span { padding: 6px 12px; border-radius: 999px; font-family: var(--font-primary); font-weight: 600; font-size: var(--text-sm); color: var(--color-text-muted); white-space: nowrap; }
+  .m-seg .is-on { background: #fff; color: var(--color-ink); box-shadow: var(--shadow-xs); }
+  .m-seg--full span { flex: 1; text-align: center; padding: 7px 4px; font-size: var(--text-xs); }
+  .m-pad { padding: var(--space-3) var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-4); }
+  .m-center { align-items: center; text-align: center; justify-content: center; flex: 1; }
+  .m-sec { display: flex; justify-content: space-between; align-items: center; margin-bottom: -6px; }
+  .m-sec h3 { margin: 0; font-family: var(--font-primary); font-size: var(--text-md); }
+  .m-rail { display: flex; gap: var(--space-3); overflow-x: auto; margin: 0 calc(var(--space-4) * -1); padding: 2px var(--space-4) 6px; scroll-snap-type: x mandatory; }
+  .m-rail > * { scroll-snap-align: start; flex: none; }
+  .m-event { width: 150px; padding: var(--space-3); border-radius: var(--radius-card); background: var(--line); color: #fff; display: flex; flex-direction: column; gap: 4px; border: 1.5px solid var(--color-ink); }
+  .m-event b { font-family: var(--font-primary); font-size: var(--text-base); line-height: 1.15; }
+  .m-event small { font-family: var(--font-primary); font-weight: 600; font-size: var(--text-xs); opacity: .9; }
+  .m-event__date { align-self: start; display: flex; flex-direction: column; align-items: center; background: #fff; color: var(--color-ink); border-radius: 8px; padding: 2px 8px; font-family: var(--font-primary); font-weight: 700; font-size: var(--text-lg); line-height: 1.1; margin-bottom: 4px; }
+  .m-event__date b { font-size: 0.625rem; letter-spacing: .08em; }
+  .m-big { position: relative; }
+  .m-save { position: absolute; right: 12px; bottom: 12px; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 1.5px solid var(--color-ink); }
+  .m-save svg { width: 20px; height: 20px; }
+  .m-hero-full { background: var(--line); color: #fff; padding: 8px var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); border-bottom: 1.5px solid var(--color-ink); }
+  .m-hero-btns { display: flex; justify-content: space-between; }
+  .m-glass { background: rgba(255,255,255,.2) !important; border-color: rgba(255,255,255,.35) !important; color: #fff !important; }
+  .m-stats { display: grid; grid-template-columns: repeat(3, 1fr); background: rgba(255,255,255,.15); border-radius: var(--radius-md); }
+  .m-stats div { text-align: center; padding: 8px 0; }
+  .m-stats b { display: block; font-family: var(--font-primary); font-size: var(--text-lg); }
+  .m-stats span { font-family: var(--font-primary); font-size: 0.625rem; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+  .m-stop { width: 170px; padding: var(--space-3); border: 1.5px solid var(--color-ink); border-radius: var(--radius-card); display: flex; flex-direction: column; gap: 2px; }
+  .m-stop b { font-family: var(--font-primary); font-size: var(--text-base); }
+  .m-stop small { color: var(--color-text-muted); font-size: var(--text-xs); }
+  .m-stop__n { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; border: 2.5px solid var(--color-ink); font-family: var(--font-primary); font-weight: 700; font-size: var(--text-xs); margin-bottom: 6px; }
+  .m-cp { display: flex; align-items: center; gap: 4px; margin-top: 6px; font-size: var(--text-xs); font-family: var(--font-primary); font-weight: 600; }
+  .m-cp img { width: 12px; }
+  .m-acc { border-top: 1px solid var(--color-gray-light); padding-top: var(--space-3); }
+  .m-acc summary { list-style: none; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-primary); font-weight: 700; font-size: var(--text-md); cursor: pointer; }
+  .m-acc summary::-webkit-details-marker { display: none; }
+  .m-acc summary svg { width: 18px; height: 18px; }
+  .m-acc[open] summary { margin-bottom: var(--space-2); }
+  .m-acc .transit + .transit { margin-top: 6px; }
+  .m-cta { position: sticky; bottom: 0; margin-top: auto; display: flex; gap: var(--space-3); padding: var(--space-3) var(--space-4); background: linear-gradient(transparent, #fff 30%); }
+  .m-mapfull { flex: 1; min-height: 0; border: 0 !important; border-radius: 0 !important; }
+  .m-sheet--float { position: absolute; left: 0; right: 0; bottom: 0; margin: 0; border-radius: 22px 22px 0 0; box-shadow: var(--shadow-lg); padding-bottom: var(--space-4); }
+  .m-dots { display: flex; gap: 4px; }
+  .m-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--color-gray-light); }
+  .m-dots i.on { background: var(--color-ink); }
+  .m-bigcheck { display: flex; align-items: center; gap: var(--space-3); min-height: 56px; padding: 0 var(--space-3); border: 1.5px solid var(--color-ink); border-radius: var(--radius-card); font-family: var(--font-primary); font-weight: 600; font-size: var(--text-md); }
+  .m-bigcheck .box { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border: 2.5px solid var(--color-ink); border-radius: 8px; }
+  .m-bigcheck.done { background: var(--color-yellow-tint); }
+  .m-bigcheck.done .box { background: var(--color-yellow); }
+  .m-bigcheck.done { color: var(--color-text-muted); text-decoration: line-through; }
+  .m-bigcheck .box svg { width: 16px; height: 16px; stroke-width: 3; color: var(--color-ink); }
+  .m-swipe { position: relative; display: flex; align-items: center; justify-content: center; height: 56px; border-radius: 999px; background: var(--color-red); color: #fff; font-family: var(--font-primary); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: var(--text-sm); border: 3px solid var(--color-ink); }
+  .m-swipe__knob { position: absolute; left: 4px; top: 4px; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: #fff; color: var(--color-ink); }
+  .m-steps { display: flex; gap: 6px; }
+  .m-steps i { width: 28px; height: 5px; border-radius: 3px; background: var(--color-gray-light); }
+  .m-steps i.on { background: var(--color-ink); }
+  .m-stars { display: flex; gap: 6px; }
+  .m-stars svg { width: 48px; height: 48px; stroke-width: 1.5; color: var(--color-ink); fill: #fff; }
+  .m-stars svg.on { fill: var(--color-yellow); }
+  .m-progress { height: 4px; background: var(--color-gray-50); }
+  .m-progress i { display: block; height: 100%; background: var(--color-red); }
+  .m-sug { display: flex; align-items: center; gap: var(--space-3); min-height: 56px; border-bottom: 1px solid var(--color-gray-light); }
+  .m-sug > svg { width: 20px; height: 20px; color: var(--color-text-muted); flex: none; }
+  .m-sug b { display: block; font-family: var(--font-primary); }
+  .m-sug small { color: var(--color-text-muted); font-size: var(--text-xs); }
+  .m-add { margin-left: auto; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--color-ink); color: #fff; }
+  .m-add svg { width: 18px; height: 18px; }
+  .m-swiperow { position: relative; overflow: hidden; border-radius: var(--radius-md); }
+  .m-swiperow > :first-child { position: relative; z-index: 1; background: #fff; }
+  .m-del { position: absolute; right: 0; top: 0; bottom: 0; width: 72px; display: grid; place-items: center; background: var(--color-red); color: #fff; font-family: var(--font-primary); font-weight: 700; font-size: var(--text-sm); }
+  .m-resume { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4); border-radius: var(--radius-card); background: var(--line); color: #fff; text-decoration: none; border: 1.5px solid var(--color-ink); }
+  .m-resume > div { flex: 1; }
+  .m-resume small { font-family: var(--font-primary); font-weight: 600; font-size: var(--text-xs); letter-spacing: .08em; text-transform: uppercase; opacity: .9; }
+  .m-resume b { display: block; font-family: var(--font-primary); font-size: var(--text-lg); }
+  .m-resume__go { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: #fff; color: var(--color-ink); }
+  .m-row { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--color-gray-light); border-left: 6px solid var(--line); border-radius: var(--radius-md); }
+  .m-row > div { flex: 1; }
+  .m-row b { display: block; font-family: var(--font-primary); }
+  .m-row small { color: var(--color-text-muted); font-size: var(--text-xs); }
+  .m-row > svg { width: 18px; height: 18px; color: var(--color-text-muted); }
+  .m-row__date { display: flex; flex-direction: column; align-items: center; min-width: 38px; font-family: var(--font-primary); font-weight: 700; font-size: var(--text-lg); line-height: 1.05; }
+  .m-row__date b { font-size: 0.625rem; letter-spacing: .08em; color: var(--color-text-muted); }
+  .m-prof { display: flex; align-items: center; gap: var(--space-3); padding: 6px var(--space-4) var(--space-2); }
+  .m-prof b { display: block; font-family: var(--font-primary); font-size: var(--text-xl); }
+  .m-prof small { color: var(--color-text-muted); font-size: var(--text-sm); }
+  .m-statrow { display: grid; grid-template-columns: repeat(4, 1fr); border: 1.5px solid var(--color-ink); border-radius: var(--radius-card); }
+  .m-statrow div { text-align: center; padding: 10px 0; }
+  .m-statrow div + div { border-left: 1px solid var(--color-gray-light); }
+  .m-statrow b { display: block; font-family: var(--font-display); font-stretch: 125%; font-size: var(--text-lg); }
+  .m-statrow span { font-family: var(--font-primary); font-size: 0.625rem; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); }
+  .m-lines { display: flex; flex-wrap: wrap; gap: 8px; }
+  .m-feeditem { display: flex; gap: var(--space-3); }
+  .m-feeditem__dot { flex: none; width: 14px; height: 14px; margin-top: 4px; border-radius: 50%; border: 2.5px solid var(--color-ink); }
+  .m-feeditem small { color: var(--color-text-muted); font-size: var(--text-xs); }
+  .m-feeditem b { display: block; font-family: var(--font-primary); margin-bottom: 4px; }
+  .m-cards { position: absolute; left: 0; right: 0; bottom: 12px; display: flex; gap: 10px; overflow-x: auto; padding: 0 16px; scroll-snap-type: x mandatory; }
+  .m-cards > * { flex: none; width: 240px; scroll-snap-align: center; }
+
+  @media (max-width: 1180px) {
+    .pair { grid-template-columns: 1fr; }
+    .phone-wrap { align-items: center; }
+  }
+  @media (max-width: 380px) { .phone { width: 100%; } }
+
+  /* Small screens: the mockup page itself stays usable */
+  @media (max-width: 900px) {
+    .notes-row { grid-template-columns: 1fr; }
+    .browser__viewport { height: auto; max-height: 820px; }
+    .two-col, .split, .profile, .explore { grid-template-columns: 1fr; }
+    .side { position: static; }
+    .split .map, .explore .map { min-height: 280px; border-right: 0; border-bottom: 1.5px solid var(--color-ink); }
+    .explore__list { border-right: 0; }
+    .appbar { gap: var(--space-3); padding: 0 var(--space-4); }
+    .appbar nav, .appbar .search { display: none; }
+    .row4 { grid-template-columns: 1fr 1fr; }
+    .run-row { grid-template-columns: 10px minmax(0,1fr); }
+    .run-row > :nth-child(n+3) { grid-column: 2; }
+    .hero h1 { font-size: var(--text-2xl); }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="page-head">
+    <div>
+      <p class="eyebrow" style="margin:0;color:var(--color-text-muted)">Breadcrumb · style guide v0.2</p>
+      <h1 class="font-display">Web + mobile mockups</h1>
+      <p>Each P0 page from the PRD, drawn at desktop width (left) and phone width (right) with the style guide's own classes. It's one web app, but the phone version is designed for phones on its own terms (bottom sheets, swipe gestures, step-by-step flows) rather than being the desktop page shrunk down. Red boxes list what's mobile-specific and any backend it needs. The blue box lists what the page needs from the backend; <b style="color:var(--color-red-strong)">red</b> items aren't in the schema yet. The white box describes the layout at both sizes.</p>
+    </div>
+    <span class="sample-note">Sample content for layout only. Places are real; costs, times and ratings are placeholders.</span>
+  </div>
+  <nav class="toc"><a href="#feed">1 · For You</a><a href="#detail">2 · Detail</a><a href="#play">3 · Active quest</a><a href="#rate">4 · Rate</a><a href="#create">5 · Create</a><a href="#activity">6 · Activity</a><a href="#profile">7 · Profile</a><a href="#map">8 · Map</a><a href="#summary">Backend summary</a></nav>
+
+  <!-- 1. FEED -->
+  <section class="screen" id="feed">
+    <header><p class="eyebrow">1 · Discovery · Person C</p><h2>For You feed</h2><code>/</code></header>
+    <div class="pair"><div class="browser">
+      <div class="browser__chrome"><span class="browser__dots"><i></i><i></i><i></i></span><span class="browser__url">breadcrumb.app/</span></div>
+      <div class="browser__viewport">
+        <div class="appbar">
+          <img src="archive/boston-bound/assets/svg/logo-wordmark.svg" alt="Breadcrumb">
+          <nav><a class="is-active"><i data-lucide="house"></i>For You</a><a><i data-lucide="map"></i>Map</a><a><i data-lucide="circle-plus"></i>Create</a><a><i data-lucide="bookmark"></i>Activity</a></nav>
+          <div class="input search"><i data-lucide="search"></i><span class="ph">Search sidequests…</span></div>
+          <span class="avatar">MK</span>
+        </div>
+        <div class="content">
+          <div class="feed-head">
+            <div><h1 class="font-display">For you</h1><p>You've lived here. Have you explored it?</p></div>
+            <div class="filters"><span class="fchip is-on">All</span><span class="fchip">Food</span><span class="fchip">Cafés</span><span class="fchip">Outdoors</span><span class="fchip"><i data-lucide="wallet"></i>Under $20</span><span class="fchip"><i data-lucide="calendar"></i>Scheduled</span></div>
+          </div>
+          <div class="grid">
+            <a class="sq-card sq-card--rl" href="#detail">
+              <div class="sq-card__top"><div class="sq-card__meta"><span class="pill pill--rl">RL</span><span class="curated"><i data-lucide="badge-check" style="width:12px;height:12px"></i>Curated</span></div><h3 class="sq-card__title">Sunday Café Hop</h3></div>
+              <div class="sq-card__bottom"><p class="sq-card__label"><img class="vehicle vehicle--rl" src="archive/boston-bound/assets/svg/vehicle-rl.svg" alt="">Layover <small>· 3 stops · anytime</small></p><p class="sq-card__desc">Three cafés across Beacon Hill and Back Bay, linked by a walk through the Public Garden.</p><ul class="chips"><li class="chip chip--cost"><i data-lucide="wallet"></i>$$<span class="chip__off">$</span></li><li class="chip chip--time"><i data-lucide="clock"></i>~2 hr</li><li class="chip chip--fun"><i data-lucide="star"></i>4.6</li></ul></div>
+            </a>
+            <a class="sq-card sq-card--gl" href="#detail">
+              <div class="sq-card__top"><div class="sq-card__meta"><span class="pill pill--gl">GL</span><span>Sat · 2:00 PM</span></div><h3 class="sq-card__title">Fenway Food Crawl</h3></div>
+              <div class="sq-card__bottom"><p class="sq-card__label"><img class="vehicle vehicle--gl" src="archive/boston-bound/assets/svg/vehicle-gl.svg" alt="">Outbound <small>· 4 stops · 6 going</small></p><p class="sq-card__desc">Join a group eating through Time Out Market and the Fenway side streets.</p><ul class="chips"><li class="chip chip--cost"><i data-lucide="wallet"></i>$$$</li><li class="chip chip--time"><i data-lucide="clock"></i>~3 hr</li><li class="chip chip--fun"><i data-lucide="star"></i>New</li></ul></div>
+            </a>
+            <a class="sq-card sq-card--ol" href="#detail">
+              <div class="sq-card__top"><div class="sq-card__meta"><span class="pill pill--ol">OL</span><span>Anytime</span></div><h3 class="sq-card__title">North End Cannoli Duel</h3></div>
+              <div class="sq-card__bottom"><p class="sq-card__label"><img class="vehicle vehicle--ol" src="archive/boston-bound/assets/svg/vehicle-ol.svg" alt="">Inbound <small>· you completed this</small></p><p class="sq-card__desc">Mike's vs. Modern. Pick a side, then walk it off along the Harborwalk.</p><ul class="chips"><li class="chip chip--cost"><i data-lucide="wallet"></i>$<span class="chip__off">$$</span></li><li class="chip chip--time"><i data-lucide="clock"></i>~1.5 hr</li><li class="chip chip--fun"><i data-lucide="star"></i>4.8</li></ul></div>
+            </a>
+            <a class="sq-card sq-card--bl" href="#detail">
+              <div class="sq-card__top"><div class="sq-card__meta"><span class="pill pill--bl">BL</span><span>Anytime</span></div><h3 class="sq-card__title">Eastie Harbor Loop</h3></div>
+              <div class="sq-card__bottom"><p class="sq-card__label"><img class="vehicle vehicle--bl" src="archive/boston-bound/assets/svg/vehicle-bl.svg" alt="">Boarding <small>· you joined</small></p><p class="sq-card__desc">Piers Park skyline views, then tacos in Maverick Square.</p><ul class="chips"><li class="chip chip--cost"><i data-lucide="wallet"></i>$<span class="chip__off">$$</span></li><li class="chip chip--time"><i data-lucide="clock"></i>~2.5 hr</li><li class="chip chip--fun"><i data-lucide="star"></i>4.3</li></ul></div>
+            </a>
+            <a class="sq-card sq-card--sl" href="#detail">
+              <div class="sq-card__top"><div class="sq-card__meta"><span class="pill pill--sl">SL</span><span>Anytime</span></div><h3 class="sq-card__title">Seaport Sunset Stroll</h3></div>
+              <div class="sq-card__bottom"><p class="sq-card__label"><img class="vehicle vehicle--sl" src="archive/boston-bound/assets/svg/vehicle-sl.svg" alt="">Outbound <small>· 3 stops</small></p><p class="sq-card__desc">Fan Pier, the ICA steps and a harborside snack as the sun goes down.</p><ul class="chips"><li class="chip chip--cost"><i data-lucide="wallet"></i>$$<span class="chip__off">$</span></li><li class="chip chip--time"><i data-lucide="clock"></i>~2 hr</li><li class="chip chip--fun"><i data-lucide="star"></i>4.5</li></ul></div>
+            </a>
+            <a class="sq-card sq-card--rl" href="#detail">
+              <div class="sq-card__top"><div class="sq-card__meta"><span class="pill pill--rl">RL</span><span>Sun · 11:00 AM</span></div><h3 class="sq-card__title">Harvard Sq Bookstores</h3></div>
+              <div class="sq-card__bottom"><p class="sq-card__label"><img class="vehicle vehicle--rl" src="archive/boston-bound/assets/svg/vehicle-rl.svg" alt="">Outbound <small>· 3 stops · 2 going</small></p><p class="sq-card__desc">Harvard Book Store, Grolier Poetry and a coffee to read with.</p><ul class="chips"><li class="chip chip--cost"><i data-lucide="wallet"></i>$<span class="chip__off">$$</span></li><li class="chip chip--time"><i data-lucide="clock"></i>~2 hr</li><li class="chip chip--fun"><i data-lucide="star"></i>New</li></ul></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div><div class="phone-wrap"><span class="eyebrow phone-label">Mobile · /</span><div class="phone"><div class="phone__status"><span>9:41</span><span class="phone__notch"></span><span><i data-lucide="signal"></i><i data-lucide="battery-full"></i></span></div><div class="phone__body">
+<div class="m-head"><img src="archive/boston-bound/assets/svg/logo-mark.svg" alt="" style="width:30px"><div class="m-seg"><span class="is-on">For you</span><span>Nearby</span><span>Friends</span></div><span class="icon-btn"><i data-lucide="search"></i></span></div>
+<div class="m-pad">
+  <div class="m-sec"><h3>Happening this week</h3><span class="ext">All</span></div>
+  <div class="m-rail">
+    <div class="m-event" style="--line:var(--line-gl)"><span class="m-event__date"><b>SAT</b>22</span><b>Fenway Food Crawl</b><small>2:00 PM · 6 going</small></div>
+    <div class="m-event" style="--line:var(--line-rl)"><span class="m-event__date"><b>SUN</b>23</span><b>Harvard Sq Books</b><small>11:00 AM · 2 going</small></div>
+    <div class="m-event" style="--line:var(--line-bl)"><span class="m-event__date"><b>SUN</b>23</span><b>Eastie Loop</b><small>3:00 PM</small></div>
+  </div>
+  <div class="m-sec"><h3>Anytime quests</h3><span class="fchip" style="height:28px"><i data-lucide="sliders-horizontal"></i>Filter</span></div>
+  <a class="m-big sq-card sq-card--rl" href="#detail"><div class="sq-card__top" style="min-height:150px"><div class="sq-card__meta"><span class="pill pill--rl">RL</span><span class="curated">Curated</span></div><h3 class="sq-card__title" style="font-size:1.45rem">Sunday Café Hop</h3></div><div class="sq-card__bottom"><p class="sq-card__label"><img class="vehicle vehicle--rl" src="archive/boston-bound/assets/svg/vehicle-rl.svg" alt="">3 stops · 1.2 mi from you</p><ul class="chips"><li class="chip chip--cost"><i data-lucide="wallet"></i>$$</li><li class="chip chip--time"><i data-lucide="clock"></i>~2 hr</li><li class="chip chip--fun"><i data-lucide="star"></i>4.6</li></ul></div><span class="m-save" aria-label="Save"><i data-lucide="bookmark"></i></span></a>
+  <a class="m-big sq-card sq-card--ol" href="#detail"><div class="sq-card__top" style="min-height:150px"><div class="sq-card__meta"><span class="pill pill--ol">OL</span><span>Anytime</span></div><h3 class="sq-card__title" style="font-size:1.45rem">North End Cannoli Duel</h3></div></a>
+</div></div><nav class="m-tabbar"><a class="m-tabbar__item is-active"><i data-lucide="compass"></i>Explore</a><a class="m-tabbar__item"><i data-lucide="map"></i>Map</a><a class="m-tabbar__create" aria-label="Create"><i data-lucide="plus"></i></a><a class="m-tabbar__item"><i data-lucide="bookmark"></i>Saved</a><a class="m-tabbar__item"><i data-lucide="user"></i>You</a></nav></div><div class="notes notes--mobile"><h4>Mobile-only patterns</h4><ul><li>Tabs at the top (For you / Nearby / Friends) instead of desktop filters</li><li>Horizontal rail for scheduled outings, so time-sensitive quests sit up top</li><li>One big card per row with a save button you can reach with your thumb</li><li>Pull down to refresh</li><li class=gap>“Nearby” and “1.2 mi from you” need the user's location: compute the distance on the phone and never send it to the server</li><li>Friends tab needs <code>follows</code> (P1). Hide it until then.</li></ul></div></div></div>
+    <div class="notes-row">
+      <div class="notes"><h4>Backend needs</h4><ul>
+        <li><code>getFeed(filters)</code>: published sidequests + creator profile, ordered curated first, then newest</li>
+        <li class="gap"><code>sidequests.primary_line</code> (rl/gl/bl/ol/sl) sets the card colour</li>
+        <li class="gap"><code>sidequests.is_curated</code> for the badge</li>
+        <li class="gap">Rating stats view: avg fun, review count. "New" when there are no reviews.</li>
+        <li>Status label per viewer: LAYOVER = saved, BOARDING = joined, OUTBOUND = open, INBOUND = completed run</li>
+        <li>Participant count for scheduled quests ("6 going"). Search = <code>ilike</code> on title/description for now.</li>
+      </ul></div>
+      <div class="notes notes--layout"><h4>Desktop layout</h4><ul>
+        <li>Top nav bar; search and avatar on the right</li>
+        <li>Card grid: 3 columns on desktop, 2 on tablet, 1 on phone</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- 2. DETAIL -->
+  <section class="screen" id="detail">
+    <header><p class="eyebrow">2 · Discovery · Person C (+ B's map)</p><h2>Sidequest detail</h2><code>/q/:id</code></header>
+    <div class="pair"><div class="browser">
+      <div class="browser__chrome"><span class="browser__dots"><i></i><i></i><i></i></span><span class="browser__url">breadcrumb.app/q/sunday-cafe-hop</span></div>
+      <div class="browser__viewport">
+        <div class="appbar"><img src="archive/boston-bound/assets/svg/logo-wordmark.svg" alt="Breadcrumb"><nav><a class="is-active"><i data-lucide="house"></i>For You</a><a><i data-lucide="map"></i>Map</a><a><i data-lucide="circle-plus"></i>Create</a><a><i data-lucide="bookmark"></i>Activity</a></nav><div class="input search"><i data-lucide="search"></i><span class="ph">Search sidequests…</span></div><span class="avatar">MK</span></div>
+        <div class="hero"><div class="hero__inner">
+          <div class="hero__meta"><span class="pill pill--rl">RL</span><span>Anytime</span><span class="curated"><i data-lucide="badge-check" style="width:12px;height:12px"></i>Curated</span></div>
+          <h1 class="font-display">Sunday Café Hop</h1>
+          <div class="byline" style="color:#fff"><span class="avatar">ST</span>Breadcrumb Team</div>
+        </div></div>
+        <div class="content">
+          <div class="two-col">
+            <div class="stack">
+              <p style="margin:0;font-size:var(--text-md);line-height:var(--leading-normal)">A slow Sunday: espresso on Charles Street, a loop through the Public Garden, and pastries on Newbury.</p>
+              <div class="map" style="min-height:280px"><div class="park"></div><span class="marker" style="left:28%;top:26%">1</span><span class="marker" style="left:48%;top:55%">2</span><span class="marker" style="left:74%;top:72%">3</span><span class="tag">Map preview · stops only, routes come from the directions API</span></div>
+              <h3 class="section-title">Route</h3>
+              <ol class="route-strip">
+                <li class="stop"><span class="stop__dot">1</span><span class="stop__name">Tatte Bakery &amp; Café</span><span class="stop__note">70 Charles St, Beacon Hill</span><span class="checkpoint"><img src="archive/boston-bound/assets/svg/marker-checkpoint.svg" alt="">Order a shakshuka or a pastry</span></li>
+                <li class="leg leg--walk"><i data-lucide="footprints"></i>Walk · via Boston Common</li>
+                <li class="stop"><span class="stop__dot">2</span><span class="stop__name">Public Garden</span><span class="stop__note">Lagoon &amp; footbridge</span><span class="checkpoint"><img src="archive/boston-bound/assets/svg/marker-checkpoint.svg" alt="">Find the Make Way for Ducklings statues</span></li>
+                <li class="leg leg--gl"><span class="pill pill--gl">GL</span>Arlington → Copley</li>
+                <li class="stop"><span class="stop__dot">3</span><span class="stop__name">Newbury Street</span><span class="stop__note">Back Bay</span></li>
+              </ol>
+              <h3 class="section-title">Reviews <span class="muted">· 12</span></h3>
+              <div class="ratings-sum"><div><b>4.6</b><span>Fun</span></div><div><b>4.1</b><span>Value</span></div><div><b>4.4</b><span>Travel</span></div></div>
+              <div><div class="review"><div class="byline"><span class="avatar">MK</span>maya_k · BU <span class="chip chip--fun" style="margin-left:auto"><i data-lucide="star"></i>5</span></div><p>The ducklings checkpoint was the highlight. Go before noon.</p></div><div class="review"><div class="byline"><span class="avatar">JR</span>jrod · Northeastern <span class="chip chip--fun" style="margin-left:auto"><i data-lucide="star"></i>4</span></div><p>Easy walk, Tatte line was long though.</p></div></div>
+            </div>
+            <aside class="side">
+              <div class="panel">
+                <dl class="kv"><dt>Cost</dt><dd>~$20</dd><dt>Time</dt><dd>~2 hours</dd><dt>Stops</dt><dd>3 · 2 checkpoints</dd><dt>Area</dt><dd>Beacon Hill · Back Bay</dd></dl>
+                <div class="side-actions" style="margin-top:var(--space-2)">
+                  <a class="btn btn--go" href="#play"><i data-lucide="navigation"></i>Start quest</a>
+                  <a class="btn" href="#"><i data-lucide="bookmark"></i>Save</a>
+                </div>
+                <p style="margin:var(--space-2) 0 0;font-size:var(--text-xs);color:var(--color-text-muted)">This is an anytime quest, so there's no Join button. Scheduled quests show <b>Join · Sat 2:00 PM</b> here.</p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div><div class="phone-wrap"><span class="eyebrow phone-label">Mobile · /q/:id</span><div class="phone"><div class="phone__status"><span>9:41</span><span class="phone__notch"></span><span><i data-lucide="signal"></i><i data-lucide="battery-full"></i></span></div><div class="phone__body">
+<div class="m-hero-full" style="--line:var(--line-rl)">
+  <div class="m-hero-btns"><span class="icon-btn m-glass"><i data-lucide="chevron-left"></i></span><span style="display:flex;gap:8px"><span class="icon-btn m-glass"><i data-lucide="share"></i></span><span class="icon-btn m-glass"><i data-lucide="bookmark"></i></span></span></div>
+  <span class="pill pill--rl" style="background:#fff;color:#000;align-self:start">RL · Anytime</span>
+  <h1 class="font-display" style="margin:0;font-size:1.7rem;line-height:1.05">Sunday Café Hop</h1>
+  <div class="m-stats"><div><b>~$20</b><span>Cost</span></div><div><b>2 hr</b><span>Time</span></div><div><b>4.6★</b><span>12 reviews</span></div></div>
+</div>
+<div class="m-pad">
+  <div class="m-sec"><h3>3 stops</h3><span class="muted" style="font-size:var(--text-sm)">swipe →</span></div>
+  <div class="m-rail">
+    <div class="m-stop"><span class="m-stop__n">1</span><b>Tatte Bakery</b><small>70 Charles St</small><span class="m-cp"><img src="archive/boston-bound/assets/svg/marker-checkpoint.svg" alt="">Order a pastry</span></div>
+    <div class="m-stop"><span class="m-stop__n">2</span><b>Public Garden</b><small>Lagoon</small><span class="m-cp"><img src="archive/boston-bound/assets/svg/marker-checkpoint.svg" alt="">Find the ducklings</span></div>
+    <div class="m-stop"><span class="m-stop__n">3</span><b>Newbury St</b><small>Back Bay</small></div>
+  </div>
+  <details class="m-acc" open><summary>Getting around <i data-lucide="chevron-down"></i></summary><div class="transit"><span class="pill pill--walk"><i data-lucide="footprints"></i></span>Walk 1 → 2</div><div class="transit"><span class="pill pill--gl">GL</span>Arlington → Copley, 2 → 3</div></details>
+  <details class="m-acc"><summary>Reviews (12) <i data-lucide="chevron-down"></i></summary></details>
+  <details class="m-acc"><summary>About <i data-lucide="chevron-down"></i></summary></details>
+</div>
+<div class="m-cta"><a class="btn btn--go" href="#play" style="flex:1"><i data-lucide="navigation"></i>Start quest</a></div></div><span class="m-homebar"></span></div><div class="notes notes--mobile"><h4>Mobile-only patterns</h4><ul><li>Full-bleed header with see-through buttons; save and share sit up top</li><li>Stops are a swipeable card rail instead of the long vertical route</li><li>Collapsible sections keep the page short</li><li>One fixed bottom button. A scheduled quest shows <b>Join</b> here, then <b>Start</b> on the day.</li><li>Share opens the native share sheet with a link to <code>/q/:id</code> (link previews need OG tags at deploy)</li></ul></div></div></div>
+    <div class="notes-row">
+      <div class="notes"><h4>Backend needs</h4><ul>
+        <li><code>getSidequest(id)</code>: sidequest + creator + ordered stops + checkpoints + rating stats + reviews (with reviewer profiles)</li>
+        <li class="gap"><code>quest_checkpoints</code> table (optional <code>stop_id</code>)</li>
+        <li class="gap">Leg modes ("Walk", "GL Arlington → Copley"): fetch live from the directions API and never store made-up ones. Decide: store a <code>suggested_mode</code> per leg, or always compute it?</li>
+        <li>Viewer state: saved? joined? in-progress run? (drives the side panel buttons)</li>
+        <li>Join only when <code>scheduled_at</code> is set (the DB already enforces this)</li>
+      </ul></div>
+      <div class="notes notes--layout"><h4>Desktop layout</h4><ul>
+        <li>Full-width coloured hero (card top, scaled up)</li>
+        <li>Main column (map, route strip, reviews) + sticky side panel with facts and actions</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- 3. ACTIVE QUEST -->
+  <section class="screen" id="play">
+    <header><p class="eyebrow">3 · Quest · Person A (+ B's map)</p><h2>Active quest</h2><code>/q/:id/play</code></header>
+    <div class="pair"><div class="browser">
+      <div class="browser__chrome"><span class="browser__dots"><i></i><i></i><i></i></span><span class="browser__url">breadcrumb.app/q/sunday-cafe-hop/play</span></div>
+      <div class="browser__viewport">
+        <div class="appbar"><img src="archive/boston-bound/assets/svg/logo-wordmark.svg" alt="Breadcrumb"><span class="font-display" style="font-size:var(--text-md)">Sunday Café Hop</span><a class="btn btn--ghost btn--sm" href="#detail" style="margin-left:auto"><i data-lucide="x"></i>Exit</a></div>
+        <div class="split">
+          <div class="map">
+            <div class="park" style="left:34%;top:34%"></div>
+            <span class="marker" style="left:26%;top:22%;background:var(--color-yellow)">1</span><span class="marker" style="left:50%;top:52%">2</span><span class="marker" style="left:76%;top:76%">3</span>
+            <span class="me" style="left:40%;top:40%"></span>
+            <div class="map-overlay panel" style="padding:var(--space-3)"><span class="eyebrow" style="font-size:var(--text-xs)"><i data-lucide="locate-fixed" style="width:14px;height:14px;vertical-align:-2px"></i> Location on</span><p style="margin:4px 0 0;font-size:var(--text-xs);color:var(--color-text-muted)">Only used on this page. Never saved or shared.</p></div>
+          </div>
+          <div class="split__panel">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span class="eyebrow" style="color:var(--color-text-muted)">Stop 2 of 3</span><span class="eyebrow">2 / 5 checkpoints</span></div>
+            <div class="progress"><i></i></div>
+            <h3 class="section-title" style="font-size:var(--text-xl)">Next: Public Garden</h3>
+            <div class="transit"><span class="pill pill--walk"><i data-lucide="footprints"></i></span>Walk via Boston Common</div>
+            <div class="transit"><span class="pill pill--gl">GL</span>Arlington, outbound · 4 min <span class="live">● Live MBTA</span></div>
+            <a class="ext" href="#">Open directions in Google Maps<i data-lucide="external-link"></i></a>
+            <h3 class="section-title">Checklist</h3>
+            <ul class="checklist">
+              <li class="done"><span class="box"><i data-lucide="check"></i></span><span>Order something at Tatte</span><small>Stop 1</small></li>
+              <li class="done"><span class="box"><i data-lucide="check"></i></span><span>Walk down Charles St</span><small>Stop 1</small></li>
+              <li><span class="box"></span><span>Find the duckling statues</span><small>Stop 2</small></li>
+              <li><span class="box"></span><span>Cross the lagoon footbridge</span><small>Stop 2</small></li>
+              <li><span class="box"></span><span>Window-shop one bookstore</span><small>Stop 3</small></li>
+            </ul>
+            <a class="btn btn--primary" href="#rate" style="align-self:start;margin-top:var(--space-2)"><i data-lucide="flag"></i>Complete quest</a>
+          </div>
+        </div>
+      </div>
+    </div><div class="phone-wrap"><span class="eyebrow phone-label">Mobile · /q/:id/play</span><div class="phone"><div class="phone__status"><span>9:41</span><span class="phone__notch"></span><span><i data-lucide="signal"></i><i data-lucide="battery-full"></i></span></div><div class="phone__body">
+<div class="m-mapfull map"><div class="park" style="left:34%;top:30%"></div><span class="marker" style="left:26%;top:20%;background:var(--color-yellow)">1</span><span class="marker" style="left:52%;top:42%">2</span><span class="marker" style="left:76%;top:58%">3</span><span class="me" style="left:42%;top:34%"></span>
+  <span class="icon-btn" style="position:absolute;top:10px;left:12px"><i data-lucide="x"></i></span>
+  <span class="icon-btn" style="position:absolute;top:10px;right:12px"><i data-lucide="locate-fixed"></i></span>
+</div>
+<div class="m-sheet m-sheet--float">
+  <span class="m-grab"></span>
+  <div style="display:flex;justify-content:space-between;align-items:center"><span class="eyebrow" style="color:var(--color-text-muted)">Stop 2 of 3 · 2/5 ✓</span><span class="m-dots"><i class="on"></i><i class="on"></i><i></i></span></div>
+  <h3 class="section-title" style="font-size:var(--text-xl)">Public Garden</h3>
+  <div class="transit"><span class="pill pill--gl">GL</span>Arlington in 4 min <span class="live">● Live</span></div>
+  <div class="m-bigcheck"><span class="box"></span>Find the duckling statues</div>
+  <div class="m-bigcheck done"><span class="box"><i data-lucide="check"></i></span>Cross the footbridge</div>
+  <div style="display:flex;gap:8px"><a class="btn btn--sm btn--straight" href="#" style="flex:1"><i data-lucide="navigation"></i>Directions</a><a class="btn btn--sm btn--straight" href="#" style="flex:1">Next stop<i data-lucide="chevron-right"></i></a></div>
+  <div class="m-swipe"><span class="m-swipe__knob"><i data-lucide="chevrons-right"></i></span>Swipe to complete quest</div>
+</div></div><span class="m-homebar"></span></div><div class="notes notes--mobile"><h4>Mobile-only patterns</h4><ul><li>Full-screen map with a bottom sheet you can drag up and down</li><li>One stop at a time: swipe the sheet left or right to move between stops</li><li>Large checkboxes (56 px rows) you can tap while walking</li><li>“Swipe to complete” so nobody finishes a quest by accident</li><li>Keep the screen awake (Wake Lock API) while a quest is active</li><li class=gap>Resume after closing the app: reload the in-progress <code>quest_run</code> on open</li><li>Location stays on the phone only. Nothing is stored.</li></ul></div></div></div>
+    <div class="notes-row">
+      <div class="notes"><h4>Backend needs</h4><ul>
+        <li class="gap"><code>quest_runs</code>: start/resume (one in-progress run per user per quest), complete, abandon</li>
+        <li class="gap"><code>checkpoint_completions</code> keyed by run, toggled on click</li>
+        <li>Location stays in memory only, with <b>no table</b> (PRD privacy rule)</li>
+        <li>MBTA V3: nearest stop + predictions for the next leg (client fetch; an API key raises rate limits)</li>
+        <li>External directions fallback. Never draw straight lines as routes.</li>
+      </ul></div>
+      <div class="notes notes--layout"><h4>Desktop layout</h4><ul>
+        <li>Focused mode: slim header with Exit, no main nav</li>
+        <li>Split view: map fills the left, a 420 px progress + checklist panel sits on the right</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- 4. RATE -->
+  <section class="screen" id="rate">
+    <header><p class="eyebrow">4 · Reviews · Person C</p><h2>Rate after completing</h2><code>dialog over /q/:id</code></header>
+    <div class="pair"><div class="browser">
+      <div class="browser__chrome"><span class="browser__dots"><i></i><i></i><i></i></span><span class="browser__url">breadcrumb.app/q/sunday-cafe-hop</span></div>
+      <div class="browser__viewport" style="height:600px">
+        <div class="scrim">
+          <div class="dialog" role="dialog" aria-label="Rate this sidequest">
+            <div class="dialog__head"><img src="archive/boston-bound/assets/svg/skyline.svg" alt="" aria-hidden="true"><div><h3 class="font-display">Quest complete!</h3><p>How was Sunday Café Hop?</p></div></div>
+            <form class="rate" onsubmit="return false">
+              <fieldset class="rate__row rate--fun"><legend class="sr-only">Fun</legend><span class="rate__label"><i data-lucide="star"></i>Fun</span>
+                <div class="rate__options"><input type="radio" name="fun" id="f1"><label for="f1"><i data-lucide="star"></i></label><input type="radio" name="fun" id="f2"><label for="f2"><i data-lucide="star"></i></label><input type="radio" name="fun" id="f3"><label for="f3"><i data-lucide="star"></i></label><input type="radio" name="fun" id="f4" checked><label for="f4"><i data-lucide="star"></i></label><input type="radio" name="fun" id="f5"><label for="f5"><i data-lucide="star"></i></label></div></fieldset>
+              <fieldset class="rate__row rate--cost"><legend class="sr-only">Cost</legend><span class="rate__label"><i data-lucide="wallet"></i>Cost</span>
+                <div class="rate__options"><input type="radio" name="c" id="c1"><label for="c1">$</label><input type="radio" name="c" id="c2" checked><label for="c2">$$</label><input type="radio" name="c" id="c3"><label for="c3">$$$</label></div></fieldset>
+              <fieldset class="rate__row rate--time"><legend class="sr-only">Travel</legend><span class="rate__label"><i data-lucide="clock"></i>Travel</span>
+                <div class="rate__options"><input type="radio" name="t" id="t1"><label for="t1">&lt;15</label><input type="radio" name="t" id="t2" checked><label for="t2">15–30</label><input type="radio" name="t" id="t3"><label for="t3">30–45</label><input type="radio" name="t" id="t4"><label for="t4">45+</label></div></fieldset>
+            </form>
+            <div class="field"><span class="lbl">Review (optional)</span><div class="input input--area"><span class="ph">What should the next person know?</span></div></div>
+            <div class="dialog__foot"><a class="btn btn--ghost" href="#">Skip</a><a class="btn btn--highlight" href="#"><i data-lucide="send"></i>Post review</a></div>
+          </div>
+        </div>
+      </div>
+    </div><div class="phone-wrap"><span class="eyebrow phone-label">Mobile · /q/:id/review</span><div class="phone"><div class="phone__status"><span>9:41</span><span class="phone__notch"></span><span><i data-lucide="signal"></i><i data-lucide="battery-full"></i></span></div><div class="phone__body">
+<div class="m-head"><span class="icon-btn"><i data-lucide="x"></i></span><div class="m-steps"><i class="on"></i><i></i><i></i></div><span class="ext">Skip</span></div>
+<div class="m-pad m-center">
+  <img src="archive/boston-bound/assets/svg/skyline.svg" alt="" aria-hidden="true" style="width:230px">
+  <p class="eyebrow" style="color:var(--color-text-muted);margin:0">Quest complete · 1 of 3</p>
+  <h2 class="font-display" style="margin:0;font-size:1.5rem">How fun was it?</h2>
+  <div class="m-stars"><i data-lucide="star" class="on"></i><i data-lucide="star" class="on"></i><i data-lucide="star" class="on"></i><i data-lucide="star" class="on"></i><i data-lucide="star"></i></div>
+  <p class="muted" style="margin:0">Tap a star. The next question appears automatically.</p>
+</div>
+<div class="m-cta"><a class="btn btn--highlight" href="#" style="flex:1">Next<i data-lucide="arrow-right"></i></a></div></div><span class="m-homebar"></span></div><div class="notes notes--mobile"><h4>Mobile-only patterns</h4><ul><li>One question per screen (Fun → Value → Travel → optional text), with big tap targets</li><li>Moves to the next step on tap, and the phone gives a little vibration</li><li>Opens right after “swipe to complete”. You can skip it and rate later from Saved → Completed.</li><li class=gap>Same scale issue as desktop: decide how the $/$$/$$$ and minute buckets map to 1–5</li></ul></div></div></div>
+    <div class="notes-row">
+      <div class="notes"><h4>Backend needs</h4><ul>
+        <li>Insert into <code>sidequest_reviews</code>. The DB requires a completion (currently <code>completed_sidequests</code>; switch to completed runs in <code>002</code>).</li>
+        <li class="gap"><b>Mismatch:</b> the style guide rates Cost as $/$$/$$$ and Travel as minute ranges, but the schema and PRD use <code>value_rating</code> / <code>travel_rating</code> 1–5. Decide: map in the UI, or change the columns.</li>
+      </ul></div>
+      <div class="notes notes--layout"><h4>Desktop layout</h4><ul>
+        <li>Modal dialog over the detail page, opened from "Complete quest" or a "Rate" button</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- 5. CREATE -->
+  <section class="screen" id="create">
+    <header><p class="eyebrow">5 · Create · Person B</p><h2>Create a sidequest</h2><code>/create</code></header>
+    <div class="pair"><div class="browser">
+      <div class="browser__chrome"><span class="browser__dots"><i></i><i></i><i></i></span><span class="browser__url">breadcrumb.app/create</span></div>
+      <div class="browser__viewport">
+        <div class="appbar"><img src="archive/boston-bound/assets/svg/logo-wordmark.svg" alt="Breadcrumb"><nav><a><i data-lucide="house"></i>For You</a><a><i data-lucide="map"></i>Map</a><a class="is-active"><i data-lucide="circle-plus"></i>Create</a><a><i data-lucide="bookmark"></i>Activity</a></nav><div class="input search"><i data-lucide="search"></i><span class="ph">Search sidequests…</span></div><span class="avatar">MK</span></div>
+        <div class="content">
+          <div class="two-col" style="grid-template-columns:minmax(0,1fr) 420px">
+            <div class="stack">
+              <h1 class="font-display" style="margin:0;font-size:var(--text-2xl)">New sidequest</h1>
+              <div class="field"><span class="lbl">Title</span><div class="input">Sunday Café Hop</div></div>
+              <div class="field"><span class="lbl">Description</span><div class="input input--area"><span class="ph">What's the vibe?</span></div></div>
+              <div class="field"><span class="lbl">When</span><div class="seg" style="max-width:360px"><span class="on">Anytime</span><span>Scheduled</span></div></div>
+              <div class="row4">
+                <div class="field"><span class="lbl">Category</span><div class="input">Cafés<i data-lucide="chevron-down" style="margin-left:auto"></i></div></div>
+                <div class="field"><span class="lbl">Main line</span><div class="input"><span class="pill pill--rl">RL</span><i data-lucide="chevron-down" style="margin-left:auto"></i></div></div>
+                <div class="field"><span class="lbl">Est. cost</span><div class="input">$ 20</div></div>
+                <div class="field"><span class="lbl">Duration</span><div class="input">120 min</div></div>
+              </div>
+              <div class="field"><span class="lbl">Stops</span>
+                <div class="stop-edit"><span class="n">1</span><div><b>Tatte Bakery &amp; Café</b><small>70 Charles St · 2 checkpoints</small></div><span class="tools"><i data-lucide="list-checks"></i><i data-lucide="trash-2"></i><i data-lucide="grip-vertical"></i></span></div>
+                <div class="stop-edit"><span class="n">2</span><div><b>Public Garden</b><small>Boston · 2 checkpoints</small></div><span class="tools"><i data-lucide="list-checks"></i><i data-lucide="trash-2"></i><i data-lucide="grip-vertical"></i></span></div>
+                <div class="input"><i data-lucide="search"></i><span class="ph">Search a place in Boston to add a stop…</span></div>
+              </div>
+              <div class="form-foot"><a class="btn btn--ghost" href="#">Save draft</a><a class="btn btn--primary" href="#"><i data-lucide="send"></i>Publish</a></div>
+            </div>
+            <aside class="side">
+              <span class="eyebrow" style="color:var(--color-text-muted)">Live preview</span>
+              <div class="map" style="min-height:220px"><div class="park"></div><span class="marker" style="left:30%;top:30%">1</span><span class="marker" style="left:56%;top:58%">2</span></div>
+              <div class="sq-card sq-card--rl"><div class="sq-card__top"><div class="sq-card__meta"><span class="pill pill--rl">RL</span><span>Anytime</span></div><h3 class="sq-card__title">Sunday Café Hop</h3></div><div class="sq-card__bottom"><p class="sq-card__label"><img class="vehicle vehicle--rl" src="archive/boston-bound/assets/svg/vehicle-rl.svg" alt="">Draft <small>· 2 stops</small></p><ul class="chips"><li class="chip chip--cost"><i data-lucide="wallet"></i>$$</li><li class="chip chip--time"><i data-lucide="clock"></i>~2 hr</li></ul></div></div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div><div class="phone-wrap"><span class="eyebrow phone-label">Mobile · /create</span><div class="phone"><div class="phone__status"><span>9:41</span><span class="phone__notch"></span><span><i data-lucide="signal"></i><i data-lucide="battery-full"></i></span></div><div class="phone__body">
+<div class="m-head"><span class="icon-btn"><i data-lucide="chevron-left"></i></span><b style="font-family:var(--font-primary)">Step 2 of 4 · Stops</b><span class="ext">Save</span></div>
+<div class="m-progress"><i style="width:50%"></i></div>
+<div class="m-pad">
+  <div class="input" style="min-height:50px;border-radius:999px"><i data-lucide="search"></i><span class="ph">Search a place in Boston</span></div>
+  <div class="m-sug"><i data-lucide="map-pin"></i><div><b>Tatte Bakery &amp; Café</b><small>70 Charles St, Boston</small></div><span class="m-add"><i data-lucide="plus"></i></span></div>
+  <div class="m-sug"><i data-lucide="map-pin"></i><div><b>Tatte Bakery &amp; Café</b><small>1003 Beacon St, Brookline</small></div><span class="m-add"><i data-lucide="plus"></i></span></div>
+  <div class="m-sec"><h3>Your stops</h3><span class="muted" style="font-size:var(--text-sm)">hold to reorder</span></div>
+  <div class="stop-edit"><span class="n">1</span><div><b>Public Garden</b><small>tap to add checkpoints</small></div><span class="tools"><i data-lucide="grip-vertical"></i></span></div>
+  <div class="m-swiperow"><div class="stop-edit" style="transform:translateX(-72px)"><span class="n">2</span><div><b>Newbury Street</b><small>1 checkpoint</small></div></div><span class="m-del"><i data-lucide="trash-2"></i></span></div>
+</div>
+<div class="m-cta"><a class="btn btn--primary" href="#" style="flex:1">Next: checkpoints<i data-lucide="arrow-right"></i></a></div></div><span class="m-homebar"></span></div><div class="notes notes--mobile"><h4>Mobile-only patterns</h4><ul><li>Four steps instead of one long form: Basics → Stops → Checkpoints → Review &amp; publish</li><li>Place search fills the whole screen with big result rows. Tap + to add a stop.</li><li>Hold and drag to reorder stops; swipe left to delete one</li><li>Autosaves a draft at every step, so a lost connection loses nothing</li><li class=gap>Saving a draft every step means writing <code>status='draft'</code> early and updating it, so <b>Create</b> must also support updating a draft</li></ul></div></div></div>
+    <div class="notes-row">
+      <div class="notes"><h4>Backend needs</h4><ul>
+        <li>Insert sidequest + stops (+ checkpoints) together. Ideally one RPC so a half-saved quest can't happen.</li>
+        <li>Place search fills <code>place_name</code>, <code>address</code>, <code>latitude</code>, <code>longitude</code> (geocoding API, decision D2)</li>
+        <li class="gap">"Main line" picker writes <code>primary_line</code></li>
+        <li>Draft vs. publish = <code>status</code>. Reordering uses the deferrable <code>stop_order</code> unique.</li>
+        <li>Cover image: URL for now. A Storage bucket only if we allow uploads.</li>
+      </ul></div>
+      <div class="notes notes--layout"><h4>Desktop layout</h4><ul>
+        <li>Form on the left; sticky live preview (map + card exactly as the feed shows it) on the right</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- 6. ACTIVITY -->
+  <section class="screen" id="activity">
+    <header><p class="eyebrow">6 · Activity · Person D</p><h2>My activity</h2><code>/me</code></header>
+    <div class="pair"><div class="browser">
+      <div class="browser__chrome"><span class="browser__dots"><i></i><i></i><i></i></span><span class="browser__url">breadcrumb.app/me?tab=in-progress</span></div>
+      <div class="browser__viewport" style="height:600px">
+        <div class="appbar"><img src="archive/boston-bound/assets/svg/logo-wordmark.svg" alt="Breadcrumb"><nav><a><i data-lucide="house"></i>For You</a><a><i data-lucide="map"></i>Map</a><a><i data-lucide="circle-plus"></i>Create</a><a class="is-active"><i data-lucide="bookmark"></i>Activity</a></nav><div class="input search"><i data-lucide="search"></i><span class="ph">Search sidequests…</span></div><span class="avatar">MK</span></div>
+        <div class="content">
+          <h1 class="font-display" style="margin:0 0 var(--space-4);font-size:var(--text-2xl)">My activity</h1>
+          <div class="tabs"><span>Saved<b>4</b></span><span>Joined<b>1</b></span><span class="is-on">In progress<b>2</b></span><span>Completed<b>14</b></span><span>Created<b>3</b></span></div>
+          <div class="run-row" style="--line:var(--line-rl)"><span class="sw"></span><div><small>Started today</small><b>Sunday Café Hop</b></div><div><small>Stop 2 of 3 · 2/5 checkpoints</small><div class="progress" style="margin-top:6px"><i></i></div></div><a class="btn btn--go btn--sm btn--straight" href="#play">Resume</a></div>
+          <div class="run-row" style="--line:var(--line-bl)"><span class="sw"></span><div><small>Started Tue</small><b>Eastie Harbor Loop</b></div><div><small>Stop 1 of 4 · 1/6 checkpoints</small><div class="progress" style="margin-top:6px"><i style="width:15%"></i></div></div><a class="btn btn--go btn--sm btn--straight" href="#play">Resume</a></div>
+          <div class="empty"><img src="archive/boston-bound/assets/svg/lobster.svg" alt="" aria-hidden="true" style="width:110px"><h4>That's everything in progress</h4><p>Find your next one on the For You feed.</p></div>
+        </div>
+      </div>
+    </div><div class="phone-wrap"><span class="eyebrow phone-label">Mobile · /me</span><div class="phone"><div class="phone__status"><span>9:41</span><span class="phone__notch"></span><span><i data-lucide="signal"></i><i data-lucide="battery-full"></i></span></div><div class="phone__body">
+<div class="m-head"><h2 class="font-display" style="margin:0;font-size:1.25rem">Saved</h2><span class="icon-btn"><i data-lucide="sliders-horizontal"></i></span></div>
+<div class="m-pad" style="gap:var(--space-3)">
+  <a class="m-resume" href="#play" style="--line:var(--line-rl)"><div><small>Continue your quest</small><b>Sunday Café Hop</b><div class="progress" style="margin-top:6px;background:rgba(255,255,255,.3);border:0"><i></i></div></div><span class="m-resume__go"><i data-lucide="play"></i></span></a>
+  <div class="m-seg m-seg--full"><span>Saved 4</span><span class="is-on">Joined 1</span><span>Done 14</span><span>Mine 3</span></div>
+  <div class="m-row" style="--line:var(--line-gl)"><span class="m-row__date"><b>SAT</b>22</span><div><b>Fenway Food Crawl</b><small>2:00 PM · 6 going</small></div><i data-lucide="chevron-right"></i></div>
+  <p class="muted" style="font-size:var(--text-xs);margin:0;text-align:center">Swipe a row left to leave or unsave</p>
+  <div class="m-swiperow"><div class="m-row" style="--line:var(--line-ol);transform:translateX(-80px)"><span class="m-row__date"><b>ANY</b>—</span><div><b>Cannoli Duel</b><small>Saved Nov 3</small></div></div><span class="m-del" style="width:80px">Unsave</span></div>
+</div></div><nav class="m-tabbar"><a class="m-tabbar__item"><i data-lucide="compass"></i>Explore</a><a class="m-tabbar__item"><i data-lucide="map"></i>Map</a><a class="m-tabbar__create" aria-label="Create"><i data-lucide="plus"></i></a><a class="m-tabbar__item is-active"><i data-lucide="bookmark"></i>Saved</a><a class="m-tabbar__item"><i data-lucide="user"></i>You</a></nav></div><div class="notes notes--mobile"><h4>Mobile-only patterns</h4><ul><li>Your in-progress quest is pinned at the top as a big Resume card</li><li>Compact tabs that fit the screen width, with counts</li><li>Swipe a row left to unsave or leave</li><li>Scheduled outings show their date in a block on the left, like a calendar</li><li class=gap>“Add to calendar” for joined outings: an <code>.ics</code> file made on the phone, no backend needed</li></ul></div></div></div>
+    <div class="notes-row">
+      <div class="notes"><h4>Backend needs (one query per tab, none inferred)</h4><ul>
+        <li>Saved → <code>saved_sidequests</code> · Joined → <code>sidequest_participants</code> · Created → <code>sidequests where creator_id = me</code> (incl. drafts)</li>
+        <li class="gap">In progress → <code>quest_runs status='in_progress'</code> + checkpoint progress counts</li>
+        <li class="gap">Completed → <code>quest_runs status='completed'</code></li>
+        <li>Tab counts: one cheap <code>count</code> per tab, or a small view</li>
+      </ul></div>
+      <div class="notes notes--layout"><h4>Desktop layout</h4><ul>
+        <li>Tabs keep their state in the URL (<code>?tab=</code>) so they can be linked</li>
+        <li>Saved/Completed/Created tabs reuse the feed card grid; In progress uses wide progress rows</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- 7. PROFILE -->
+  <section class="screen" id="profile">
+    <header><p class="eyebrow">7 · Profile · Person D</p><h2>Public profile</h2><code>/u/:username</code></header>
+    <div class="pair"><div class="browser">
+      <div class="browser__chrome"><span class="browser__dots"><i></i><i></i><i></i></span><span class="browser__url">breadcrumb.app/u/maya_k</span></div>
+      <div class="browser__viewport" style="height:640px">
+        <div class="appbar"><img src="archive/boston-bound/assets/svg/logo-wordmark.svg" alt="Breadcrumb"><nav><a><i data-lucide="house"></i>For You</a><a><i data-lucide="map"></i>Map</a><a><i data-lucide="circle-plus"></i>Create</a><a><i data-lucide="bookmark"></i>Activity</a></nav><div class="input search"><i data-lucide="search"></i><span class="ph">Search sidequests…</span></div><span class="avatar">MK</span></div>
+        <div class="content">
+          <div class="profile">
+            <div class="panel profile-card"><span class="avatar avatar--lg">MK</span><h2>Maya K.</h2><p>@maya_k · Boston University</p><p>Loves cheap eats &amp; long walks.</p><div class="stats"><div><b>14</b><span>Completed</span></div><div><b>3</b><span>Created</span></div><div><b>9</b><span>Reviews</span></div></div><a class="btn btn--sm btn--straight" href="#"><i data-lucide="user-plus"></i>Follow</a></div>
+            <div class="stack">
+              <div class="tabs" style="margin:0"><span class="is-on">Completed</span><span>Created</span><span>Reviews</span></div>
+              <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">
+                <a class="sq-card sq-card--ol" href="#detail"><div class="sq-card__top"><div class="sq-card__meta"><span class="pill pill--ol">OL</span><span>Nov 16</span></div><h3 class="sq-card__title">North End Cannoli Duel</h3></div><div class="sq-card__bottom"><p class="sq-card__label"><img class="vehicle vehicle--ol" src="archive/boston-bound/assets/svg/vehicle-ol.svg" alt="">Inbound</p><ul class="chips"><li class="chip chip--fun"><i data-lucide="star"></i>Rated 5</li></ul></div></a>
+                <a class="sq-card sq-card--gl" href="#detail"><div class="sq-card__top"><div class="sq-card__meta"><span class="pill pill--gl">GL</span><span>Nov 9</span></div><h3 class="sq-card__title">Fenway Food Crawl</h3></div><div class="sq-card__bottom"><p class="sq-card__label"><img class="vehicle vehicle--gl" src="archive/boston-bound/assets/svg/vehicle-gl.svg" alt="">Inbound</p><ul class="chips"><li class="chip chip--fun"><i data-lucide="star"></i>Rated 4</li></ul></div></a>
+                <a class="sq-card sq-card--sl" href="#detail"><div class="sq-card__top"><div class="sq-card__meta"><span class="pill pill--sl">SL</span><span>Nov 2</span></div><h3 class="sq-card__title">Seaport Sunset Stroll</h3></div><div class="sq-card__bottom"><p class="sq-card__label"><img class="vehicle vehicle--sl" src="archive/boston-bound/assets/svg/vehicle-sl.svg" alt="">Inbound</p><ul class="chips"><li class="chip chip--fun"><i data-lucide="star"></i>Rated 4</li></ul></div></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><div class="phone-wrap"><span class="eyebrow phone-label">Mobile · /u/:username</span><div class="phone"><div class="phone__status"><span>9:41</span><span class="phone__notch"></span><span><i data-lucide="signal"></i><i data-lucide="battery-full"></i></span></div><div class="phone__body">
+<div class="m-prof"><span class="avatar" style="width:64px;height:64px;font-size:1.4rem">MK</span><div><b>Maya K.</b><small>@maya_k · BU</small></div><span class="icon-btn" style="margin-left:auto"><i data-lucide="settings"></i></span></div>
+<div class="m-pad">
+  <div class="m-statrow"><div><b>14</b><span>Quests</span></div><div><b>38</b><span>Stops</span></div><div><b>5/5</b><span>Lines</span></div><div><b>9</b><span>Reviews</span></div></div>
+  <div class="m-sec"><h3>Lines explored</h3></div>
+  <div class="m-lines"><span class="pill pill--rl pill--lg">RL 6</span><span class="pill pill--gl pill--lg">GL 4</span><span class="pill pill--ol pill--lg">OL 2</span><span class="pill pill--bl pill--lg">BL 1</span><span class="pill pill--sl pill--lg">SL 1</span></div>
+  <div class="m-sec"><h3>Activity</h3></div>
+  <div class="m-feeditem"><span class="m-feeditem__dot" style="background:var(--line-ol)"></span><div><small>Nov 16 · completed</small><b>North End Cannoli Duel</b><span class="chip chip--fun"><i data-lucide="star"></i>Rated 5</span></div></div>
+  <div class="m-feeditem"><span class="m-feeditem__dot" style="background:var(--line-gl)"></span><div><small>Nov 9 · completed</small><b>Fenway Food Crawl</b></div></div>
+</div></div><nav class="m-tabbar"><a class="m-tabbar__item"><i data-lucide="compass"></i>Explore</a><a class="m-tabbar__item"><i data-lucide="map"></i>Map</a><a class="m-tabbar__create" aria-label="Create"><i data-lucide="plus"></i></a><a class="m-tabbar__item"><i data-lucide="bookmark"></i>Saved</a><a class="m-tabbar__item is-active"><i data-lucide="user"></i>You</a></nav></div><div class="notes notes--mobile"><h4>Mobile-only patterns</h4><ul><li>Strava-style stats along the top and an activity timeline</li><li><b>Lines explored</b> badges: a mobile-friendly reward for exploring</li><li>Edit profile opens as a full-screen sheet from the settings button</li><li class=gap>Lines explored = count of completed runs grouped by <code>primary_line</code>. Needs nothing new beyond 002.</li><li class=gap>“Stops” total = sum of stops across completed runs (a view, or count on the phone)</li></ul></div></div></div>
+    <div class="notes-row">
+      <div class="notes"><h4>Backend needs</h4><ul>
+        <li><code>profiles</code> by username (exists). Onboarding sets the username (nullable until then).</li>
+        <li>Counts: completed runs, created (published), reviews: a small view or 3 <code>count</code> queries</li>
+        <li class="gap">Completed runs must be <b>publicly readable</b>. In-progress runs stay private (RLS in <code>002</code>).</li>
+        <li>Follow button = <code>follows</code> (exists, P1)</li>
+      </ul></div>
+      <div class="notes notes--layout"><h4>Desktop layout</h4><ul>
+        <li>Profile card on the left, history tabs + card grid on the right</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- 8. MAP -->
+  <section class="screen" id="map">
+    <header><p class="eyebrow">8 · Maps · Person B · P1</p><h2>Explore map</h2><code>/map</code></header>
+    <div class="pair"><div class="browser">
+      <div class="browser__chrome"><span class="browser__dots"><i></i><i></i><i></i></span><span class="browser__url">breadcrumb.app/map</span></div>
+      <div class="browser__viewport" style="height:600px">
+        <div class="appbar"><img src="archive/boston-bound/assets/svg/logo-wordmark.svg" alt="Breadcrumb"><nav><a><i data-lucide="house"></i>For You</a><a class="is-active"><i data-lucide="map"></i>Map</a><a><i data-lucide="circle-plus"></i>Create</a><a><i data-lucide="bookmark"></i>Activity</a></nav><div class="input search"><i data-lucide="search"></i><span class="ph">Search sidequests…</span></div><span class="avatar">MK</span></div>
+        <div class="explore">
+          <div class="explore__list">
+            <span class="eyebrow" style="color:var(--color-text-muted)">4 sidequests in view</span>
+            <a class="sq-card sq-card--gl" href="#detail"><div class="sq-card__top" style="min-height:0"><div class="sq-card__meta"><span class="pill pill--gl">GL</span><span>Sat · 2:00 PM</span></div><h3 class="sq-card__title">Fenway Food Crawl</h3></div></a>
+            <a class="sq-card sq-card--rl" href="#detail"><div class="sq-card__top" style="min-height:0"><div class="sq-card__meta"><span class="pill pill--rl">RL</span><span>Anytime</span></div><h3 class="sq-card__title">Sunday Café Hop</h3></div></a>
+            <a class="sq-card sq-card--ol" href="#detail"><div class="sq-card__top" style="min-height:0"><div class="sq-card__meta"><span class="pill pill--ol">OL</span><span>Anytime</span></div><h3 class="sq-card__title">North End Cannoli Duel</h3></div></a>
+            <a class="sq-card sq-card--bl" href="#detail"><div class="sq-card__top" style="min-height:0"><div class="sq-card__meta"><span class="pill pill--bl">BL</span><span>Anytime</span></div><h3 class="sq-card__title">Eastie Harbor Loop</h3></div></a>
+          </div>
+          <div class="map">
+            <div class="park" style="left:20%;top:42%"></div>
+            <span class="marker" style="left:30%;top:32%;background:var(--line-rl);color:#fff">3</span>
+            <span class="marker" style="left:58%;top:48%;background:var(--line-gl);color:#fff;box-shadow:0 0 0 4px var(--color-yellow)">4</span>
+            <span class="marker" style="left:46%;top:68%;background:var(--line-ol);color:var(--color-ink)">2</span>
+            <span class="marker" style="left:80%;top:24%;background:var(--line-bl);color:#fff">4</span>
+            <span class="tag">Pin = first stop, coloured by main line; number = stop count</span>
+          </div>
+        </div>
+      </div>
+    </div><div class="phone-wrap"><span class="eyebrow phone-label">Mobile · /map</span><div class="phone"><div class="phone__status"><span>9:41</span><span class="phone__notch"></span><span><i data-lucide="signal"></i><i data-lucide="battery-full"></i></span></div><div class="phone__body">
+<div class="m-mapfull map" style="flex:1"><div class="park" style="left:18%;top:36%"></div>
+  <span class="marker" style="left:30%;top:26%;background:var(--line-rl);color:#fff">3</span><span class="marker" style="left:62%;top:40%;background:var(--line-gl);color:#fff;box-shadow:0 0 0 4px var(--color-yellow)">4</span><span class="marker" style="left:46%;top:56%;background:var(--line-ol)">2</span><span class="marker" style="left:78%;top:18%;background:var(--line-bl);color:#fff">4</span><span class="me" style="left:50%;top:48%"></span>
+  <span class="fchip" style="position:absolute;top:12px;left:50%;transform:translateX(-50%);box-shadow:var(--shadow-sm)"><i data-lucide="refresh-cw"></i>Search this area</span>
+  <span class="icon-btn" style="position:absolute;right:12px;bottom:178px;box-shadow:var(--shadow-sm)"><i data-lucide="locate-fixed"></i></span>
+  <div class="m-cards">
+    <a class="sq-card sq-card--gl" href="#detail"><div class="sq-card__top" style="min-height:0;padding:12px"><div class="sq-card__meta"><span class="pill pill--gl">GL</span><span>Sat 2 PM</span></div><h3 class="sq-card__title" style="font-size:1rem">Fenway Food Crawl</h3></div><div class="sq-card__bottom" style="padding:8px 12px"><ul class="chips"><li class="chip chip--cost"><i data-lucide="wallet"></i>$$$</li><li class="chip chip--time"><i data-lucide="clock"></i>3 hr</li></ul></div></a>
+    <a class="sq-card sq-card--rl" href="#detail"><div class="sq-card__top" style="min-height:0;padding:12px"><div class="sq-card__meta"><span class="pill pill--rl">RL</span><span>Anytime</span></div><h3 class="sq-card__title" style="font-size:1rem">Sunday Café Hop</h3></div></a>
+  </div>
+</div></div><nav class="m-tabbar"><a class="m-tabbar__item"><i data-lucide="compass"></i>Explore</a><a class="m-tabbar__item is-active"><i data-lucide="map"></i>Map</a><a class="m-tabbar__create" aria-label="Create"><i data-lucide="plus"></i></a><a class="m-tabbar__item"><i data-lucide="bookmark"></i>Saved</a><a class="m-tabbar__item"><i data-lucide="user"></i>You</a></nav></div><div class="notes notes--mobile"><h4>Mobile-only patterns</h4><ul><li>Full-screen map with a swipeable card rail along the bottom, synced with the pins</li><li>Swiping a card highlights its pin; tapping a pin scrolls to its card</li><li>A “Search this area” button appears after you pan the map</li><li class=gap>Needs a bounding-box query: the first stop's lat/lng within the visible map (P1)</li></ul></div></div></div>
+    <div class="notes-row">
+      <div class="notes"><h4>Backend needs</h4><ul>
+        <li>The style guide lists a Map tab, but the PRD's screen list doesn't. Treat it as <b>P1</b>.</li>
+        <li>Each published quest's first stop coordinates + <code>primary_line</code> (pin colour)</li>
+        <li>Later: bounding-box query (index on lat/lng, or PostGIS)</li>
+      </ul></div>
+      <div class="notes notes--layout"><h4>Desktop layout</h4><ul>
+        <li>List on the left synced with pins on the right (hovering a card highlights its pin)</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section class="summary" id="summary">
+    <h2 class="font-display">What the backend needs</h2>
+    <div class="panel"><div class="table-wrap">
+    <table>
+      <thead><tr><th>Item</th><th>Status</th><th>Used by</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>quest_runs</td><td><span class="badge badge--new">Add in 002</span></td><td>Active quest, Activity, Profile, Reviews</td><td>One in-progress run per user per quest. Completed runs public, in-progress private.</td></tr>
+        <tr><td>quest_checkpoints</td><td><span class="badge badge--new">Add in 002</span></td><td>Detail, Active quest, Create</td><td>Optional stop_id. Visibility follows the parent sidequest.</td></tr>
+        <tr><td>checkpoint_completions</td><td><span class="badge badge--new">Add in 002</span></td><td>Active quest, Activity</td><td>Keyed by run</td></tr>
+        <tr><td>sidequests.primary_line</td><td><span class="badge badge--new">Add in 002</span></td><td>Every card, map pins</td><td>Check: rl, gl, bl, ol, sl (cr optional). The style guide's card design depends on it.</td></tr>
+        <tr><td>sidequests.is_curated</td><td><span class="badge badge--new">Add in 002</span></td><td>Feed badge, ordering</td><td>Labels seed/demo content (PRD §12)</td></tr>
+        <tr><td>Rating stats view</td><td><span class="badge badge--new">Add in 002</span></td><td>Feed, Detail</td><td>avg fun/value/travel + count</td></tr>
+        <tr><td>Reviews → runs</td><td><span class="badge badge--new">Change in 002</span></td><td>Rate</td><td>Replace the FK to completed_sidequests with a check for a completed run, then drop completed_sidequests.</td></tr>
+        <tr><td>Rating scale</td><td><span class="badge badge--decide">Decide</span></td><td>Rate, chips</td><td>Style guide: $/$$/$$$ + minute ranges. Schema/PRD: 1–5. Simplest: keep 1–5 and map the ranges in the UI.</td></tr>
+        <tr><td>Create RPC</td><td><span class="badge badge--decide">Nice to have</span></td><td>Create</td><td>Save sidequest + stops + checkpoints in one transaction</td></tr>
+        <tr><td>Map provider</td><td><span class="badge badge--decide">Decide</span></td><td>All maps</td><td>The style guide specifies <b>Google Maps</b> (API key + billing). TASKS.md assumed MapLibre. Google also gives transit directions, which reduces the PRD §12 risk.</td></tr>
+        <tr><td>Saves, joins, follows, profiles</td><td><span class="badge badge--ok">Exists</span></td><td>Detail, Activity, Profile</td><td>Already in 001 with RLS</td></tr>
+        <tr><td>Location storage</td><td><span class="badge badge--ok">None, by design</span></td><td>Active quest</td><td>PRD privacy rule</td></tr>
+      </tbody>
+    </table>
+    </div></div>
+  </section>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script>lucide.createIcons();</script>
+</body>
+</html>

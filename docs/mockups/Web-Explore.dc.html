@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Explore trails · breadcrumb</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+*{box-sizing:border-box}
+button,input,textarea{font:inherit;color:inherit}
+a{color:#C2410C}a:hover{color:#9A3412}
+input::placeholder{color:#736E66}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F7F6F2; font-family: Inter, system-ui, sans-serif; color: #1B1916; -webkit-font-smoothing: antialiased">
+
+  <header style="background: #FFFFFF; border-bottom: 1px solid #E7E4DD">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 12px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px">
+      <a href="Web-Explore.dc.html" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: #1B1916; text-decoration: none">
+        <svg width="30" height="12" viewBox="0 0 34 14" aria-hidden="true"><circle cx="3.6" cy="7" r="2.6" fill="#F7C2B1"></circle><circle cx="13.4" cy="7" r="3.2" fill="#F08A69"></circle><circle cx="26.6" cy="7" r="4.6" fill="#E8552D"></circle></svg>breadcrumb
+      </a>
+      <nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 4px">
+        <a href="Web-Explore.dc.html" aria-current="page" style="display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 999px; background: #EFEDE6; font-size: 15px; font-weight: 700; color: #1B1916; text-decoration: none">Explore</a>
+        <a href="Web-Explore.dc.html" style="display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 999px; font-size: 15px; font-weight: 500; color: #57534C; text-decoration: none">Map</a>
+        <a href="Web-Explore.dc.html" style="display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 999px; font-size: 15px; font-weight: 500; color: #57534C; text-decoration: none">Saved</a>
+        <a href="Mobile-Profile.dc.html" style="display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 999px; font-size: 15px; font-weight: 500; color: #57534C; text-decoration: none">You</a>
+      </nav>
+      <form role="search" style="flex: 1 1 260px; max-width: 460px; margin-left: auto; position: relative">
+        <label for="web-search" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search</label>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#736E66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; left: 14px; top: 13px"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        <input id="web-search" type="search" placeholder="Search trails, places, neighborhoods" style="width: 100%; height: 44px; padding: 0 16px 0 42px; border: 1px solid #D6D2C8; border-radius: 999px; background: #F7F6F2; font-size: 15px">
+      </form>
+      <a href="Web-Create.dc.html" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 20px; border-radius: 999px; background: #C2410C; color: #FFFFFF; font-size: 15px; font-weight: 700; text-decoration: none">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>Make a trail
+      </a>
+      <a href="Mobile-Profile.dc.html" aria-label="Your profile" style="display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #FDEDE6; color: #C2410C; font-size: 15px; font-weight: 800; text-decoration: none">MC</a>
+    </div>
+  </header>
+
+  <main style="max-width: 1360px; margin: 0 auto; padding: 32px 24px 48px; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 32px">
+    <section aria-labelledby="feed-title" style="flex: 999 1 560px; min-width: 0">
+      <h1 id="feed-title" style="margin: 0; font-size: 40px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.1">Trails for you</h1>
+      <p style="margin: 8px 0 0; font-size: 17px; color: #57534C">You've lived here. Have you explored it?</p>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin: 20px 0 16px">
+        <div role="tablist" aria-label="Feed" style="display: flex; flex-wrap: wrap; gap: 8px">
+          <button type="button" role="tab" aria-selected="true" style="height: 38px; padding: 0 16px; border-radius: 999px; border: 1px solid #1B1916; background: #1B1916; color: #FFFFFF; font-size: 15px; font-weight: 600; cursor: pointer">For you</button>
+          <button type="button" role="tab" aria-selected="false" style="height: 38px; padding: 0 16px; border-radius: 999px; border: 1px solid #D6D2C8; background: #FFFFFF; font-size: 15px; font-weight: 600; cursor: pointer">Nearby</button>
+          <button type="button" role="tab" aria-selected="false" style="height: 38px; padding: 0 16px; border-radius: 999px; border: 1px solid #D6D2C8; background: #FFFFFF; font-size: 15px; font-weight: 600; cursor: pointer">Friends</button>
+          <button type="button" role="tab" aria-selected="false" style="height: 38px; padding: 0 16px; border-radius: 999px; border: 1px solid #D6D2C8; background: #FFFFFF; font-size: 15px; font-weight: 600; cursor: pointer">This weekend</button>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <button type="button" style="display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 14px; border: 0; border-radius: 999px; background: transparent; box-shadow: inset 0 0 0 1px #D6D2C8; font-size: 14px; font-weight: 600; color: #57534C; cursor: pointer">Any cost<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+          <button type="button" style="display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 14px; border: 0; border-radius: 999px; background: transparent; box-shadow: inset 0 0 0 1px #D6D2C8; font-size: 14px; font-weight: 600; color: #57534C; cursor: pointer">Any length<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 16px">
+        <a href="Web-Detail.dc.html" style="display: block; padding: 16px 18px; background: #FFFFFF; border: 1px solid #1B1916; border-radius: 20px; box-shadow: 0 0 0 1px #1B1916, 0 10px 28px rgba(27,25,22,0.08); color: #1B1916; text-decoration: none">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 13px; font-weight: 600; color: #C2410C">Cafés · Anytime</span><span style="font-size: 13px; color: #736E66">1.2 mi away</span></div>
+          <h2 style="margin: 6px 0 0; font-size: 21px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3">Sunday Café Hop</h2>
+          <svg viewBox="0 0 320 40" aria-hidden="true" style="display: block; width: 100%; height: auto; margin-top: 10px"><path d="M9.5 23C62.2 14 107.3 8 160 17C212.7 26 257.8 29 310.5 20" fill="none" stroke="#E8552D" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 8.5"></path><circle cx="9.5" cy="23" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="160" cy="17" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="310.5" cy="20" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle></svg>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 4px; font-size: 12px; color: #736E66"><span>Tatte</span><span style="text-align: center">Public Garden</span><span style="text-align: right">Newbury St</span></div>
+          <div style="display: flex; align-items: center; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #E7E4DD; font-size: 15px; font-weight: 600"><span>~$20</span><span>2 hr</span><span>2 crumbs</span><span style="margin-left: auto; display: inline-flex; align-items: center; gap: 4px"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>4.6</span></div>
+        </a>
+
+        <a href="Web-Detail.dc.html" style="display: block; padding: 16px 18px; background: #FFFFFF; border: 1px solid #E7E4DD; border-radius: 20px; box-shadow: 0 1px 2px rgba(27,25,22,0.04), 0 4px 14px rgba(27,25,22,0.04); color: #1B1916; text-decoration: none">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 13px; font-weight: 600; color: #1D4ED8">Food · Sat 2:00 PM</span><span style="font-size: 13px; color: #736E66">6 going</span></div>
+          <h2 style="margin: 6px 0 0; font-size: 21px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3">Fenway Food Crawl</h2>
+          <svg viewBox="0 0 320 40" aria-hidden="true" style="display: block; width: 100%; height: auto; margin-top: 10px"><path d="M9.5 19C44.6 28 74.7 27 109.8 18C145 9 175.1 14 210.2 23C245.3 32 275.4 28 310.5 19" fill="none" stroke="#E8552D" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 8.5"></path><circle cx="9.5" cy="19" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="109.8" cy="18" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="210.2" cy="23" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="310.5" cy="19" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle></svg>
+          <div style="height: 15px"></div>
+          <div style="display: flex; align-items: center; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #E7E4DD; font-size: 15px; font-weight: 600"><span>~$35</span><span>3 hr</span><span>4 stops</span><span style="margin-left: auto; color: #1D4ED8">Going</span></div>
+        </a>
+
+        <a href="Web-Detail.dc.html" style="display: block; padding: 16px 18px; background: #FFFFFF; border: 1px solid #E7E4DD; border-radius: 20px; box-shadow: 0 1px 2px rgba(27,25,22,0.04), 0 4px 14px rgba(27,25,22,0.04); color: #1B1916; text-decoration: none">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 13px; font-weight: 600; color: #C2410C">Parks · Anytime</span><span style="font-size: 13px; color: #736E66">0.4 mi away</span></div>
+          <h2 style="margin: 6px 0 0; font-size: 21px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3">Esplanade Golden Hour</h2>
+          <svg viewBox="0 0 320 40" aria-hidden="true" style="display: block; width: 100%; height: auto; margin-top: 10px"><path d="M9.5 19C62.2 28 107.3 32 160 23C212.7 14 257.8 9 310.5 18" fill="none" stroke="#E8552D" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 8.5"></path><circle cx="9.5" cy="19" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="160" cy="23" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="310.5" cy="18" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle></svg>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 4px; font-size: 12px; color: #736E66"><span>Longfellow Br.</span><span style="text-align: center">Hatch Shell</span><span style="text-align: right">Mass Ave</span></div>
+          <div style="display: flex; align-items: center; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #E7E4DD; font-size: 15px; font-weight: 600"><span>Free</span><span>1.5 hr</span><span>3 crumbs</span><span style="margin-left: auto; display: inline-flex; align-items: center; gap: 4px"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>4.8</span></div>
+        </a>
+
+        <a href="Web-Detail.dc.html" style="display: block; padding: 16px 18px; background: #FFFFFF; border: 1px solid #E7E4DD; border-radius: 20px; box-shadow: 0 1px 2px rgba(27,25,22,0.04), 0 4px 14px rgba(27,25,22,0.04); color: #1B1916; text-decoration: none">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 13px; font-weight: 600; color: #C2410C">Books · Anytime</span><span style="font-size: 13px; color: #736E66">3.1 mi away</span></div>
+          <h2 style="margin: 6px 0 0; font-size: 21px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3">Harvard Square Bookstores</h2>
+          <svg viewBox="0 0 320 40" aria-hidden="true" style="display: block; width: 100%; height: auto; margin-top: 10px"><path d="M9.5 17C44.6 8 74.7 12 109.8 21C145 30 175.1 31 210.2 22C245.3 13 275.4 8 310.5 17" fill="none" stroke="#E8552D" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 8.5"></path><circle cx="9.5" cy="17" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="109.8" cy="21" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="210.2" cy="22" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="310.5" cy="17" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle></svg>
+          <div style="height: 15px"></div>
+          <div style="display: flex; align-items: center; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #E7E4DD; font-size: 15px; font-weight: 600"><span>~$25</span><span>2.5 hr</span><span>4 stops</span><span style="margin-left: auto; display: inline-flex; align-items: center; gap: 4px"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>4.5</span></div>
+        </a>
+
+        <a href="Web-Detail.dc.html" style="display: block; padding: 16px 18px; background: #FFFFFF; border: 1px solid #E7E4DD; border-radius: 20px; box-shadow: 0 1px 2px rgba(27,25,22,0.04), 0 4px 14px rgba(27,25,22,0.04); color: #1B1916; text-decoration: none">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 13px; font-weight: 600; color: #1D4ED8">Food · Sun 11:00 AM</span><span style="font-size: 13px; color: #736E66">3 going</span></div>
+          <h2 style="margin: 6px 0 0; font-size: 21px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3">South End Brunch Loop</h2>
+          <svg viewBox="0 0 320 40" aria-hidden="true" style="display: block; width: 100%; height: auto; margin-top: 10px"><path d="M9.5 23C35.8 14 58.4 8 84.8 17C111.1 26 133.7 29 160 20C186.3 11 208.9 14 235.3 23C261.6 32 284.2 26 310.5 17" fill="none" stroke="#E8552D" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 8.5"></path><circle cx="9.5" cy="23" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="84.8" cy="17" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="160" cy="20" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="235.3" cy="23" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="310.5" cy="17" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle></svg>
+          <div style="height: 15px"></div>
+          <div style="display: flex; align-items: center; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #E7E4DD; font-size: 15px; font-weight: 600"><span>~$40</span><span>3 hr</span><span>5 stops</span><span style="margin-left: auto; color: #1D4ED8">Join</span></div>
+        </a>
+
+        <a href="Mobile-Profile.dc.html" style="display: block; padding: 16px 18px; background: #FFFFFF; border: 1px solid #E7E4DD; border-radius: 20px; box-shadow: 0 1px 2px rgba(27,25,22,0.04), 0 4px 14px rgba(27,25,22,0.04); color: #1B1916; text-decoration: none">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 13px; font-weight: 600; color: #15803D">Finished · Nov 16</span><span style="font-size: 13px; color: #736E66">You rated 5</span></div>
+          <h2 style="margin: 6px 0 0; font-size: 21px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3">North End Cannoli Duel</h2>
+          <svg viewBox="0 0 320 40" aria-hidden="true" style="display: block; width: 100%; height: auto; margin-top: 10px"><path d="M9.5 19C114.9 28 205.2 27 310.5 18" fill="none" stroke="#15803D" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 8.5"></path><circle cx="9.5" cy="19" r="7" fill="#15803D"></circle><circle cx="310.5" cy="18" r="7" fill="#15803D"></circle></svg>
+          <div style="height: 15px"></div>
+          <div style="display: flex; align-items: center; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #E7E4DD; font-size: 15px; font-weight: 600"><span>~$15</span><span>1 hr</span><span>2 stops</span><span style="margin-left: auto; color: #15803D">Review posted</span></div>
+        </a>
+      </div>
+    </section>
+
+    <aside aria-label="Trails on the map" style="flex: 1 1 380px; min-width: 0">
+      <div style="position: relative; overflow: hidden; background: #EFEDE6; border: 1px solid #E7E4DD; border-radius: 20px">
+        <svg viewBox="0 0 440 600" role="img" aria-label="Map of Boston with six trails; Sunday Café Hop is highlighted from Beacon Hill through the Public Garden to Newbury Street" style="display: block; width: 100%; height: auto">
+          <rect width="440" height="600" fill="#EFEDE6"></rect>
+          <path d="M0 146C110 118 228 152 330 110C376 92 410 76 440 68L440 116C410 124 380 138 342 154C240 194 110 166 0 194Z" fill="#D8E6F0"></path>
+          <path d="M440 270C404 312 402 410 362 462C332 502 352 566 334 600L440 600Z" fill="#D8E6F0"></path>
+          <path d="M0 200C110 172 236 202 336 160" fill="none" stroke="#DDE8D3" stroke-width="10" stroke-linecap="round"></path>
+          <rect x="214" y="222" width="92" height="58" rx="14" fill="#DDE8D3"></rect>
+          <rect x="54" y="344" width="74" height="62" rx="18" fill="#DDE8D3"></rect>
+          <path d="M40 304H350M30 338H346M120 600L176 206M300 600L282 300" stroke="#FBFAF7" stroke-width="7" stroke-linecap="round"></path>
+          <path d="M60 40L170 120M150 30L250 96" stroke="#FBFAF7" stroke-width="6" stroke-linecap="round"></path>
+          <g font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#7E98AB"><text x="24" y="168">Charles River</text></g>
+          <g font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#6F8A63"><text x="222" y="256">Public Garden</text></g>
+          <path d="M298 212Q266 228 236 254Q204 280 172 300" fill="none" stroke="#E8552D" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0 9"></path>
+          <g>
+            <circle cx="298" cy="212" r="12" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.6"></circle>
+            <circle cx="236" cy="254" r="12" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.6"></circle>
+            <circle cx="172" cy="300" r="12" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.6"></circle>
+            <g font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#1B1916" text-anchor="middle"><text x="298" y="216.2">1</text><text x="236" y="258.2">2</text><text x="172" y="304.2">3</text></g>
+          </g>
+          <g font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#1B1916" stroke="#F7F6F2" stroke-width="4" paint-order="stroke">
+            <circle cx="90" cy="372" r="7" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.4"></circle><text x="102" y="376">Fenway Food Crawl</text>
+            <circle cx="186" cy="186" r="7" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.4"></circle><text x="198" y="190">Esplanade</text>
+            <circle cx="132" cy="62" r="7" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.4"></circle><text x="144" y="66">Harvard Sq Bookstores</text>
+            <circle cx="262" cy="420" r="7" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.4"></circle><text x="274" y="424">South End Brunch</text>
+            <circle cx="376" cy="196" r="7" fill="#15803D" stroke="#15803D" stroke-width="2.4"></circle><text x="330" y="226">North End</text>
+          </g>
+        </svg>
+        <div style="position: absolute; top: 12px; right: 12px; display: flex; flex-direction: column; overflow: hidden; border-radius: 14px; background: #FFFFFF; box-shadow: 0 4px 14px rgba(27,25,22,0.14)">
+          <button type="button" aria-label="Zoom in" style="display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-bottom: 1px solid #E7E4DD; background: #FFFFFF; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></button>
+          <button type="button" aria-label="Zoom out" style="display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; background: #FFFFFF; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin-top: 12px; font-size: 13px; color: #736E66">
+        <span>6 trails near Back Bay</span>
+        <span style="display: inline-flex; align-items: center; gap: 12px">
+          <span style="display: inline-flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; border: 2.4px solid #E8552D; background: #FFFFFF"></span>Open</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #15803D"></span>Finished</span>
+        </span>
+      </div>
+    </aside>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":980}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

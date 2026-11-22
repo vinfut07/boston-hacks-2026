@@ -1,0 +1,12 @@
+/**
+ * Small shared helpers. cn() merges Tailwind class names and resolves
+ * conflicts; shadcn/ui components use it.
+ */
+
+import { clsx, type ClassValue } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
+/** Merge Tailwind classes, resolving conflicts (shadcn/ui convention). */
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}

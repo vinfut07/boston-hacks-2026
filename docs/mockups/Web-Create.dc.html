@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Make a trail · breadcrumb</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+*{box-sizing:border-box}
+button,input,textarea{font:inherit;color:inherit}
+a{color:#C2410C}a:hover{color:#9A3412}
+input::placeholder,textarea::placeholder{color:#736E66}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F7F6F2; font-family: Inter, system-ui, sans-serif; color: #1B1916; -webkit-font-smoothing: antialiased">
+
+  <header style="background: #FFFFFF; border-bottom: 1px solid #E7E4DD">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 12px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px">
+      <a href="Web-Explore.dc.html" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: #1B1916; text-decoration: none">
+        <svg width="30" height="12" viewBox="0 0 34 14" aria-hidden="true"><circle cx="3.6" cy="7" r="2.6" fill="#F7C2B1"></circle><circle cx="13.4" cy="7" r="3.2" fill="#F08A69"></circle><circle cx="26.6" cy="7" r="4.6" fill="#E8552D"></circle></svg>breadcrumb
+      </a>
+      <nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 4px">
+        <a href="Web-Explore.dc.html" style="display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 999px; font-size: 15px; font-weight: 500; color: #57534C; text-decoration: none">Explore</a>
+        <a href="Web-Explore.dc.html" style="display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 999px; font-size: 15px; font-weight: 500; color: #57534C; text-decoration: none">Map</a>
+        <a href="Web-Explore.dc.html" style="display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 999px; font-size: 15px; font-weight: 500; color: #57534C; text-decoration: none">Saved</a>
+        <a href="Mobile-Profile.dc.html" style="display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 999px; font-size: 15px; font-weight: 500; color: #57534C; text-decoration: none">You</a>
+      </nav>
+      <a href="Mobile-Profile.dc.html" aria-label="Your profile" style="margin-left: auto; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #FDEDE6; color: #C2410C; font-size: 15px; font-weight: 800; text-decoration: none">MC</a>
+    </div>
+  </header>
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: 32px 24px 56px">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 24px">
+      <div>
+        <h1 style="margin: 0; font-size: 40px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.1">Make a trail</h1>
+        <p style="margin: 8px 0 0; font-size: 17px; color: #57534C">Pick 2 to 8 stops, add a crumb at each, and publish.</p>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px">
+        <button type="button" style="height: 48px; padding: 0 22px; border: 0; border-radius: 999px; background: #FFFFFF; box-shadow: inset 0 0 0 1px #D6D2C8; font-size: 16px; font-weight: 700; cursor: pointer">Save draft</button>
+        <a href="Web-Detail.dc.html" style="display: inline-flex; align-items: center; height: 48px; padding: 0 26px; border-radius: 999px; background: #C2410C; color: #FFFFFF; font-size: 16px; font-weight: 700; text-decoration: none">Publish trail</a>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 32px; margin-top: 28px">
+      <form style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <section aria-labelledby="basics-title" style="padding: 22px 24px; background: #FFFFFF; border: 1px solid #E7E4DD; border-radius: 20px">
+          <h2 id="basics-title" style="margin: 0; font-size: 19px; font-weight: 700; letter-spacing: -0.01em">Basics</h2>
+          <label for="w-name" style="display: block; margin-top: 18px; font-size: 14px; font-weight: 600; color: #57534C">Name</label>
+          <input id="w-name" type="text" value="Rainy Day Bookshop Crawl" style="display: block; width: 100%; height: 48px; margin-top: 8px; padding: 0 14px; border: 1px solid #D6D2C8; border-radius: 14px; background: #FFFFFF; font-size: 17px; font-weight: 600">
+          <label for="w-desc" style="display: block; margin-top: 16px; font-size: 14px; font-weight: 600; color: #57534C">Short description</label>
+          <textarea id="w-desc" rows="2" style="display: block; width: 100%; margin-top: 8px; padding: 12px 14px; border: 1px solid #D6D2C8; border-radius: 14px; background: #FFFFFF; font-size: 15px; line-height: 1.45; resize: vertical">Two of Boston's oldest bookshops for a gray afternoon, with a coffee at the end.</textarea>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 16px 32px; margin-top: 16px">
+            <fieldset style="flex: 1 1 280px; margin: 0; padding: 0; border: 0">
+              <legend style="padding: 0; font-size: 14px; font-weight: 600; color: #57534C">Category</legend>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px">
+                <button type="button" aria-pressed="false" style="height: 38px; padding: 0 14px; border-radius: 999px; border: 1px solid #D6D2C8; background: #FFFFFF; font-size: 15px; font-weight: 600; cursor: pointer">Cafés</button>
+                <button type="button" aria-pressed="true" style="height: 38px; padding: 0 14px; border-radius: 999px; border: 1px solid #1B1916; background: #1B1916; color: #FFFFFF; font-size: 15px; font-weight: 600; cursor: pointer">Books</button>
+                <button type="button" aria-pressed="false" style="height: 38px; padding: 0 14px; border-radius: 999px; border: 1px solid #D6D2C8; background: #FFFFFF; font-size: 15px; font-weight: 600; cursor: pointer">Food</button>
+                <button type="button" aria-pressed="false" style="height: 38px; padding: 0 14px; border-radius: 999px; border: 1px solid #D6D2C8; background: #FFFFFF; font-size: 15px; font-weight: 600; cursor: pointer">Parks</button>
+                <button type="button" aria-pressed="false" style="height: 38px; padding: 0 14px; border-radius: 999px; border: 1px solid #D6D2C8; background: #FFFFFF; font-size: 15px; font-weight: 600; cursor: pointer">Art</button>
+              </div>
+            </fieldset>
+            <fieldset style="flex: 1 1 240px; margin: 0; padding: 0; border: 0">
+              <legend style="padding: 0; font-size: 14px; font-weight: 600; color: #57534C">When</legend>
+              <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; margin-top: 8px; padding: 4px; border-radius: 999px; background: #EFEDE6">
+                <button type="button" aria-pressed="true" style="height: 36px; border: 0; border-radius: 999px; background: #FFFFFF; box-shadow: 0 1px 3px rgba(27,25,22,0.12); font-size: 15px; font-weight: 600; cursor: pointer">Anytime</button>
+                <button type="button" aria-pressed="false" style="height: 36px; border: 0; border-radius: 999px; background: transparent; font-size: 15px; font-weight: 600; color: #57534C; cursor: pointer">Pick a date</button>
+              </div>
+              <p style="margin: 8px 0 0; font-size: 13px; color: #736E66">Dated trails show a time and let people join.</p>
+            </fieldset>
+          </div>
+        </section>
+
+        <section aria-labelledby="stops-title" style="padding: 22px 24px; background: #FFFFFF; border: 1px solid #E7E4DD; border-radius: 20px">
+          <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px">
+            <h2 id="stops-title" style="margin: 0; font-size: 19px; font-weight: 700; letter-spacing: -0.01em">Stops</h2>
+            <span style="font-size: 13px; color: #736E66">2 of 8 · drag to reorder</span>
+          </div>
+          <div style="position: relative; margin-top: 16px">
+            <label for="w-place" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Add a place</label>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#736E66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; left: 14px; top: 15px"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <input id="w-place" type="search" placeholder="Search a place, or drop a pin on the map" style="width: 100%; height: 48px; padding: 0 16px 0 42px; border: 1px solid #D6D2C8; border-radius: 14px; background: #F7F6F2; font-size: 15px">
+          </div>
+
+          <ol style="margin: 16px 0 0; padding: 0; list-style: none">
+            <li style="position: relative; display: grid; grid-template-columns: 20px 28px minmax(0, 1fr) 44px; align-items: start; column-gap: 12px; padding-bottom: 6px">
+              <span aria-hidden="true" style="position: absolute; left: 44px; top: 34px; bottom: 0; width: 4px; background: radial-gradient(circle, #E8552D 1.5px, transparent 1.9px) center top / 4px 8.5px repeat-y"></span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#A29D93" role="img" aria-label="Drag to reorder" style="margin-top: 4px"><circle cx="9" cy="6" r="1.6"></circle><circle cx="15" cy="6" r="1.6"></circle><circle cx="9" cy="12" r="1.6"></circle><circle cx="15" cy="12" r="1.6"></circle><circle cx="9" cy="18" r="1.6"></circle><circle cx="15" cy="18" r="1.6"></circle></svg>
+              <span style="display: grid; place-items: center; width: 28px; height: 28px; border: 2.5px solid #E8552D; border-radius: 50%; background: #FFFFFF; font-size: 13px; font-weight: 700">1</span>
+              <div>
+                <h3 style="margin: 0; font-size: 17px; font-weight: 700; line-height: 28px">Brattle Book Shop</h3>
+                <p style="margin: 0; font-size: 13px; color: #736E66">9 West St, Downtown Crossing</p>
+                <label for="w-crumb-1" style="display: block; margin-top: 10px; font-size: 13px; font-weight: 600; color: #57534C">Crumb</label>
+                <input id="w-crumb-1" type="text" value="Dig through the outdoor sale lot" style="display: block; width: 100%; height: 44px; margin-top: 6px; padding: 0 12px; border: 1px solid #D6D2C8; border-radius: 12px; background: #FFFFFF; font-size: 15px">
+              </div>
+              <button type="button" aria-label="Remove Brattle Book Shop" style="display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #736E66; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+            </li>
+            <li style="position: relative; display: grid; grid-template-columns: 20px 28px minmax(0, 1fr); column-gap: 12px; padding: 4px 0 10px">
+              <span aria-hidden="true" style="position: absolute; left: 44px; top: 0; bottom: 0; width: 4px; background: radial-gradient(circle, #E8552D 1.5px, transparent 1.9px) center top / 4px 8.5px repeat-y"></span>
+              <span></span><span></span>
+              <p style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; font-size: 13px; color: #736E66"><span aria-hidden="true" style="flex: none; width: 9px; height: 9px; border-radius: 50%; background: #00843D"></span>Green Line, Park St → Hynes · 15 min <button type="button" style="height: 32px; padding: 0 10px; border: 0; border-radius: 999px; background: transparent; font-size: 13px; font-weight: 600; color: #C2410C; cursor: pointer">Walk instead</button></p>
+            </li>
+            <li style="position: relative; display: grid; grid-template-columns: 20px 28px minmax(0, 1fr) 44px; align-items: start; column-gap: 12px; padding-bottom: 6px">
+              <span aria-hidden="true" style="position: absolute; left: 44px; top: 34px; bottom: 0; width: 4px; background: radial-gradient(circle, #E8552D 1.5px, transparent 1.9px) center top / 4px 8.5px repeat-y"></span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#A29D93" role="img" aria-label="Drag to reorder" style="margin-top: 4px"><circle cx="9" cy="6" r="1.6"></circle><circle cx="15" cy="6" r="1.6"></circle><circle cx="9" cy="12" r="1.6"></circle><circle cx="15" cy="12" r="1.6"></circle><circle cx="9" cy="18" r="1.6"></circle><circle cx="15" cy="18" r="1.6"></circle></svg>
+              <span style="display: grid; place-items: center; width: 28px; height: 28px; border: 2.5px solid #E8552D; border-radius: 50%; background: #FFFFFF; font-size: 13px; font-weight: 700">2</span>
+              <div>
+                <h3 style="margin: 0; font-size: 17px; font-weight: 700; line-height: 28px">Trident Booksellers &amp; Café</h3>
+                <p style="margin: 0; font-size: 13px; color: #736E66">338 Newbury St, Back Bay</p>
+                <label for="w-crumb-2" style="display: block; margin-top: 10px; font-size: 13px; font-weight: 600; color: #57534C">Crumb</label>
+                <input id="w-crumb-2" type="text" value="Read one chapter over a coffee" style="display: block; width: 100%; height: 44px; margin-top: 6px; padding: 0 12px; border: 1px solid #D6D2C8; border-radius: 12px; background: #FFFFFF; font-size: 15px">
+              </div>
+              <button type="button" aria-label="Remove Trident Booksellers &amp; Café" style="display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #736E66; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+            </li>
+            <li>
+              <button type="button" style="display: grid; grid-template-columns: 20px 28px minmax(0, 1fr); column-gap: 12px; align-items: center; width: 100%; min-height: 52px; padding: 6px 0 0; border: 0; background: transparent; text-align: left; cursor: pointer">
+                <span></span>
+                <span aria-hidden="true" style="display: grid; place-items: center; width: 28px; height: 28px; border: 2.5px dashed #E8552D; border-radius: 50%; color: #C2410C"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span>
+                <span style="font-size: 16px; font-weight: 700; color: #C2410C">Add another stop</span>
+              </button>
+            </li>
+          </ol>
+        </section>
+      </form>
+
+      <aside aria-labelledby="preview-title" style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <h2 id="preview-title" style="margin: 0; font-size: 19px; font-weight: 700; letter-spacing: -0.01em">Preview</h2>
+        <div style="overflow: hidden; background: #EFEDE6; border: 1px solid #E7E4DD; border-radius: 20px">
+          <svg viewBox="0 0 400 300" role="img" aria-label="Map preview: Brattle Book Shop downtown, Trident on Newbury Street, and a spot for a third stop" style="display: block; width: 100%; height: auto">
+            <rect width="400" height="300" fill="#EFEDE6"></rect>
+            <path d="M0 40C110 18 230 46 330 14L400 0L0 0Z" fill="#D8E6F0"></path>
+            <rect x="196" y="88" width="104" height="70" rx="18" fill="#DDE8D3"></rect>
+            <path d="M0 200H400M150 0V300M0 236H400" stroke="#FBFAF7" stroke-width="8"></path>
+            <g font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600"><text x="208" y="128" fill="#6F8A63">Boston Common</text><text x="20" y="226" fill="#A29D93">Newbury St</text></g>
+            <path d="M332 150Q250 170 180 186Q120 198 76 210" fill="none" stroke="#E8552D" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0 9"></path>
+            <path d="M76 210Q60 240 92 262" fill="none" stroke="#D6D2C8" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 9"></path>
+            <circle cx="332" cy="150" r="14" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.8"></circle>
+            <circle cx="76" cy="210" r="14" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.8"></circle>
+            <circle cx="96" cy="266" r="12" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.4" stroke-dasharray="4 3.5"></circle>
+            <path d="M91 266H101M96 261V271" stroke="#C2410C" stroke-width="2.2" stroke-linecap="round"></path>
+            <g font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#1B1916" text-anchor="middle"><text x="332" y="154.6">1</text><text x="76" y="214.6">2</text></g>
+          </svg>
+        </div>
+
+        <div>
+          <p style="margin: 0 0 8px; font-size: 13px; font-weight: 600; color: #57534C">How it shows in the feed</p>
+          <div style="padding: 16px 18px; background: #FFFFFF; border: 1px solid #E7E4DD; border-radius: 20px; box-shadow: 0 1px 2px rgba(27,25,22,0.04), 0 4px 14px rgba(27,25,22,0.04)">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 13px; font-weight: 600; color: #C2410C">Books · Anytime</span><span style="font-size: 13px; color: #736E66">by you</span></div>
+            <h3 style="margin: 6px 0 0; font-size: 21px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3">Rainy Day Bookshop Crawl</h3>
+            <svg viewBox="0 0 320 40" aria-hidden="true" style="display: block; width: 100%; height: auto; margin-top: 10px"><path d="M9.5 19C114.9 28 205.2 27 310.5 18" fill="none" stroke="#E8552D" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 8.5"></path><circle cx="9.5" cy="19" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="310.5" cy="18" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle></svg>
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 4px; font-size: 12px; color: #736E66"><span>Brattle</span><span style="text-align: right">Trident</span></div>
+            <div style="display: flex; align-items: center; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #E7E4DD; font-size: 15px; font-weight: 600"><span>~$15</span><span>2 hr</span><span>2 crumbs</span><span style="margin-left: auto; font-weight: 500; color: #736E66">New</span></div>
+          </div>
+        </div>
+
+        <section aria-labelledby="ready-title" style="padding: 18px 20px; background: #FFFFFF; border: 1px solid #E7E4DD; border-radius: 20px">
+          <h3 id="ready-title" style="margin: 0; font-size: 15px; font-weight: 700">Ready to publish</h3>
+          <ul style="display: grid; gap: 10px; margin: 12px 0 0; padding: 0; list-style: none; font-size: 15px">
+            <li style="display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #15803D; color: #FFFFFF"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>A name and a category</li>
+            <li style="display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #15803D; color: #FFFFFF"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>At least 2 stops</li>
+            <li style="display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #15803D; color: #FFFFFF"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>A crumb at every stop</li>
+            <li style="display: flex; align-items: center; gap: 10px; color: #57534C"><span aria-hidden="true" style="width: 22px; height: 22px; border-radius: 50%; border: 2px dashed #D6D2C8"></span>Cost and time estimates (filled in for you)</li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1120}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+/* ==========================================================================
+   Breadcrumb · BostonHacks 2026 — design tokens (v0.2)
+   Direction: the "Boston Bound" palette and subway-map motifs on plain white,
+   drawn cleanly — thin ink rules, flat fills, soft shadows, no doodles.
+   Buttons are the one bold accent: thick outline, hard shadow, slight tilt.
+   Mirror of these tokens for Tailwind: styles/tailwind.config.snippet.js
+   ========================================================================== */
+
+/* Fonts (Google Fonts, SIL Open Font License).
+   Archivo at 125% width stands in for Presicav, which needs a paid webfont license. */
+
+:root {
+  /* ---- Core palette (from bostonhacks.org) ------------------------------ */
+  --color-red: #CE2634;        /* Red Line — primary accent */
+  --color-green: #0C6B14;      /* Green Line */
+  --color-blue: #206DDF;       /* Blue Line — links, focus */
+  --color-sky: #2F9DD9;        /* map water, bike legs, illustration accents */
+  --color-yellow: #F7DD04;     /* highlighter, ratings, checkpoints — sparingly */
+  --color-ink: #000000;        /* text + rules */
+  --color-gray-light: #D9D9D9; /* hairlines, dividers */
+  --color-gray-mid: #868686;   /* disabled, placeholder (not body text) */
+  --color-paper: #FFFFFF;
+
+  /* ---- Extended transit palette (ours, MBTA-inspired) ------------------- */
+  --color-orange: #ED8B00;     /* Orange Line — ink text only */
+  --color-silver: #7C878E;     /* Silver Line */
+  --color-purple: #80276C;     /* Commuter Rail (optional) */
+
+  /* ---- Neutrals ---------------------------------------------------------- */
+  --color-gray-50: #F4F5F6;    /* muted surfaces (card bottoms, hovers) */
+  --color-gray-dark: #4A4A4A;  /* muted text, passes AA */
+
+  /* ---- Tints & strong shades -------------------------------------------- */
+  --color-red-tint: #FBE2E4;
+  --color-green-tint: #DCEEDD;
+  --color-blue-tint: #DDE8FB;
+  --color-sky-tint: #DDF0FA;
+  --color-yellow-tint: #FDF5B0;
+  --color-orange-tint: #FDEACC;
+  --color-red-strong: #AE1F2B;   /* hover / pressed */
+  --color-green-strong: #08520F;
+  --color-blue-strong: #1A5BBD;  /* active nav text on blue tint (5.2:1) */
+  --color-sky-strong: #17699A;   /* bike icons + text on white or sky tint (5.1:1) */
+  --color-yellow-strong: #E3CA00;
+
+  /* ---- Semantic roles ---------------------------------------------------- */
+  --color-bg: var(--color-paper);
+  --color-surface: var(--color-paper);
+  --color-surface-muted: var(--color-gray-50);
+  --color-text: var(--color-ink);
+  --color-text-muted: var(--color-gray-dark);
+  --color-text-on-color: #FFFFFF;
+  --color-border: var(--color-ink);            /* cards, controls */
+  --color-border-subtle: var(--color-gray-light); /* panels, chips, dividers */
+  --color-accent: var(--color-red);
+  --color-link: var(--color-blue);
+  --color-active: var(--color-blue-strong);
+  --color-active-bg: var(--color-blue-tint);
+  --color-focus: var(--color-blue);
+  --color-highlight: var(--color-yellow);
+  --color-success: var(--color-green);
+  --color-danger: var(--color-red);
+
+  /* ---- Transit lines & travel modes ------------------------------------- */
+  --line-rl: var(--color-red);
+  --line-gl: var(--color-green);
+  --line-bl: var(--color-blue);
+  --line-ol: var(--color-orange);
+  --line-sl: var(--color-silver);
+  --line-cr: var(--color-purple);
+  --mode-bus: var(--color-yellow);
+  --mode-walk: var(--color-ink);
+  --mode-bike: var(--color-sky);   /* Bluebikes and other bike legs */
+
+  /* ---- Typography -------------------------------------------------------- */
+  --font-display: "Archivo", "Arial Black", sans-serif;  /* use with --font-display-stretch */
+  --font-display-stretch: 125%;                          /* Archivo Expanded */
+  --font-primary: "Akshar", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --text-2xs: 0.6875rem; /* 11 */
+  --text-xs: 0.75rem;    /* 12 */
+  --text-sm: 0.875rem;   /* 14 */
+  --text-base: 1rem;     /* 16 */
+  --text-md: 1.125rem;   /* 18 */
+  --text-lg: 1.25rem;    /* 20 */
+  --text-xl: 1.5rem;     /* 24 */
+  --text-2xl: 1.875rem;  /* 30 */
+  --text-3xl: 2.25rem;   /* 36 */
+  --text-4xl: 3rem;      /* 48 */
+  --text-5xl: 4rem;      /* 64 */
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.55;
+
+  --tracking-display: 0.01em;
+  --tracking-caps: 0.08em;   /* small uppercase labels */
+
+  /* ---- Spacing (4px base) ------------------------------------------------ */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ---- Radii ------------------------------------------------------------- */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;    /* controls */
+  --radius-lg: 12px;   /* cards, panels */
+  --radius-xl: 16px;   /* sheets, app icon */
+  --radius-pill: 999px;
+  --radius-control: var(--radius-md);
+  --radius-card: var(--radius-lg);
+  --radius-button: 14px 20px 12px 22px / 20px 12px 22px 14px; /* uneven, hand-cut corners */
+
+  /* ---- Border widths ----------------------------------------------------- */
+  --border-hairline: 1px;  /* panels, chips, dividers (subtle gray) */
+  --border-thin: 1.5px;    /* cards, buttons, inputs (ink) */
+  --border-base: 2px;      /* emphasis, selected states */
+  --border-line: 6px;      /* subway-line strokes in UI */
+  --border-button: 4px;    /* buttons only (3px on small buttons) */
+
+  /* ---- Shadows ----------------------------------------------------------- */
+  --shadow-xs: 0 1px 2px rgba(16, 24, 32, 0.06);
+  --shadow-sm: 0 2px 6px rgba(16, 24, 32, 0.08);
+  --shadow-md: 0 8px 20px rgba(16, 24, 32, 0.10);
+  --shadow-lg: 0 16px 40px rgba(16, 24, 32, 0.14);
+  --focus-ring: 0 0 0 3px rgba(32, 109, 223, 0.40);
+  /* Buttons only: hard ink offsets */
+  --shadow-button-sm: 3px 3px 0 0 var(--color-ink);
+  --shadow-button: 5px 5px 0 0 var(--color-ink);
+  --shadow-button-hover: 6px 7px 0 0 var(--color-ink);
+  --tilt-button: -2deg;
+
+  /* ---- Motion ------------------------------------------------------------ */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+
+  /* ---- Layout ------------------------------------------------------------ */
+  --container-max: 1120px;
+  --gutter: 16px;
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+/* Display type: Archivo Expanded, all caps. */
+.font-display {
+  font-family: var(--font-display);
+  font-stretch: var(--font-display-stretch);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+}
+
+/* Small uppercase label. */
+.eyebrow {
+  font-family: var(--font-primary);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+/* White panel with a hairline border. */
+.panel {
+  background: var(--color-surface);
+  border: var(--border-hairline) solid var(--color-border-subtle);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-xs);
+}
+
+/* Ink-ruled box: the printed-map look for cards and featured blocks. */
+.outline-ink {
+  border: var(--border-thin) solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+/* Highlighter stripe behind a word or two. */
+.text-highlight {
+  background: linear-gradient(transparent 58%, var(--color-yellow) 58%, var(--color-yellow) 90%, transparent 90%);
+  padding: 0 0.1em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}

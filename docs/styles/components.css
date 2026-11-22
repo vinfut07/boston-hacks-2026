@@ -1,0 +1,357 @@
+/* ==========================================================================
+   breadcrumb · components (v1.0, "Dotted trail"). Requires tokens.css.
+   Icons: Lucide (ISC), 2px stroke, currentColor.
+   Trails on cards are drawn by tools/trail.js (or its React port).
+   ========================================================================== */
+
+/* ---------- App screen base ----------------------------------------------- */
+.app {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- Brand ---------------------------------------------------------- */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-weight: var(--weight-heavy);
+  font-size: var(--text-xl);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+.brand__mark { flex: none; width: 30px; height: auto; }
+
+/* ---------- App bar -------------------------------------------------------- */
+.app-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--gutter);
+}
+
+/* ---------- Icon button (search, back, save) ------------------------------- */
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+}
+.icon-btn svg { width: 20px; height: 20px; stroke-width: 2; }
+.icon-btn:hover { background: var(--color-paper); }
+.icon-btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.icon-btn--float { border-color: transparent; box-shadow: var(--shadow-float); }
+.icon-btn--float:focus-visible { box-shadow: var(--shadow-float), var(--focus-ring); }
+.icon-btn.is-on svg { fill: currentColor; } /* saved bookmark */
+
+/* ---------- Page heading --------------------------------------------------- */
+.page-head { padding: var(--space-4) var(--gutter) 0; }
+.page-title {
+  margin: 0;
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-heavy);
+  letter-spacing: var(--tracking-title);
+  line-height: var(--leading-tight);
+}
+.page-sub { margin: 6px 0 0; font-size: var(--text-md); color: var(--color-text-2); }
+
+/* ---------- Filter tabs (pills) -------------------------------------------- */
+.tabs {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--gutter);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex: none;
+  height: 38px;
+  padding: 0 16px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-white);
+  font: var(--weight-semibold) var(--text-base) / 1 var(--font-sans);
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
+}
+.tab:hover { border-color: var(--color-ink-2); }
+.tab:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.tab.is-active,
+.tab[aria-selected="true"] { background: var(--color-ink); border-color: var(--color-ink); color: var(--color-white); }
+
+/* ---------- Feed ----------------------------------------------------------- */
+.feed { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-3); margin: 0; padding: 0 var(--gutter) var(--space-6); list-style: none; }
+
+/* ---------- Trail card ----------------------------------------------------- */
+/* Status sets the eyebrow color: anytime (orange), scheduled (blue), done (green). */
+.trail-card {
+  --status: var(--color-anytime);
+  display: block;
+  padding: 16px 18px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow var(--duration-base) var(--ease-out);
+}
+a.trail-card:hover { box-shadow: var(--shadow-card), 0 10px 28px rgba(27, 25, 22, 0.07); }
+.trail-card:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.trail-card--scheduled { --status: var(--color-scheduled); }
+.trail-card--done { --status: var(--color-done); }
+.trail-card__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); }
+.trail-card__eyebrow { font-size: var(--text-sm); font-weight: var(--weight-semibold); color: var(--status); }
+.trail-card__meta { font-size: var(--text-sm); color: var(--color-text-muted); white-space: nowrap; }
+.trail-card__title {
+  margin: 6px 0 0;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-snug);
+}
+.trail-card .trail { margin-top: 10px; }
+.trail-card__stats {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+}
+.trail-card__end { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; }
+.status-link { color: var(--color-scheduled); font-weight: var(--weight-semibold); text-decoration: none; }
+.status-link:hover { text-decoration: underline; }
+
+/* ---------- Trail: dotted line between ringed stops ------------------------ */
+/* <div class="trail" style="--stops:3">
+     <div class="trail__line" data-trail data-stops="3"></div>   (tools/trail.js fills this)
+     <div class="trail__labels"><span>Tatte</span>…</div>
+   </div> */
+.trail { --stops: 3; min-width: 0; }
+.trail__line { position: relative; height: 40px; min-width: 0; }
+/* Absolutely placed so a trail drawn at an old width never props the card open. */
+.trail__svg { position: absolute; top: 0; left: 0; display: block; overflow: visible; }
+.trail__path {
+  fill: none;
+  stroke: var(--color-trail);
+  stroke-width: var(--trail-dot);
+  stroke-linecap: round;
+  stroke-dasharray: 0 var(--trail-gap);
+}
+.trail__ring { fill: var(--color-white); stroke: var(--color-trail); stroke-width: var(--trail-ring-stroke); }
+.trail__end { fill: var(--color-done); }
+.trail--done .trail__path { stroke: var(--color-done); }
+.trail__labels {
+  display: grid;
+  grid-template-columns: repeat(var(--stops), minmax(0, 1fr));
+  gap: var(--space-2);
+  margin-top: 4px;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+.trail__labels span { overflow: hidden; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+.trail__labels span:first-child { text-align: left; }
+.trail__labels span:last-child { text-align: right; }
+
+/* ---------- Rating --------------------------------------------------------- */
+.rating { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.rating svg { width: 15px; height: 15px; fill: currentColor; stroke: currentColor; stroke-width: 1.5; }
+
+/* ---------- Buttons -------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+  font: var(--weight-bold) var(--text-md) / 1 var(--font-sans);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+.btn svg { width: 18px; height: 18px; stroke-width: 2.25; }
+.btn:hover { background: var(--color-crumb-deep); }
+.btn:active { transform: scale(0.98); }
+.btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.btn--block { display: flex; width: 100%; }
+.btn--lg { height: 56px; font-size: var(--text-lg); }
+.btn--sm { height: 38px; padding: 0 16px; font-size: var(--text-base); }
+.btn--secondary { background: var(--color-white); color: var(--color-ink); box-shadow: inset 0 0 0 1px var(--color-border-strong); }
+.btn--secondary:hover { background: var(--color-paper); }
+.btn--secondary:focus-visible { box-shadow: inset 0 0 0 1px var(--color-border-strong), var(--focus-ring); }
+.btn--ink { background: var(--color-ink); }
+.btn--ink:hover { background: #000; }
+.btn--ghost { background: transparent; color: var(--color-accent); }
+.btn--ghost:hover { background: var(--color-crumb-tint); }
+.btn:disabled,
+.btn[aria-disabled="true"] { background: var(--color-line); color: var(--color-text-muted); box-shadow: none; transform: none; cursor: not-allowed; }
+
+/* ---------- Bottom tab bar with the + button ------------------------------- */
+.tabbar {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: end;
+  min-height: calc(var(--tabbar-height) + env(safe-area-inset-bottom, 0px));
+  padding: 0 var(--space-2) env(safe-area-inset-bottom, 0px);
+  background: var(--color-white);
+  border-top: 1px solid var(--color-border);
+}
+.tabbar__item {
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  padding: 10px 0 10px;
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+.tabbar__item svg { width: 22px; height: 22px; stroke-width: 1.9; }
+.tabbar__item:focus-visible { outline: none; border-radius: var(--radius-sm); box-shadow: var(--focus-ring); }
+.tabbar__item.is-active,
+.tabbar__item[aria-current="page"] { color: var(--color-ink); font-weight: var(--weight-bold); }
+.tabbar__item.is-active svg,
+.tabbar__item[aria-current="page"] svg { stroke-width: 2.3; }
+.tabbar__fab {
+  justify-self: center;
+  align-self: start;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  margin-top: -20px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+  box-shadow: var(--shadow-fab);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+.tabbar__fab svg { width: 26px; height: 26px; stroke-width: 2.4; }
+.tabbar__fab:hover { background: var(--color-crumb-deep); }
+.tabbar__fab:focus-visible { outline: none; box-shadow: var(--shadow-fab), var(--focus-ring); }
+
+/* ---------- Detail: map hero + bottom sheet -------------------------------- */
+.map-hero { position: relative; height: 270px; overflow: hidden; background: var(--map-land); }
+.map-hero > svg,
+.map-hero > .map-hero__map { position: absolute; inset: 0; width: 100%; height: 100%; }
+.map-hero__bar {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  left: var(--gutter);
+  right: var(--gutter);
+  display: flex;
+  justify-content: space-between;
+}
+.sheet {
+  position: relative;
+  margin-top: calc(var(--radius-sheet) * -1);
+  padding: var(--space-6) var(--gutter) var(--space-4);
+  background: var(--color-paper);
+  border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+  box-shadow: var(--shadow-sheet);
+}
+.sheet__title {
+  margin: 6px 0 0;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-heavy);
+  letter-spacing: var(--tracking-title);
+  line-height: var(--leading-tight);
+}
+.sheet__stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  margin-top: 10px;
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-2);
+}
+.action-bar {
+  position: sticky;
+  bottom: 0;
+  padding: var(--space-3) var(--gutter) calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(to bottom, rgba(247, 246, 242, 0), var(--color-paper) 28%);
+}
+
+/* ---------- Numbered stop ring --------------------------------------------- */
+.num-ring {
+  box-sizing: border-box;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: var(--stop-num-size);
+  height: var(--stop-num-size);
+  border: 2.5px solid var(--color-trail);
+  border-radius: 50%;
+  background: var(--color-white);
+  font: var(--weight-bold) var(--text-sm) / 1 var(--font-sans);
+  color: var(--color-ink);
+}
+.num-ring--current { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-white); }
+.num-ring--done { background: var(--color-done); border-color: var(--color-done); color: var(--color-white); }
+.num-ring--map { box-shadow: var(--shadow-float); } /* HTML map marker */
+
+/* ---------- Stop list with dotted connectors ------------------------------- */
+.stops { margin: var(--space-6) 0 0; padding: 0; list-style: none; }
+.stop {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--stop-num-size) minmax(0, 1fr);
+  column-gap: var(--space-4);
+  padding-bottom: var(--space-5);
+}
+.stop::before { /* dots down to the next stop */
+  content: "";
+  position: absolute;
+  top: calc(var(--stop-num-size) + 6px);
+  bottom: 4px;
+  left: calc(var(--stop-num-size) / 2 - 2px);
+  width: 4px;
+  background: radial-gradient(circle, var(--color-trail) 1.5px, transparent 1.9px) center top / 4px var(--trail-gap) repeat-y;
+}
+.stop:last-child { padding-bottom: 0; }
+.stop:last-child::before { display: none; }
+.stop.is-done::before { background-image: radial-gradient(circle, var(--color-done) 1.5px, transparent 1.9px); }
+.stop__name { margin: 0; font-size: var(--text-lg); font-weight: var(--weight-bold); line-height: var(--stop-num-size); }
+.stop__place { margin: 0; font-size: var(--text-sm); color: var(--color-text-muted); }
+.crumb-item { display: flex; gap: 10px; margin: 10px 0 0; font-size: var(--text-base); line-height: var(--leading-snug); }
+.crumb-item::before { content: ""; flex: none; width: 7px; height: 7px; margin-top: 0.45em; border-radius: 50%; background: var(--color-trail); }
+.crumb-item b { font-weight: var(--weight-semibold); }
+.crumb-item.is-done { color: var(--color-text-muted); }
+.crumb-item.is-done::before { background: var(--color-done); }
+.stop__leg { display: flex; align-items: center; gap: 6px; margin: 8px 0 0; font-size: var(--text-sm); color: var(--color-text-muted); }
+.stop__leg svg { flex: none; width: 15px; height: 15px; stroke-width: 2; }
+.line-dot { flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--line, var(--line-green)); }

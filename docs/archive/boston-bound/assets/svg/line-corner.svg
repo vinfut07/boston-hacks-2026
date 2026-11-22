@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img">
+  <!-- Original artwork - BostonHacks 2026 "Breadcrumb" team. -->
+  <title>Subway line corner</title>
+  <path d="M36 0v112q0 44 44 44h120" fill="none" stroke="#CE2634" stroke-width="8"/><path d="M50 0v112q0 30 30 30h120" fill="none" stroke="#0C6B14" stroke-width="8"/><rect x="28" y="49" width="30" height="14" rx="7" fill="#FFFFFF" stroke="#000" stroke-width="2.5"/><rect x="143" y="135" width="14" height="28" rx="7" fill="#FFFFFF" stroke="#000" stroke-width="2.5"/>
+</svg>

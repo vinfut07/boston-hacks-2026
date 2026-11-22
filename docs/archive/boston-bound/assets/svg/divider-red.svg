@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 44" width="800" height="44" role="img">
+  <!-- Original artwork - BostonHacks 2026 "Breadcrumb" team. -->
+  <title>Red Line divider</title>
+  <path d="M8 32H232q8 0 14-6l8-8q6-6 14-6H532q8 0 14 6l8 8q6 6 14 6H792" fill="none" stroke="#CE2634" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="120" cy="32" r="5.5" fill="#FFFFFF" stroke="#000" stroke-width="2.5"/><circle cx="400" cy="12" r="5.5" fill="#FFFFFF" stroke="#000" stroke-width="2.5"/><circle cx="680" cy="32" r="5.5" fill="#FFFFFF" stroke="#000" stroke-width="2.5"/>
+</svg>

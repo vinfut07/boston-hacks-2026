@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>breadcrumb Style Guide</title>
+  <meta name="description" content="Visual foundation for breadcrumb (BostonHacks 2026): the Dotted trail direction, tokens, components and both core screens.">
+  <link rel="icon" href="assets/svg/app-icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <style>
+    /* ---------- style-guide page layout only (not part of the app styles) ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; overflow-x: hidden; }
+    img { max-width: 100%; }
+    code {
+      font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+      font-size: 0.82em;
+      padding: 0.1em 0.38em;
+      background: var(--color-sand);
+      border-radius: 6px;
+    }
+    a { color: var(--color-accent); }
+    .sg-wrap { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--gutter); }
+    @media (min-width: 720px) { .sg-wrap { padding: 0 var(--space-8); } }
+
+    .sg-hero { padding: var(--space-10) 0 var(--space-4); }
+    .sg-hero .eyebrow { margin: var(--space-8) 0 var(--space-2); }
+    .sg-title { margin: 0; font-size: clamp(2.25rem, 1.6rem + 3vw, 3.5rem); font-weight: var(--weight-heavy); letter-spacing: var(--tracking-title); line-height: 1.02; }
+    .sg-title span { display: block; margin-top: 6px; font-size: 0.42em; font-weight: var(--weight-bold); letter-spacing: var(--tracking-tight); color: var(--color-text-muted); }
+    .sg-lede { max-width: 60ch; margin: var(--space-4) 0 var(--space-5); font-size: var(--text-lg); color: var(--color-text-2); }
+    .sg-divider { display: block; width: 100%; max-width: 640px; height: auto; margin: var(--space-2) 0 var(--space-4); }
+    .sg-nav { padding-left: 0; padding-right: 0; }
+    .sg-nav a { display: inline-flex; align-items: center; text-decoration: none; }
+
+    .sg-section { padding: var(--space-12) 0 var(--space-4); scroll-margin-top: var(--space-4); border-top: 1px solid var(--color-border); }
+    .sg-kicker { margin: 0 0 var(--space-1); }
+    .sg-h2 { margin: 0 0 var(--space-3); font-size: clamp(1.6rem, 1.25rem + 1.4vw, 2.25rem); font-weight: var(--weight-heavy); letter-spacing: var(--tracking-title); line-height: var(--leading-tight); }
+    .sg-intro { max-width: 68ch; margin: 0 0 var(--space-6); color: var(--color-text-2); }
+    .sg-h3 { margin: var(--space-10) 0 var(--space-3); font-size: var(--text-xl); font-weight: var(--weight-bold); letter-spacing: var(--tracking-tight); }
+    .sg-h3 small { font-size: var(--text-base); font-weight: var(--weight-medium); letter-spacing: 0; color: var(--color-text-muted); }
+    .sg-panel { padding: var(--space-5); background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-card); }
+    .sg-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+    .sg-grid--sm { grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr)); }
+    .sg-grid--cards { grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); align-items: start; }
+    .sg-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+    .two-col { display: grid; gap: var(--space-6); grid-template-columns: 1fr; }
+    @media (min-width: 860px) { .two-col { grid-template-columns: 1fr 1fr; } }
+    .note { margin: var(--space-3) 0 0; font-size: var(--text-sm); color: var(--color-text-muted); }
+
+    /* phones */
+    .screens { display: grid; gap: var(--space-8) var(--space-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 390px)); justify-content: center; }
+    .screen-fig { margin: 0; }
+    .screen-fig figcaption { display: flex; justify-content: space-between; gap: var(--space-3); margin: 0 4px var(--space-3); font-size: var(--text-sm); color: var(--color-text-muted); }
+    .screen-fig figcaption strong { color: var(--color-ink); font-weight: var(--weight-semibold); }
+    .phone { position: relative; height: 820px; overflow: hidden; border-radius: 40px; background: var(--color-paper); border: 1px solid var(--color-border-strong); box-shadow: 0 24px 60px rgba(27, 25, 22, 0.12); }
+    .phone__screen { position: absolute; inset: 0; display: flex; flex-direction: column; }
+    .phone__scroll { flex: 1; overflow-y: auto; scrollbar-width: none; }
+    .phone__scroll::-webkit-scrollbar { display: none; }
+    .phone__status { display: flex; align-items: center; justify-content: space-between; height: 46px; padding: 6px 28px 0; font-size: 15px; font-weight: var(--weight-semibold); }
+    .phone__status span:last-child { display: inline-flex; gap: 6px; }
+    .phone__status svg { width: 17px; height: 17px; stroke-width: 2.2; }
+    .phone__status--over { position: absolute; z-index: 2; top: 0; left: 0; right: 0; }
+    .phone .map-hero__bar { top: 52px; }
+
+    /* swatches */
+    .swatch { margin: 0; overflow: hidden; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+    .swatch__chip { display: flex; align-items: flex-end; justify-content: space-between; height: 84px; padding: var(--space-3); font-weight: var(--weight-semibold); font-size: var(--text-sm); border-bottom: 1px solid var(--color-border); }
+    .swatch__chip b { font-size: var(--text-xl); font-weight: var(--weight-heavy); letter-spacing: var(--tracking-tight); }
+    .swatch figcaption { display: grid; gap: 2px; padding: var(--space-3); font-size: var(--text-sm); }
+    .swatch figcaption strong { font-size: var(--text-base); }
+    .swatch figcaption em { font-style: normal; color: var(--color-text-muted); }
+    .swatch--sm .swatch__chip { height: 48px; }
+
+    /* type */
+    .type-row { display: grid; gap: 4px var(--space-6); padding: var(--space-4) 0; border-bottom: 1px solid var(--color-border); }
+    .type-row:first-child { padding-top: 0; }
+    .type-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    @media (min-width: 720px) { .type-row { grid-template-columns: 12rem 1fr; align-items: baseline; } }
+    .type-row__meta { font-size: var(--text-sm); color: var(--color-text-muted); }
+    .type-row__meta b { display: block; color: var(--color-ink); font-weight: var(--weight-semibold); }
+
+    /* shape */
+    .radius-demo { display: grid; place-items: center; height: 96px; background: var(--color-white); border: 1px solid var(--color-border-strong); font-size: var(--text-sm); text-align: center; }
+    .radius-demo b { display: block; font-size: var(--text-base); }
+    .shadow-demo { display: grid; place-items: center; height: 96px; background: var(--color-white); border-radius: var(--radius-card); font-size: var(--text-sm); text-align: center; }
+    .anatomy { display: grid; gap: var(--space-5); align-items: center; }
+    @media (min-width: 720px) { .anatomy { grid-template-columns: 1.2fr 1fr; } }
+    .anatomy .trail__line { height: 56px; }
+    .spec-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: var(--text-sm); color: var(--color-text-2); }
+    .spec-list b { color: var(--color-ink); }
+
+    /* components */
+    .tabbar-demo { max-width: 390px; overflow: visible; padding-top: 28px; border-radius: var(--radius-card); background: var(--color-paper); }
+    .tabbar-demo .tabbar { border-radius: 0 0 var(--radius-card) var(--radius-card); }
+    .stops-demo { padding: var(--space-5); background: var(--color-paper); border: 1px solid var(--color-border); border-radius: var(--radius-card); }
+    .stops-demo .stops { margin-top: 0; }
+
+    /* assets */
+    .asset { margin: 0; display: grid; grid-template-rows: 1fr auto; overflow: hidden; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+    .asset__art { display: grid; place-items: center; min-height: 132px; padding: var(--space-4); }
+    .asset--wide { grid-column: 1 / -1; }
+    .asset figcaption { padding: var(--space-2) var(--space-3); border-top: 1px solid var(--color-border); background: var(--color-paper); font-size: var(--text-xs); overflow-wrap: anywhere; }
+    .asset figcaption code { padding: 0; background: none; }
+    .empty-demo { display: grid; justify-items: center; gap: var(--space-2); padding: var(--space-8) var(--space-5); text-align: center; }
+    .empty-demo h4 { margin: var(--space-3) 0 0; font-size: var(--text-xl); font-weight: var(--weight-bold); letter-spacing: var(--tracking-tight); }
+    .empty-demo p { max-width: 34ch; margin: 0 0 var(--space-3); color: var(--color-text-muted); }
+
+    /* rules */
+    .rules { display: grid; gap: var(--space-3); grid-template-columns: 1fr; margin: 0; padding: 0; list-style: none; }
+    @media (min-width: 860px) { .rules { grid-template-columns: 1fr 1fr; } }
+    .rule { display: grid; grid-template-columns: 28px 1fr; gap: var(--space-3); padding: var(--space-4); background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: var(--text-base); }
+    .rule svg { width: 22px; height: 22px; stroke-width: 2.5; }
+    .rule--do svg { color: var(--color-green); }
+    .rule--dont svg { color: var(--color-crumb-strong); }
+    .rule b { display: block; font-weight: var(--weight-semibold); }
+    .rule span { color: var(--color-text-2); }
+
+    .sg-footer { margin-top: var(--space-12); padding: var(--space-8) 0 var(--space-16); border-top: 1px solid var(--color-border); }
+    .sg-footer p { max-width: 80ch; font-size: var(--text-sm); color: var(--color-text-muted); }
+  </style>
+</head>
+<body class="app">
+
+<div class="sg-wrap">
+  <header class="sg-hero">
+    <a class="brand" href="#top" id="top"><img class="brand__mark" src="assets/svg/logo-mark.svg" alt="" width="30" height="12">breadcrumb</a>
+    <p class="eyebrow">BostonHacks 2026 · Bos(tons) of Eats and Streets</p>
+    <h1 class="sg-title">Style guide <span>v1.0 · Dotted trail</span></h1>
+    <p class="sg-lede">Every outing is a <b>trail</b>: stops joined by a dotted line, with small tasks called <b>crumbs</b> along the way. The palette is warm paper, white cards and near-black type, with one orange accent.</p>
+    <img class="sg-divider" src="assets/svg/trail-divider.svg" alt="" aria-hidden="true">
+    <nav class="tabs sg-nav" aria-label="Style guide sections">
+      <a class="tab is-active" href="#screens">Screens</a>
+      <a class="tab" href="#color">Color</a>
+      <a class="tab" href="#type">Type</a>
+      <a class="tab" href="#shape">Shape</a>
+      <a class="tab" href="#components">Components</a>
+      <a class="tab" href="#assets">Assets</a>
+      <a class="tab" href="#rules">Rules</a>
+    </nav>
+  </header>
+
+  <!-- ============================================================ 01 SCREENS -->
+  <section class="sg-section" id="screens">
+    <p class="sg-kicker eyebrow">01</p>
+    <h2 class="sg-h2">Screens</h2>
+    <p class="sg-intro">The two core screens, built only from the classes in <code>styles/components.css</code>. Sizes are CSS pixels on a 390 px phone. Both screens scroll.</p>
+
+    <div class="screens">
+      <!-- For You -->
+      <figure class="screen-fig">
+        <figcaption><strong>For You</strong><span>Explore tab</span></figcaption>
+        <div class="phone">
+          <div class="phone__screen">
+            <div class="phone__scroll">
+              <div class="phone__status" aria-hidden="true"><span>9:41</span><span><i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i></span></div>
+              <header class="app-bar">
+                <a class="brand" href="#screens"><img class="brand__mark" src="assets/svg/logo-mark.svg" alt="" width="30" height="12">breadcrumb</a>
+                <button class="icon-btn" type="button" aria-label="Search"><i data-lucide="search"></i></button>
+              </header>
+              <div class="page-head">
+                <h1 class="page-title">Trails for you</h1>
+                <p class="page-sub">You've lived here. Have you explored it?</p>
+              </div>
+              <div class="tabs" role="tablist" aria-label="Feed">
+                <button class="tab is-active" type="button" role="tab" aria-selected="true">For you</button>
+                <button class="tab" type="button" role="tab" aria-selected="false">Nearby</button>
+                <button class="tab" type="button" role="tab" aria-selected="false">Friends</button>
+              </div>
+              <ul class="feed">
+                <li>
+                  <a class="trail-card" href="#screens">
+                    <div class="trail-card__head"><span class="trail-card__eyebrow">Cafés · Anytime</span><span class="trail-card__meta">1.2 mi away</span></div>
+                    <h3 class="trail-card__title">Sunday Café Hop</h3>
+                    <div class="trail" style="--stops:3">
+                      <div class="trail__line" data-trail data-stops="3" data-seed="0"></div>
+                      <div class="trail__labels"><span>Tatte</span><span>Public Garden</span><span>Newbury St</span></div>
+                    </div>
+                    <div class="trail-card__stats"><span>~$20</span><span>2 hr</span><span>2 crumbs</span><span class="trail-card__end rating"><i data-lucide="star"></i>4.6</span></div>
+                  </a>
+                </li>
+                <li>
+                  <a class="trail-card trail-card--scheduled" href="#screens">
+                    <div class="trail-card__head"><span class="trail-card__eyebrow">Food · Sat 2:00 PM</span><span class="trail-card__meta">6 going</span></div>
+                    <h3 class="trail-card__title">Fenway Food Crawl</h3>
+                    <div class="trail" style="--stops:4">
+                      <div class="trail__line" data-trail data-stops="4" data-seed="1"></div>
+                    </div>
+                    <div class="trail-card__stats"><span>~$35</span><span>3 hr</span><span>4 stops</span><span class="trail-card__end status-link">Going</span></div>
+                  </a>
+                </li>
+                <li>
+                  <a class="trail-card trail-card--done" href="#screens">
+                    <div class="trail-card__head"><span class="trail-card__eyebrow">Finished · Nov 16</span><span class="trail-card__meta">You rated 5</span></div>
+                    <h3 class="trail-card__title">North End Cannoli Duel</h3>
+                    <div class="trail trail--done" style="--stops:2">
+                      <div class="trail__line" data-trail data-stops="2" data-state="done" data-seed="1"></div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <nav class="tabbar" aria-label="App">
+              <a class="tabbar__item is-active" href="#screens" aria-current="page"><i data-lucide="compass"></i>Explore</a>
+              <a class="tabbar__item" href="#screens"><i data-lucide="map"></i>Map</a>
+              <button class="tabbar__fab" type="button" aria-label="Make a trail"><i data-lucide="plus"></i></button>
+              <a class="tabbar__item" href="#screens"><i data-lucide="bookmark"></i>Saved</a>
+              <a class="tabbar__item" href="#screens"><i data-lucide="user"></i>You</a>
+            </nav>
+          </div>
+        </div>
+      </figure>
+
+      <!-- Detail -->
+      <figure class="screen-fig">
+        <figcaption><strong>Trail detail</strong><span>Opened from a card</span></figcaption>
+        <div class="phone">
+          <div class="phone__screen">
+            <div class="phone__status phone__status--over" aria-hidden="true"><span>9:41</span><span><i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i></span></div>
+            <div class="phone__scroll">
+              <div class="map-hero" style="height:300px">
+                <svg viewBox="0 0 390 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Map of the route: Tatte, Public Garden, Newbury Street">
+                  <rect width="390" height="300" fill="#EFEDE6"/>
+                  <circle cx="372" cy="36" r="118" fill="#D8E6F0"/>
+                  <rect x="88" y="118" width="150" height="100" rx="22" fill="#DDE8D3"/>
+                  <path d="M0 246H390M256 0V300" stroke="#FBFAF7" stroke-width="10"/>
+                  <path d="M0 84H70M170 246V300" stroke="#FBFAF7" stroke-width="6"/>
+                  <path d="M80 112Q132 136 190 172Q252 210 310 248" fill="none" stroke="#E8552D" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0 9"/>
+                  <g font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="13" text-anchor="middle" fill="#1B1916">
+                    <circle cx="80" cy="112" r="14" fill="#fff" stroke="#E8552D" stroke-width="2.8"/><text x="80" y="116.6">1</text>
+                    <circle cx="190" cy="172" r="14" fill="#fff" stroke="#E8552D" stroke-width="2.8"/><text x="190" y="176.6">2</text>
+                    <circle cx="310" cy="248" r="14" fill="#fff" stroke="#E8552D" stroke-width="2.8"/><text x="310" y="252.6">3</text>
+                  </g>
+                </svg>
+                <div class="map-hero__bar">
+                  <button class="icon-btn icon-btn--float" type="button" aria-label="Back"><i data-lucide="chevron-left"></i></button>
+                  <button class="icon-btn icon-btn--float" type="button" aria-label="Save trail"><i data-lucide="bookmark"></i></button>
+                </div>
+              </div>
+              <section class="sheet">
+                <p class="eyebrow" style="margin:0">Cafés · Anytime · Curated</p>
+                <h1 class="sheet__title">Sunday Café Hop</h1>
+                <div class="sheet__stats"><span>~$20</span><span>2 hr</span><span>3 stops</span><span class="rating"><i data-lucide="star"></i>4.6 (12)</span></div>
+                <ol class="stops">
+                  <li class="stop">
+                    <span class="num-ring">1</span>
+                    <div>
+                      <h3 class="stop__name">Tatte Bakery &amp; Café</h3>
+                      <p class="stop__place">70 Charles St, Beacon Hill</p>
+                      <p class="crumb-item"><span><b>Crumb:</b> order a shakshuka or a pastry</span></p>
+                      <p class="stop__leg"><i data-lucide="footprints"></i>Walk 8 min via Boston Common</p>
+                    </div>
+                  </li>
+                  <li class="stop">
+                    <span class="num-ring">2</span>
+                    <div>
+                      <h3 class="stop__name">Public Garden</h3>
+                      <p class="stop__place">Lagoon &amp; footbridge</p>
+                      <p class="crumb-item"><span><b>Crumb:</b> find the Make Way for Ducklings statues</span></p>
+                      <p class="stop__leg"><span class="line-dot" style="--line:var(--line-green)"></span>Green Line, Arlington → Copley</p>
+                    </div>
+                  </li>
+                  <li class="stop">
+                    <span class="num-ring">3</span>
+                    <div>
+                      <h3 class="stop__name">Newbury Street</h3>
+                      <p class="stop__place">Back Bay</p>
+                    </div>
+                  </li>
+                </ol>
+              </section>
+              <div class="action-bar"><button class="btn btn--block btn--lg" type="button">Start trail</button></div>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================ 02 COLOR -->
+  <section class="sg-section" id="color">
+    <p class="sg-kicker eyebrow">02</p>
+    <h2 class="sg-h2">Color</h2>
+    <p class="sg-intro">Paper and ink do most of the work. Orange is the only accent: trails, the primary action and orange labels. Blue and green appear only as status (scheduled and finished). The number on each chip is the contrast of the text shown on it.</p>
+
+    <div class="sg-grid">
+      <figure class="swatch"><div class="swatch__chip" style="background:var(--color-paper)"><b>Aa</b>16 : 1</div><figcaption><strong>Paper</strong><code>--color-paper</code><span>#F7F6F2</span><em>App background, bottom sheets</em></figcaption></figure>
+      <figure class="swatch"><div class="swatch__chip" style="background:var(--color-white)"><b>Aa</b>17.5 : 1</div><figcaption><strong>White</strong><code>--color-white</code><span>#FFFFFF</span><em>Cards, tabs, buttons, tab bar</em></figcaption></figure>
+      <figure class="swatch"><div class="swatch__chip" style="background:var(--color-ink);color:#fff"><b>Aa</b>17.5 : 1</div><figcaption><strong>Ink</strong><code>--color-ink</code><span>#1B1916</span><em>Type, active tab, selected filter</em></figcaption></figure>
+      <figure class="swatch"><div class="swatch__chip" style="background:var(--color-crumb-strong);color:#fff"><b>Aa</b>5.2 : 1</div><figcaption><strong>Crumb strong</strong><code>--color-crumb-strong</code><span>#C2410C</span><em>Orange text, primary button, + button</em></figcaption></figure>
+      <figure class="swatch"><div class="swatch__chip" style="background:var(--color-crumb);color:#fff"><b>••</b>graphics</div><figcaption><strong>Crumb</strong><code>--color-crumb</code><span>#E8552D</span><em>Trail dots and rings only. Never text.</em></figcaption></figure>
+      <figure class="swatch"><div class="swatch__chip" style="background:var(--color-blue);color:#fff"><b>Aa</b>6.7 : 1</div><figcaption><strong>Blue</strong><code>--color-blue</code><span>#1D4ED8</span><em>Scheduled trails: "Sat 2:00 PM", "Going"</em></figcaption></figure>
+      <figure class="swatch"><div class="swatch__chip" style="background:var(--color-green);color:#fff"><b>Aa</b>5.0 : 1</div><figcaption><strong>Green</strong><code>--color-green</code><span>#15803D</span><em>Finished trails and done crumbs</em></figcaption></figure>
+    </div>
+
+    <h3 class="sg-h3">Text, lines &amp; surfaces</h3>
+    <div class="sg-grid sg-grid--sm">
+      <figure class="swatch swatch--sm"><div class="swatch__chip" style="background:var(--color-ink-2)"></div><figcaption><code>--color-ink-2</code><span>#57534C · 7.1:1</span><em>Stats, addresses</em></figcaption></figure>
+      <figure class="swatch swatch--sm"><div class="swatch__chip" style="background:var(--color-muted)"></div><figcaption><code>--color-muted</code><span>#736E66 · 4.7:1</span><em>Meta, labels</em></figcaption></figure>
+      <figure class="swatch swatch--sm"><div class="swatch__chip" style="background:var(--color-line-strong)"></div><figcaption><code>--color-line-strong</code><span>#D6D2C8</span><em>Tab outlines</em></figcaption></figure>
+      <figure class="swatch swatch--sm"><div class="swatch__chip" style="background:var(--color-line)"></div><figcaption><code>--color-line</code><span>#E7E4DD</span><em>Card borders</em></figcaption></figure>
+      <figure class="swatch swatch--sm"><div class="swatch__chip" style="background:var(--color-sand)"></div><figcaption><code>--color-sand</code><span>#EFEDE6</span><em>Map land, skeletons</em></figcaption></figure>
+      <figure class="swatch swatch--sm"><div class="swatch__chip" style="background:var(--color-crumb-deep)"></div><figcaption><code>--color-crumb-deep</code><span>#9A3412</span><em>Hover, pressed</em></figcaption></figure>
+    </div>
+
+    <h3 class="sg-h3">Tints, logo &amp; map</h3>
+    <div class="sg-grid sg-grid--sm">
+      <figure class="swatch swatch--sm"><div class="swatch__chip" style="background:var(--color-crumb-tint)"></div><figcaption><code>--color-crumb-tint</code><span>#FDEDE6</span></figcaption></figure>
+      <figure class="swatch swatch--sm"><div class="swatch__chip" style="background:var(--color-blue-tint)"></div><figcaption><code>--color-blue-tint</code><span>#E6EDFC</span></figcaption></figure>
+      <figure class="swatch swatch--sm"><div class="swatch__chip" style="background:var(--color-green-tint)"></div><figcaption><code>--color-green-tint</code><span>#E3F2E7</span></figcaption></figure>
+      <figure class="swatch swatch--sm"><div class="swatch__chip" style="background:var(--color-crumb-pale)"></div><figcaption><code>--color-crumb-pale</code><span>#F7C2B1 · logo</span></figcaption></figure>
+      <figure class="swatch swatch--sm"><div class="swatch__chip" style="background:var(--color-crumb-soft)"></div><figcaption><code>--color-crumb-soft</code><span>#F08A69 · logo</span></figcaption></figure>
+      <figure class="swatch swatch--sm"><div class="swatch__chip" style="background:var(--map-park)"></div><figcaption><code>--map-park</code><span>#DDE8D3</span></figcaption></figure>
+      <figure class="swatch swatch--sm"><div class="swatch__chip" style="background:var(--map-water)"></div><figcaption><code>--map-water</code><span>#D8E6F0</span></figcaption></figure>
+      <figure class="swatch swatch--sm"><div class="swatch__chip" style="background:var(--map-road)"></div><figcaption><code>--map-road</code><span>#FBFAF7</span></figcaption></figure>
+    </div>
+    <p class="note">MBTA line colors (<code>--line-red</code>, <code>--line-green</code>, …) appear only as a small dot next to a transit step, such as "Green Line, Arlington → Copley".</p>
+  </section>
+
+  <!-- ============================================================ 03 TYPE -->
+  <section class="sg-section" id="type">
+    <p class="sg-kicker eyebrow">03</p>
+    <h2 class="sg-h2">Type</h2>
+    <p class="sg-intro">There's one family, <b>Inter</b>, from Google Fonts. Titles are heavy with tight tracking. Everything else is regular to semibold. Hierarchy comes from size and weight, never from extra colors.</p>
+    <div class="sg-panel">
+      <div class="type-row"><div class="type-row__meta"><b>Page title</b>32 / 800 · −0.035em</div><div class="page-title">Trails for you</div></div>
+      <div class="type-row"><div class="type-row__meta"><b>Detail title</b>28 / 800 · −0.035em</div><div class="sheet__title" style="margin:0">Sunday Café Hop</div></div>
+      <div class="type-row"><div class="type-row__meta"><b>Card title · wordmark</b>21 / 700 · −0.02em</div><div class="trail-card__title" style="margin:0">Fenway Food Crawl</div></div>
+      <div class="type-row"><div class="type-row__meta"><b>Stop name</b>17 / 700</div><div class="stop__name" style="line-height:1.3">Tatte Bakery &amp; Café</div></div>
+      <div class="type-row"><div class="type-row__meta"><b>Subtitle · button</b>16 / 400 · 700</div><div class="page-sub" style="margin:0">You've lived here. Have you explored it?</div></div>
+      <div class="type-row"><div class="type-row__meta"><b>Body · stats · tabs</b>15 / 400–600</div><div><span style="font-weight:600">~$20 · 2 hr · 2 crumbs</span> — Crumb: order a shakshuka or a pastry</div></div>
+      <div class="type-row"><div class="type-row__meta"><b>Eyebrow · meta</b>13 / 600 · 400</div><div><span class="eyebrow">Cafés · Anytime</span> &nbsp; <span class="trail-card__meta">1.2 mi away</span></div></div>
+      <div class="type-row"><div class="type-row__meta"><b>Stop labels · tab bar</b>12 · 11 / 500</div><div class="trail__labels" style="display:block;margin:0">Tatte · Public Garden · Newbury St</div></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 04 SHAPE -->
+  <section class="sg-section" id="shape">
+    <p class="sg-kicker eyebrow">04</p>
+    <h2 class="sg-h2">Shape &amp; depth</h2>
+    <p class="sg-intro">Everything is soft: generous radii, hairline borders and low, warm shadows. Interactive pills (tabs, buttons, icon buttons) are fully round.</p>
+    <div class="sg-grid sg-grid--sm">
+      <div class="radius-demo" style="border-radius:var(--radius-sm)"><div><b>10</b><code>--radius-sm</code></div></div>
+      <div class="radius-demo" style="border-radius:var(--radius-md)"><div><b>14</b><code>--radius-md</code></div></div>
+      <div class="radius-demo" style="border-radius:var(--radius-card)"><div><b>20</b><code>--radius-card</code></div></div>
+      <div class="radius-demo" style="border-radius:var(--radius-sheet) var(--radius-sheet) 0 0"><div><b>24</b><code>--radius-sheet</code></div></div>
+      <div class="radius-demo" style="border-radius:var(--radius-pill)"><div><b>pill</b><code>--radius-pill</code></div></div>
+    </div>
+    <div class="sg-grid sg-grid--sm" style="margin-top:var(--space-4)">
+      <div class="shadow-demo" style="box-shadow:var(--shadow-card);border:1px solid var(--color-border)"><code>--shadow-card</code></div>
+      <div class="shadow-demo" style="box-shadow:var(--shadow-float)"><code>--shadow-float</code></div>
+      <div class="shadow-demo" style="box-shadow:var(--shadow-sheet)"><code>--shadow-sheet</code></div>
+      <div class="shadow-demo" style="box-shadow:var(--shadow-fab)"><code>--shadow-fab</code></div>
+    </div>
+
+    <h3 class="sg-h3">Trail anatomy</h3>
+    <div class="sg-panel anatomy">
+      <div class="trail" style="--stops:4">
+        <div class="trail__line" data-trail data-stops="4" data-seed="2" data-height="56"></div>
+        <div class="trail__labels"><span>Start</span><span>Stop</span><span>Stop</span><span>End</span></div>
+      </div>
+      <ul class="spec-list">
+        <li><b>Dots:</b> 3 px round dots every 8.5 px (<code>stroke-dasharray: 0 8.5</code>, round caps) in <code>--color-crumb</code>.</li>
+        <li><b>Stops:</b> 7.5 px rings, white fill, 2.5 px orange stroke. Finished trails turn green and show only filled end points.</li>
+        <li><b>Path:</b> gentle alternating humps and dips between evenly spaced stops. <code>tools/trail.js</code> draws it at the real pixel width so the dots never stretch.</li>
+        <li><b>Numbered stops:</b> 28 px rings with the number in 13 / 700 ink (<code>.num-ring</code>), in lists and on the map.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ 05 COMPONENTS -->
+  <section class="sg-section" id="components">
+    <p class="sg-kicker eyebrow">05</p>
+    <h2 class="sg-h2">Components</h2>
+    <p class="sg-intro">Every class here lives in <code>styles/components.css</code>. Icons come from Lucide (ISC license), drawn with a 2 px stroke in <code>currentColor</code>.</p>
+
+    <h3 class="sg-h3">Trail card <small>· the status sets the eyebrow color</small></h3>
+    <div class="sg-grid sg-grid--cards">
+      <div>
+        <a class="trail-card" href="#components">
+          <div class="trail-card__head"><span class="trail-card__eyebrow">Parks · Anytime</span><span class="trail-card__meta">0.4 mi away</span></div>
+          <h3 class="trail-card__title">Esplanade Golden Hour</h3>
+          <div class="trail" style="--stops:3">
+            <div class="trail__line" data-trail data-stops="3" data-seed="3"></div>
+            <div class="trail__labels"><span>Longfellow</span><span>Hatch Shell</span><span>Mass Ave</span></div>
+          </div>
+          <div class="trail-card__stats"><span>Free</span><span>1.5 hr</span><span>3 crumbs</span><span class="trail-card__end rating"><i data-lucide="star"></i>4.8</span></div>
+        </a>
+        <p class="note"><b>Anytime</b> (default): orange eyebrow, distance, stop labels, rating.</p>
+      </div>
+      <div>
+        <a class="trail-card trail-card--scheduled" href="#components">
+          <div class="trail-card__head"><span class="trail-card__eyebrow">Food · Sat 2:00 PM</span><span class="trail-card__meta">6 going</span></div>
+          <h3 class="trail-card__title">Fenway Food Crawl</h3>
+          <div class="trail" style="--stops:4"><div class="trail__line" data-trail data-stops="4" data-seed="1"></div></div>
+          <div class="trail-card__stats"><span>~$35</span><span>3 hr</span><span>4 stops</span><span class="trail-card__end status-link">Join</span></div>
+        </a>
+        <p class="note"><code>.trail-card--scheduled</code>: blue date and time, head count, and a Join (or Going) action.</p>
+      </div>
+      <div>
+        <a class="trail-card trail-card--done" href="#components">
+          <div class="trail-card__head"><span class="trail-card__eyebrow">Finished · Nov 16</span><span class="trail-card__meta">You rated 5</span></div>
+          <h3 class="trail-card__title">North End Cannoli Duel</h3>
+          <div class="trail trail--done" style="--stops:2"><div class="trail__line" data-trail data-stops="2" data-state="done" data-seed="1"></div></div>
+        </a>
+        <p class="note"><code>.trail-card--done</code> with <code>.trail--done</code>: a green trail with filled end points and no stats row.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <h3 class="sg-h3">App bar &amp; filter tabs</h3>
+        <div class="sg-panel" style="padding:var(--space-2) 0;background:var(--color-paper)">
+          <div class="app-bar">
+            <a class="brand" href="#components"><img class="brand__mark" src="assets/svg/logo-mark.svg" alt="" width="30" height="12">breadcrumb</a>
+            <button class="icon-btn" type="button" aria-label="Search"><i data-lucide="search"></i></button>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Filter (demo)">
+            <button class="tab is-active" type="button" role="tab" aria-selected="true">For you</button>
+            <button class="tab" type="button" role="tab" aria-selected="false">Nearby</button>
+            <button class="tab" type="button" role="tab" aria-selected="false">Friends</button>
+          </div>
+        </div>
+        <p class="note">The selected filter is solid ink, and the others are white with a <code>--color-line-strong</code> outline. The row scrolls sideways when it overflows.</p>
+      </div>
+      <div>
+        <h3 class="sg-h3">Buttons</h3>
+        <div class="sg-panel">
+          <button class="btn btn--block btn--lg" type="button">Start trail</button>
+          <div class="sg-row" style="margin-top:var(--space-4)">
+            <button class="btn" type="button"><i data-lucide="user-plus"></i>Join</button>
+            <button class="btn btn--secondary" type="button"><i data-lucide="bookmark"></i>Save</button>
+            <button class="btn btn--ink" type="button">Share</button>
+            <button class="btn btn--ghost btn--sm" type="button">See all</button>
+            <button class="btn btn--sm" type="button" disabled>Full</button>
+          </div>
+          <div class="sg-row" style="margin-top:var(--space-4)">
+            <button class="icon-btn" type="button" aria-label="Search"><i data-lucide="search"></i></button>
+            <button class="icon-btn icon-btn--float" type="button" aria-label="Back"><i data-lucide="chevron-left"></i></button>
+            <button class="icon-btn icon-btn--float is-on" type="button" aria-label="Saved"><i data-lucide="bookmark"></i></button>
+          </div>
+        </div>
+        <p class="note">Use one orange button per screen. Over the map, use <code>.icon-btn--float</code>. <code>.is-on</code> fills a saved bookmark.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <h3 class="sg-h3">Stop list <small>· on the detail sheet and during a run</small></h3>
+        <div class="stops-demo">
+          <ol class="stops">
+            <li class="stop is-done">
+              <span class="num-ring num-ring--done"><i data-lucide="check" style="width:15px;height:15px;stroke-width:3"></i></span>
+              <div><h3 class="stop__name">Tatte Bakery &amp; Café</h3><p class="stop__place">70 Charles St, Beacon Hill</p><p class="crumb-item is-done"><span><b>Crumb:</b> order a shakshuka or a pastry</span></p></div>
+            </li>
+            <li class="stop">
+              <span class="num-ring num-ring--current">2</span>
+              <div><h3 class="stop__name">Public Garden</h3><p class="stop__place">Lagoon &amp; footbridge</p><p class="crumb-item"><span><b>Crumb:</b> find the Make Way for Ducklings statues</span></p><p class="stop__leg"><span class="line-dot" style="--line:var(--line-green)"></span>Green Line, Arlington → Copley</p></div>
+            </li>
+            <li class="stop">
+              <span class="num-ring">3</span>
+              <div><h3 class="stop__name">Newbury Street</h3><p class="stop__place">Back Bay</p></div>
+            </li>
+          </ol>
+        </div>
+        <p class="note">Mid-run: <code>.is-done</code> on a stop turns its dots and crumbs green, and <code>.num-ring--current</code> marks the next stop.</p>
+      </div>
+      <div>
+        <h3 class="sg-h3">Tab bar</h3>
+        <div class="tabbar-demo">
+          <nav class="tabbar" aria-label="App (demo)">
+            <a class="tabbar__item is-active" href="#components" aria-current="page"><i data-lucide="compass"></i>Explore</a>
+            <a class="tabbar__item" href="#components"><i data-lucide="map"></i>Map</a>
+            <button class="tabbar__fab" type="button" aria-label="Make a trail"><i data-lucide="plus"></i></button>
+            <a class="tabbar__item" href="#components"><i data-lucide="bookmark"></i>Saved</a>
+            <a class="tabbar__item" href="#components"><i data-lucide="user"></i>You</a>
+          </nav>
+        </div>
+        <p class="note">The tabs are Explore, Map, + (make a trail), Saved and You. The active tab is ink and bold. The + button is the only raised element.</p>
+
+        <h3 class="sg-h3">Numbered rings</h3>
+        <div class="sg-panel sg-row">
+          <span class="num-ring">1</span>
+          <span class="num-ring num-ring--current">2</span>
+          <span class="num-ring num-ring--done"><i data-lucide="check" style="width:15px;height:15px;stroke-width:3"></i></span>
+          <span class="num-ring num-ring--map">4</span>
+          <span class="note" style="margin:0">default · current · done · map marker</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 06 ASSETS -->
+  <section class="sg-section" id="assets">
+    <p class="sg-kicker eyebrow">06</p>
+    <h2 class="sg-h2">Assets</h2>
+    <p class="sg-intro">These are original SVGs in <code>assets/svg/</code>. Regenerate them from the repo root with <code>python docs/tools/build_assets.py docs/assets/svg</code>.</p>
+    <div class="sg-grid">
+      <figure class="asset"><div class="asset__art"><img src="assets/svg/logo-mark.svg" alt="breadcrumb logo mark" width="102"></div><figcaption><code>logo-mark.svg</code> · three crumbs, warming toward the end</figcaption></figure>
+      <figure class="asset"><div class="asset__art"><img src="assets/svg/app-icon.svg" alt="breadcrumb app icon" width="96"></div><figcaption><code>app-icon.svg</code> · home screen, favicon</figcaption></figure>
+      <figure class="asset"><div class="asset__art"><div class="sg-row"><img src="assets/svg/stop-ring.svg" alt="" width="32"><img src="assets/svg/stop-done.svg" alt="" width="32"><img src="assets/svg/stop-number.svg" alt="" width="40"></div></div><figcaption><code>stop-ring.svg</code> · <code>stop-done.svg</code> · <code>stop-number.svg</code> (use <code>.num-ring</code> for live numbers)</figcaption></figure>
+      <figure class="asset asset--wide"><div class="asset__art"><img src="assets/svg/trail-divider.svg" alt="" style="width:100%;max-width:800px"></div><figcaption><code>trail-divider.svg</code> · section breaks and onboarding</figcaption></figure>
+      <figure class="asset asset--wide">
+        <div class="asset__art empty-demo">
+          <img src="assets/svg/empty-trail.svg" alt="" width="240" height="160">
+          <h4>No saved trails yet</h4>
+          <p>Save one from your feed, or make your own. It only takes two stops.</p>
+          <button class="btn" type="button"><i data-lucide="plus"></i>Make a trail</button>
+        </div>
+        <figcaption><code>empty-trail.svg</code> · empty states: a trail waiting for its next stop</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================ 07 RULES -->
+  <section class="sg-section" id="rules">
+    <p class="sg-kicker eyebrow">07</p>
+    <h2 class="sg-h2">Do &amp; don't</h2>
+    <p class="sg-intro">Quick checks before you ship a screen.</p>
+    <ul class="rules">
+      <li class="rule rule--do"><i data-lucide="check"></i><div><b>Draw every route as dots between rings.</b><span>Cards, the map, the stop list and the divider all use the same trail.</span></div></li>
+      <li class="rule rule--dont"><i data-lucide="x"></i><div><b>Don't draw solid lines or arrows for routes.</b><span>A solid line reads as a transit line or a chart.</span></div></li>
+      <li class="rule rule--do"><i data-lucide="check"></i><div><b>Keep orange as the only accent.</b><span>Use it for trails, one primary button, the + button and orange labels.</span></div></li>
+      <li class="rule rule--dont"><i data-lucide="x"></i><div><b>Don't color cards by category or T line.</b><span>Cards stay white. Blue and green mean scheduled and finished, nothing else.</span></div></li>
+      <li class="rule rule--do"><i data-lucide="check"></i><div><b>Use <code>--color-crumb-strong</code> for orange text.</b><span>It passes AA on white and paper.</span></div></li>
+      <li class="rule rule--dont"><i data-lucide="x"></i><div><b>Don't set text in <code>--color-crumb</code>.</b><span>It's for dots and rings only (3.6:1).</span></div></li>
+      <li class="rule rule--do"><i data-lucide="check"></i><div><b>Use soft shadows and hairline borders.</b><span>The only raised element is the + button.</span></div></li>
+      <li class="rule rule--dont"><i data-lucide="x"></i><div><b>Don't use hard offset shadows, tilts or thick outlines.</b><span>Those belonged to the old Boston Bound look.</span></div></li>
+      <li class="rule rule--do"><i data-lucide="check"></i><div><b>Write in plain, warm language.</b><span>Use "trails", "crumbs", "Start trail", and short titles like "Sunday Café Hop".</span></div></li>
+      <li class="rule rule--dont"><i data-lucide="x"></i><div><b>Don't use the MBTA "T" logo or official map art.</b><span>Line colors may appear only as small dots in transit steps.</span></div></li>
+    </ul>
+  </section>
+
+  <footer class="sg-footer">
+    <p><b>Fonts:</b> Inter from Google Fonts (SIL Open Font License 1.1). <b>Icons:</b> Lucide (ISC). <b>Artwork:</b> every file in <code>assets/svg/</code> was drawn for this project. The Google Maps style is in <code>styles/map-style.json</code>.</p>
+    <p>The previous "Boston Bound" system (T vehicles, Bluebikes drawings, line pills) is kept in <a href="archive/boston-bound/style-guide.html"><code>archive/boston-bound/</code></a>.</p>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script type="module">
+  import { mountTrails } from "./tools/trail.js";
+  if (window.lucide) window.lucide.createIcons();
+  mountTrails();
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{
+  "v": 3,
+  "createdOnFiles": { "v": 1, "at": "2026-11-21T20:30:00Z" },
+  "title": "breadcrumb app mockups",
+  "launch": { "view": "canvas" },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": { "x": 0, "y": 0, "w": 390, "h": 844, "title": "Mobile · Explore", "is_interactive": true, "radius": 40 },
+    "Mobile-Detail.dc.html": { "x": 470, "y": 0, "w": 390, "h": 844, "title": "Mobile · Trail detail", "is_interactive": true, "radius": 40 },
+    "Mobile-Run.dc.html": { "x": 940, "y": 0, "w": 390, "h": 844, "title": "Mobile · On the trail", "is_interactive": true, "radius": 40 },
+    "Mobile-Finished.dc.html": { "x": 1410, "y": 0, "w": 390, "h": 844, "title": "Mobile · Trail finished", "is_interactive": true, "radius": 40 },
+    "Mobile-Create.dc.html": { "x": 1880, "y": 0, "w": 390, "h": 844, "title": "Mobile · Make a trail", "is_interactive": true, "radius": 40 },
+    "Mobile-Profile.dc.html": { "x": 2350, "y": 0, "w": 390, "h": 844, "title": "Mobile · You", "is_interactive": true, "radius": 40 },
+    "Web-Explore.dc.html": { "x": 0, "y": 1340, "w": 1440, "h": 980, "title": "Web · Explore", "expand": "fill", "is_interactive": true },
+    "Web-Detail.dc.html": { "x": 1520, "y": 1340, "w": 1440, "h": 1260, "title": "Web · Trail detail", "expand": "fill", "is_interactive": true },
+    "Web-Create.dc.html": { "x": 3040, "y": 1340, "w": 1440, "h": 1120, "title": "Web · Make a trail", "expand": "fill", "is_interactive": true }
+  },
+  "order": [
+    "Main.dc.html",
+    "Mobile-Detail.dc.html",
+    "Mobile-Run.dc.html",
+    "Mobile-Finished.dc.html",
+    "Mobile-Create.dc.html",
+    "Mobile-Profile.dc.html",
+    "Web-Explore.dc.html",
+    "Web-Detail.dc.html",
+    "Web-Create.dc.html"
+  ],
+  "notes": {
+    "mobile": { "x": 0, "y": -300, "text": "Mobile app", "kind": "title1", "maxW": 2740 },
+    "web": { "x": 0, "y": 1040, "text": "Web app", "kind": "title1", "maxW": 4480 }
+  },
+  "designSystems": []
+}

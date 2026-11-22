@@ -1,0 +1,92 @@
+
+@import "tailwindcss";
+@import "tw-animate-css";
+/* Breadcrumb style guide (docs/STYLE_GUIDE.md): tokens + ready-made classes (.btn, .trail-card, .stops…). */
+@import "../docs/styles/tokens.css";
+/* components.css sits in Tailwind's components layer so utilities (md:hidden, mt-4…) can override its classes. */
+@import "../docs/styles/components.css" layer(components);
+
+@custom-variant dark (&:is(.dark *));
+
+/* Theme tokens (shadcn/ui convention), pointed at the Dotted trail palette in
+   docs/styles/tokens.css so shadcn components (Button…) match the mockups.
+   Change colors in tokens.css, not here. There is no dark theme yet. */
+:root {
+  --radius: 0.75rem;
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
+  --card: var(--color-white);
+  --card-foreground: var(--color-ink);
+  --popover: var(--color-white);
+  --popover-foreground: var(--color-ink);
+  --primary: var(--color-crumb-strong);
+  --primary-foreground: var(--color-text-on-accent);
+  --secondary: var(--color-sand);
+  --secondary-foreground: var(--color-ink);
+  --muted: var(--color-sand);
+  --muted-foreground: var(--color-muted);
+  --accent: var(--color-crumb-tint);
+  --accent-foreground: var(--color-ink);
+  --destructive: var(--color-crumb-deep);
+  --border: var(--color-line);
+  --input: var(--color-line-strong);
+  --ring: var(--color-blue);
+}
+
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Dotted trail names (docs/styles/tailwind.config.snippet.js), e.g.
+     bg-paper text-ink-2 border-line rounded-card shadow-card text-crumb-strong. */
+  --color-paper: var(--color-paper);
+  --color-sand: var(--color-sand);
+  --color-ink: var(--color-ink);
+  --color-ink-2: var(--color-ink-2);
+  --color-line: var(--color-line);
+  --color-line-strong: var(--color-line-strong);
+  --color-crumb: var(--color-crumb);
+  --color-crumb-strong: var(--color-crumb-strong);
+  --color-crumb-deep: var(--color-crumb-deep);
+  --color-crumb-tint: var(--color-crumb-tint);
+  --color-scheduled: var(--color-scheduled);
+  --color-done: var(--color-done);
+  --text-md: var(--text-md);
+  --radius-card: var(--radius-card);
+  --radius-pill: var(--radius-pill);
+  --shadow-card: var(--shadow-card);
+  --shadow-float: var(--shadow-float);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply min-h-dvh bg-background font-sans text-foreground antialiased;
+  }
+}

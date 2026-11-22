@@ -1,0 +1,509 @@
+/* ==========================================================================
+   Breadcrumb · components (v0.2, requires tokens.css)
+   Sidequest card · buttons · line pills · rating chips · rating input ·
+   nav tabs · map legend · route strip
+   ========================================================================== */
+
+/* ---------- Sidequest card (track-card layout) ---------------------------- */
+.sq-card {
+  --line: var(--line-rl);
+  --card-fg: var(--color-text-on-color);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface-muted);
+  border: var(--border-thin) solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
+}
+a.sq-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+a.sq-card:focus-visible { outline: none; box-shadow: var(--focus-ring), var(--shadow-md); }
+
+.sq-card--rl { --line: var(--line-rl); }
+.sq-card--gl { --line: var(--line-gl); }
+.sq-card--bl { --line: var(--line-bl); }
+.sq-card--sl { --line: var(--line-sl); }
+.sq-card--ol { --line: var(--line-ol); --card-fg: var(--color-ink); }
+
+.sq-card__top {
+  background: var(--line);
+  color: var(--card-fg);
+  padding: 14px var(--space-4) var(--space-4);
+  min-height: 116px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.sq-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  font-family: var(--font-primary);
+  font-weight: var(--weight-semibold);
+  font-size: 0.8125rem;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+.sq-card__top .pill { background: var(--color-paper); color: var(--color-ink); box-shadow: none; }
+.sq-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-stretch: var(--font-display-stretch);
+  font-weight: var(--weight-bold);
+  font-size: clamp(1.05rem, 0.95rem + 0.45vw, 1.3rem);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+.sq-card__bottom {
+  border-top: var(--border-thin) solid var(--color-border);
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.sq-card__label {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px var(--space-2);
+  font-family: var(--font-primary);
+  font-weight: var(--weight-bold);
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.sq-card__label .vehicle { --vehicle-scale: 0.28; flex: none; }
+.sq-card__label small {
+  font-size: inherit;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+.sq-card__desc {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+.sq-card .chips { gap: 6px; margin-top: auto; }
+
+/* ---------- Vehicles (assets/svg/vehicle-*.svg) ---------------------------
+   The widths below put every drawing on one scale (~3.25 px per foot at
+   --vehicle-scale: 1), so they stay true to size relative to each other.
+   Shrink or grow them together with --vehicle-scale. The Bluebikes files are
+   drawn in more detail (20 units per foot); outside the lineup, size them
+   directly (e.g. width: 160px) instead of with .vehicle--bike. */
+.vehicle { --vehicle-scale: 1; display: block; height: auto; max-width: 100%; }
+.vehicle--rl { width: calc(235px * var(--vehicle-scale)); } /* CRRC #4, 69 ft 9 in */
+.vehicle--ol { width: calc(219px * var(--vehicle-scale)); } /* CRRC #14, 65 ft */
+.vehicle--bl { width: calc(165px * var(--vehicle-scale)); } /* Siemens 0700, 48 ft */
+.vehicle--gl { width: calc(252px * var(--vehicle-scale)); } /* Type 7 LRV, 74 ft */
+.vehicle--sl { width: calc(208px * var(--vehicle-scale)); } /* 60 ft articulated bus */
+.vehicle--bike,
+.vehicle--ebike { width: calc(20.6px * var(--vehicle-scale)); } /* Bluebikes, ~6 ft 4 in */
+
+/* ---------- Buttons ------------------------------------------------------- */
+/* The one playful element in the system: thick ink outline, hard offset
+   shadow, uneven corners and a slight tilt. Everything around them stays clean. */
+.btn {
+  --btn-bg: var(--color-paper);
+  --btn-fg: var(--color-ink);
+  --btn-tilt: var(--tilt-button);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px; /* touch target, including the border */
+  padding: 0 var(--space-5);
+  font-family: var(--font-primary);
+  font-weight: var(--weight-bold);
+  font-size: 1.0625rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--btn-fg);
+  background: var(--btn-bg);
+  border: var(--border-button) solid var(--color-ink);
+  border-radius: var(--radius-button);
+  box-shadow: var(--shadow-button);
+  transform: rotate(var(--btn-tilt));
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--duration-fast) ease-out,
+              transform var(--duration-fast) ease-out, box-shadow var(--duration-fast) ease-out;
+}
+.btn svg { width: 1.1em; height: 1.1em; stroke-width: 2.5; flex: none; }
+.btn:hover { transform: translate(-1px, -2px) rotate(var(--btn-tilt)); box-shadow: var(--shadow-button-hover); }
+.btn:active { transform: translate(4px, 4px) rotate(var(--btn-tilt)); box-shadow: 0 0 0 0 var(--color-ink); }
+.btn:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 4px; }
+
+.btn--primary { --btn-bg: var(--color-red); --btn-fg: var(--color-text-on-color); }
+.btn--primary:hover { --btn-bg: var(--color-red-strong); }
+.btn--go { --btn-bg: var(--color-green); --btn-fg: var(--color-text-on-color); }
+.btn--go:hover { --btn-bg: var(--color-green-strong); }
+.btn--highlight { --btn-bg: var(--color-yellow); }
+.btn--highlight:hover { --btn-bg: var(--color-yellow-strong); }
+.btn--ghost { --btn-bg: transparent; --btn-tilt: 0deg; border-color: transparent; box-shadow: none; }
+.btn--ghost:hover { --btn-bg: var(--color-surface-muted); box-shadow: none; }
+.btn--ghost:active { box-shadow: none; }
+/* Straight variant for dense spots (forms, toolbars, inside cards) */
+.btn--straight { --btn-tilt: 0deg; }
+
+.btn--sm { min-height: 38px; padding: 0 var(--space-3); font-size: 0.875rem; border-width: 3px; box-shadow: var(--shadow-button-sm); }
+.btn--sm:hover { box-shadow: var(--shadow-button); }
+.btn--lg { min-height: 58px; padding: 0 var(--space-6); font-size: 1.25rem; }
+.btn--icon { width: 48px; padding: 0; border-radius: 50%; }
+
+.btn:disabled, .btn:disabled:hover, .btn:disabled:active, .btn[aria-disabled="true"] {
+  --btn-bg: var(--color-surface-muted);
+  --btn-fg: var(--color-gray-mid);
+  border-color: var(--color-gray-light);
+  box-shadow: none;
+  transform: none;
+  cursor: not-allowed;
+}
+
+/* ---------- Line & mode pills --------------------------------------------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3em;
+  min-width: 2.6em;
+  height: 1.65em;
+  padding: 0 0.55em;
+  font-family: var(--font-primary);
+  font-weight: var(--weight-bold);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--color-text-on-color);
+  background: var(--line, var(--color-ink));
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+.pill svg { width: 1.1em; height: 1.1em; stroke-width: 2.25; }
+.pill--rl { --line: var(--line-rl); }
+.pill--gl { --line: var(--line-gl); }
+.pill--bl { --line: var(--line-bl); }
+.pill--sl { --line: var(--line-sl); }
+.pill--cr { --line: var(--line-cr); }
+.pill--ol { --line: var(--line-ol); color: var(--color-ink); }
+.pill--bus { --line: var(--mode-bus); color: var(--color-ink); }
+.pill--bike { --line: var(--mode-bike); color: var(--color-ink); }
+.pill--walk { --line: var(--color-paper); color: var(--color-ink); box-shadow: inset 0 0 0 var(--border-thin) var(--color-ink); }
+.pill--lg { font-size: var(--text-base); }
+
+/* ---------- Rating chips (cost · travel time · fun factor) ---------------- */
+.chips { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 28px;
+  padding: 0 10px;
+  font-family: var(--font-primary);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-sm);
+  line-height: 1;
+  color: var(--color-ink);
+  background: var(--color-paper);
+  border: var(--border-hairline) solid var(--color-border-subtle);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+.chip svg { width: 15px; height: 15px; stroke-width: 2.25; flex: none; }
+.chip--cost svg { color: var(--color-green); }
+.chip--time svg { color: var(--color-blue); }
+.chip--fun svg { color: var(--color-ink); fill: var(--color-yellow); stroke-width: 1.75; }
+.chip__off { color: #B8B8B8; }
+
+/* ---------- Rating input (segmented, radio-based) ------------------------- */
+.rate { display: grid; gap: var(--space-4); }
+.rate__row { display: grid; grid-template-columns: 6.5rem 1fr; align-items: center; gap: var(--space-3); border: 0; margin: 0; padding: 0; min-width: 0; }
+@media (max-width: 480px) {
+  .rate__row { grid-template-columns: 1fr; gap: var(--space-2); }
+}
+.rate__label {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-primary); font-weight: var(--weight-semibold); font-size: var(--text-sm);
+  letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--color-text-muted);
+}
+.rate__label svg { width: 16px; height: 16px; stroke-width: 2.25; }
+.rate__options { display: flex; flex-wrap: wrap; }
+.rate__options input { position: absolute; opacity: 0; pointer-events: none; }
+.rate__options label {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 48px; height: 38px; padding: 0 var(--space-3);
+  margin-left: calc(var(--border-thin) * -1);
+  font-family: var(--font-primary); font-weight: var(--weight-semibold); font-size: 0.9375rem;
+  background: var(--color-paper);
+  border: var(--border-thin) solid var(--color-border);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) ease-out;
+}
+.rate__options label:first-of-type { margin-left: 0; border-radius: var(--radius-control) 0 0 var(--radius-control); }
+.rate__options label:last-of-type { border-radius: 0 var(--radius-control) var(--radius-control) 0; }
+.rate__options label:hover { background: var(--color-surface-muted); }
+.rate__options input:focus-visible + label { z-index: 1; box-shadow: var(--focus-ring); }
+.rate--cost input:checked + label { background: var(--color-green); color: var(--color-text-on-color); }
+.rate--time input:checked + label { background: var(--color-blue); color: var(--color-text-on-color); }
+
+/* fun factor: five stars, every star up to the chosen one fills yellow */
+.rate--fun .rate__options { gap: 2px; }
+.rate--fun .rate__options label { min-width: 40px; width: 40px; height: 40px; padding: 0; margin: 0; border: 0; border-radius: var(--radius-control); background: transparent; }
+.rate--fun .rate__options label:hover { background: var(--color-surface-muted); }
+.rate--fun label svg { width: 26px; height: 26px; stroke-width: 1.75; color: var(--color-ink); fill: var(--color-paper); }
+.rate--fun .rate__options:has(input:checked) label svg { fill: var(--color-yellow); }
+.rate--fun .rate__options input:checked + label ~ input + label svg { fill: var(--color-paper); }
+
+/* ---------- Nav tabs ------------------------------------------------------ */
+.nav-tabs {
+  display: flex;
+  gap: var(--space-1);
+  padding: 6px;
+  background: var(--color-paper);
+  border: var(--border-thin) solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+.nav-tabs__item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  font-family: var(--font-primary);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-base);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  text-decoration: none;
+  border-radius: var(--radius-control);
+  transition: background-color var(--duration-fast) ease-out;
+}
+.nav-tabs__item svg { width: 18px; height: 18px; stroke-width: 2; flex: none; }
+.nav-tabs__item:hover { background: var(--color-surface-muted); }
+.nav-tabs__item:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.nav-tabs__item.is-active,
+.nav-tabs__item[aria-current="page"] { color: var(--color-active); background: var(--color-active-bg); }
+@media (max-width: 640px) {
+  .nav-tabs { gap: 0; padding: 4px; }
+  .nav-tabs__item {
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+    padding: 6px 2px;
+    font-size: var(--text-2xs);
+    letter-spacing: 0.04em;
+  }
+  .nav-tabs__item svg { width: 22px; height: 22px; }
+}
+
+/* ---------- Map route legend ---------------------------------------------- */
+.map-legend {
+  background: var(--color-paper);
+  border: var(--border-hairline) solid var(--color-border-subtle);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-4);
+}
+.map-legend__title {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-primary);
+  font-weight: var(--weight-bold);
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.map-legend ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.map-legend li {
+  display: flex; align-items: center; gap: var(--space-3);
+  font-family: var(--font-primary); font-weight: var(--weight-medium); font-size: 0.9375rem;
+}
+.legend-line {
+  --c: var(--line-rl);
+  position: relative;
+  flex: none;
+  width: 44px;
+  height: var(--border-line);
+  border-radius: 3px;
+  background: var(--c);
+}
+.legend-line::after { /* station dot */
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  background: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  border-radius: 50%;
+}
+.legend-line--bus { background: var(--mode-bus); box-shadow: 0 0 0 1.5px var(--color-ink); }
+.legend-line--walk { height: 0; border-top: 4px dotted var(--mode-walk); background: none; border-radius: 0; }
+.legend-line--bike { height: 0; border-top: 4px dashed var(--mode-bike); background: none; border-radius: 0; }
+.legend-line--bus::after, .legend-line--walk::after, .legend-line--bike::after { display: none; }
+.legend-stop {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin: 0 10px;
+  font-family: var(--font-primary);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xs);
+  background: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  border-radius: 50%;
+}
+.legend-icon { flex: none; width: 20px; height: 20px; margin: 0 12px; }
+
+/* ---------- Itinerary route strip (vertical subway line) ------------------ */
+.route-strip { --line: var(--line-rl); margin: 0; padding: 0; list-style: none; }
+.route-strip > li { position: relative; padding-left: 44px; }
+.route-strip > li::before { /* the line segment */
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 0;
+  bottom: 0;
+  border-left: var(--border-line) solid var(--leg, var(--line));
+}
+.route-strip > li:first-child::before { top: 16px; }
+.route-strip > li:last-child::before { bottom: calc(100% - 16px); }
+.route-strip .stop { padding-top: 3px; padding-bottom: var(--space-3); }
+.route-strip .stop__dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  font-family: var(--font-primary);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-sm);
+  background: var(--color-paper);
+  border: 2.5px solid var(--color-ink);
+  border-radius: 50%;
+}
+.route-strip .stop__name {
+  display: block;
+  font-family: var(--font-primary);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-md);
+  line-height: var(--leading-snug);
+}
+.route-strip .stop__note { display: block; font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-text-muted); }
+.route-strip .leg {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-top: 6px;
+  padding-bottom: 14px;
+  font-family: var(--font-primary);
+  font-weight: var(--weight-medium);
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+}
+.route-strip .leg > .pill, .route-strip .leg > svg { flex: none; }
+.route-strip .leg > svg { width: 16px; height: 16px; stroke-width: 2.25; }
+.route-strip .leg--walk::before { border-left-style: dotted; --leg: var(--mode-walk); }
+.route-strip .leg--bike::before { border-left-style: dashed; --leg: var(--mode-bike); }
+.route-strip .leg--bus { --leg: var(--mode-bus); }
+.route-strip .leg--rl { --leg: var(--line-rl); }
+.route-strip .leg--gl { --leg: var(--line-gl); }
+.route-strip .leg--bl { --leg: var(--line-bl); }
+.route-strip .leg--ol { --leg: var(--line-ol); }
+.route-strip .leg--sl { --leg: var(--line-sl); }
+.route-strip .checkpoint { display: inline-flex; align-items: center; gap: 6px; margin-top: 2px; color: var(--color-ink); }
+.route-strip .checkpoint img { width: 14px; height: 14px; }
+
+/* ---------- Bluebikes: station availability -------------------------------
+   .bike-avail is the count row on a station sheet; .bike-pin is an HTML map
+   marker (Google Maps AdvancedMarkerElement content). Counts come from the
+   Bluebikes GBFS station_status feed: classic bikes, e-bikes, open docks.
+   The pin's tip hangs 9px below its box, so offset the marker by 9px. */
+.bike-avail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+.bike-avail__item {
+  display: grid;
+  gap: 2px;
+  padding: var(--space-3);
+  background: var(--color-paper);
+  border: var(--border-hairline) solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  font-family: var(--font-primary);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-sm);
+  line-height: 1.2;
+  color: var(--color-text-muted);
+}
+.bike-avail__item b {
+  font-family: var(--font-display);
+  font-stretch: var(--font-display-stretch);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-2xl);
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+.bike-avail__item span { display: inline-flex; align-items: flex-start; gap: 5px; min-width: 0; }
+.bike-avail__item svg { flex: none; width: 16px; height: 16px; margin-top: 1px; stroke-width: 2.25; color: var(--color-sky-strong); }
+.bike-avail__item--ebike svg { color: var(--color-ink); fill: var(--color-yellow); stroke-width: 2; }
+.bike-avail__item--docks svg { color: var(--color-text-muted); }
+.bike-avail__item.is-zero b { color: var(--color-gray-mid); }
+
+.bike-pin {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 10px 0 3px;
+  font-family: var(--font-primary);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-sm);
+  line-height: 1;
+  color: var(--color-ink);
+  background: var(--color-paper);
+  border: var(--border-base) solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+.bike-pin::after { /* tip */
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 10px;
+  height: 10px;
+  background: var(--color-paper);
+  border: solid var(--color-ink);
+  border-width: 0 2px 2px 0;
+  transform: translateX(-50%) rotate(45deg);
+}
+.bike-pin__icon { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--mode-bike); }
+.bike-pin__icon svg { width: 14px; height: 14px; stroke-width: 2.5; }
+.bike-pin__e { display: inline-flex; align-items: center; gap: 2px; padding-left: 6px; border-left: 1px solid var(--color-border-subtle); }
+.bike-pin__e svg { width: 13px; height: 13px; fill: var(--color-yellow); stroke-width: 2; }
+.bike-pin--empty { color: var(--color-gray-mid); }
+.bike-pin--empty .bike-pin__icon { background: var(--color-gray-light); }

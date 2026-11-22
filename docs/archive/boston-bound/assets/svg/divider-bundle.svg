@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 70" width="800" height="70" role="img">
+  <!-- Original artwork - BostonHacks 2026 "Breadcrumb" team. -->
+  <title>Red, Green and Blue Line bundle divider</title>
+  <path d="M8 14H356q6 0 10.2 4.2l15.6 15.6q4.2 4.2 10.2 4.2H792" fill="none" stroke="#CE2634" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 23H356q6 0 10.2 4.2l15.6 15.6q4.2 4.2 10.2 4.2H792" fill="none" stroke="#0C6B14" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 32H356q6 0 10.2 4.2l15.6 15.6q4.2 4.2 10.2 4.2H792" fill="none" stroke="#206DDF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><rect x="173" y="7" width="14" height="32" rx="7" fill="#FFFFFF" stroke="#000" stroke-width="2.5"/><rect x="613" y="31" width="14" height="32" rx="7" fill="#FFFFFF" stroke="#000" stroke-width="2.5"/>
+</svg>

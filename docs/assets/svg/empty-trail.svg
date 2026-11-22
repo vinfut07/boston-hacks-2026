@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" width="240" height="160" role="img">
+  <!-- Original artwork - BostonHacks 2026 "breadcrumb" team. -->
+  <title>A trail waiting for its next stop</title>
+  <defs><clipPath id="bc-empty-tile"><rect width="240" height="160" rx="22"/></clipPath></defs><g clip-path="url(#bc-empty-tile)"><rect width="240" height="160" fill="#EFEDE6"/><circle cx="222" cy="6" r="62" fill="#D8E6F0"/><rect x="22" y="26" width="86" height="58" rx="16" fill="#DDE8D3"/><path d="M0 108H240M152 0V160" stroke="#FBFAF7" stroke-width="9"/></g><path d="M40 128C62.4 116 81.6 52 104 64C136.2 76 163.8 126 196 114" stroke="#E8552D" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0 9"/><circle cx="40" cy="128" r="9" fill="#FFFFFF" stroke="#E8552D" stroke-width="3"/><circle cx="104" cy="64" r="9" fill="#FFFFFF" stroke="#E8552D" stroke-width="3"/><circle cx="196" cy="114" r="11" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5" stroke-dasharray="4 3.5"/><path d="M191.5 114H200.5M196 109.5V118.5" stroke="#C2410C" stroke-width="2.4" stroke-linecap="round"/>
+</svg>

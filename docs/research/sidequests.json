@@ -1,0 +1,86 @@
+{
+  "sidequests": [
+    {
+      "key": "chinatown-food-tour",
+      "title": "Chinatown Food Tour",
+      "description": "Eat your way through Boston's Chinatown in one afternoon: dim sum, soup dumplings, then dessert. Every stop is a short walk from the last, and portions are meant for sharing, so come hungry and bring friends.",
+      "category": "food_drink",
+      "neighborhood": "Chinatown",
+      "estimated_cost": 37,
+      "estimated_duration_minutes": 150,
+      "scheduled_at": "2026-11-28T11:00:00-05:00",
+      "status": "published",
+      "primary_line": "ol",
+      "is_curated": true,
+      "stops": [
+        {
+          "stop_order": 0,
+          "experience_key": "chinatown-gate-beach-st",
+          "place_name": "Chinatown Gate",
+          "address": "Beach St & Surface Rd, Boston, MA 02111",
+          "latitude": 42.35119,
+          "longitude": -71.05975,
+          "description": "Meet at the gate at the start of Beach Street.",
+          "planned_activity": "Meet up and take a group photo.",
+          "travel_mode_to_stop": null,
+          "estimated_cost": 0,
+          "notes": "2 min walk from Chinatown station (Orange Line).",
+          "checklist": [
+            { "label": "Take a group photo under the gate", "item_type": "do", "is_checkpoint": true },
+            { "label": "Find the four characters written across the top of the gate", "item_type": "see", "is_checkpoint": false }
+          ]
+        },
+        {
+          "stop_order": 1,
+          "experience_key": "hei-la-moon-essex-st",
+          "place_name": "Hei La Moon",
+          "address": "83 Essex St, Boston, MA 02111",
+          "latitude": 42.35238,
+          "longitude": -71.06023,
+          "description": "Big Cantonese dining room for dim sum. Dim sum is served during the day only.",
+          "planned_activity": "Share a round of dim sum.",
+          "travel_mode_to_stop": "walk",
+          "estimated_cost": 15,
+          "notes": "About 2 min walk. Arrive before noon on weekends to beat the line.",
+          "checklist": [
+            { "label": "Order har gow and shumai for the table", "item_type": "do", "is_checkpoint": false },
+            { "label": "Try one dish nobody in your group has had before", "item_type": "do", "is_checkpoint": false }
+          ]
+        },
+        {
+          "stop_order": 2,
+          "experience_key": "dumpling-cafe-washington-st",
+          "place_name": "Dumpling Cafe",
+          "address": "695 Washington St, Boston, MA 02111",
+          "latitude": 42.35122,
+          "longitude": -71.06305,
+          "description": "Casual Taiwanese spot known for soup dumplings.",
+          "planned_activity": "Split an order of soup dumplings.",
+          "travel_mode_to_stop": "walk",
+          "estimated_cost": 10,
+          "notes": "About 4 min walk.",
+          "checklist": [
+            { "label": "Eat a soup dumpling without spilling the soup", "item_type": "do", "is_checkpoint": false }
+          ]
+        },
+        {
+          "stop_order": 3,
+          "experience_key": "double-chin-harrison-ave",
+          "place_name": "Double Chin",
+          "address": "86 Harrison Ave, Boston, MA 02111",
+          "latitude": 42.35074,
+          "longitude": -71.06124,
+          "description": "Modern Asian comfort food and dessert, finishing the tour on something sweet.",
+          "planned_activity": "Share dessert.",
+          "travel_mode_to_stop": "walk",
+          "estimated_cost": 12,
+          "notes": "About 3 min walk.",
+          "checklist": [
+            { "label": "Split a cube toast", "item_type": "do", "is_checkpoint": false },
+            { "label": "Vote on the best bite of the day", "item_type": "do", "is_checkpoint": true }
+          ]
+        }
+      ]
+    }
+  ]
+}

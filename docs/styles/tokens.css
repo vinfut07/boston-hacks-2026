@@ -1,0 +1,168 @@
+/* ==========================================================================
+   breadcrumb · BostonHacks 2026 — design tokens (v1.0, "Dotted trail")
+   Warm paper, white cards, near-black type, and one orange accent.
+   Every outing is drawn as a dotted trail between ringed stops.
+   Mirror for Tailwind: styles/tailwind.config.snippet.js
+   The previous "Boston Bound" system lives in archive/boston-bound/.
+   ========================================================================== */
+
+/* Inter (Google Fonts, SIL Open Font License), variable weight + optical size. */
+
+:root {
+  /* ---- Neutrals ---------------------------------------------------------- */
+  --color-paper: #F7F6F2;       /* app background, bottom sheets */
+  --color-white: #FFFFFF;       /* cards, chips, buttons, tab bar */
+  --color-sand: #EFEDE6;        /* map land, sunken fills, skeletons */
+  --color-ink: #1B1916;         /* titles, body, active tab (16:1 on paper) */
+  --color-ink-2: #57534C;       /* secondary text: stats, addresses (7.1:1) */
+  --color-muted: #736E66;       /* meta text: distance, labels (4.7:1) */
+  --color-line: #E7E4DD;        /* card borders, dividers */
+  --color-line-strong: #D6D2C8; /* chip outlines, inputs */
+
+  /* ---- Crumb orange: the one accent ------------------------------------- */
+  --color-crumb: #E8552D;       /* trail dots and rings only (graphics, 3.6:1) */
+  --color-crumb-strong: #C2410C;/* orange text, primary button, + button (white on it: 5.2:1) */
+  --color-crumb-deep: #9A3412;  /* hover / pressed */
+  --color-crumb-tint: #FDEDE6;  /* selected rows, soft badges */
+  --color-crumb-soft: #F08A69;  /* logo, middle dot */
+  --color-crumb-pale: #F7C2B1;  /* logo, first dot */
+
+  /* ---- Status colors ----------------------------------------------------- */
+  --color-blue: #1D4ED8;        /* scheduled trails: "Sat 2:00 PM", "Going" (6.7:1) */
+  --color-blue-tint: #E6EDFC;
+  --color-green: #15803D;       /* finished trails (5.0:1) */
+  --color-green-tint: #E3F2E7;
+
+  /* ---- Map --------------------------------------------------------------- */
+  --map-land: #EFEDE6;
+  --map-park: #DDE8D3;
+  --map-water: #D8E6F0;
+  --map-road: #FBFAF7;
+  --map-label: #8C877E;
+
+  /* ---- MBTA line colors (small dots in transit notes only) -------------- */
+  --line-red: #DA291C;
+  --line-orange: #ED8B00;
+  --line-green: #00843D;
+  --line-blue: #003DA5;
+  --line-silver: #7C878E;
+
+  /* ---- Semantic roles ---------------------------------------------------- */
+  --color-bg: var(--color-paper);
+  --color-surface: var(--color-white);
+  --color-surface-sunken: var(--color-sand);
+  --color-text: var(--color-ink);
+  --color-text-2: var(--color-ink-2);
+  --color-text-muted: var(--color-muted);
+  --color-text-on-accent: #FFFFFF;
+  --color-border: var(--color-line);
+  --color-border-strong: var(--color-line-strong);
+  --color-accent: var(--color-crumb-strong);
+  --color-trail: var(--color-crumb);
+  --color-anytime: var(--color-crumb-strong);
+  --color-scheduled: var(--color-blue);
+  --color-done: var(--color-green);
+  --color-focus: rgba(29, 78, 216, 0.45);
+
+  /* ---- Typography (sizes are CSS px on a 390 px-wide phone) -------------- */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --text-2xs: 0.6875rem; /* 11  tab bar labels */
+  --text-xs: 0.75rem;    /* 12  stop labels under a trail */
+  --text-sm: 0.8125rem;  /* 13  eyebrows, meta, addresses */
+  --text-base: 0.9375rem;/* 15  body, stats, chips */
+  --text-md: 1rem;       /* 16  subtitles, buttons */
+  --text-lg: 1.0625rem;  /* 17  stop names */
+  --text-xl: 1.3125rem;  /* 21  card titles, wordmark */
+  --text-2xl: 1.75rem;   /* 28  detail title */
+  --text-3xl: 2rem;      /* 32  page title */
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-heavy: 800;
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.3;
+  --leading-normal: 1.5;
+
+  --tracking-title: -0.035em;  /* page + detail titles */
+  --tracking-tight: -0.02em;   /* card titles, wordmark */
+  --tracking-normal: 0;
+
+  /* ---- Spacing (4 px base) ---------------------------------------------- */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ---- Radii ------------------------------------------------------------- */
+  --radius-sm: 10px;     /* inputs, small tiles */
+  --radius-md: 14px;     /* menus, toasts */
+  --radius-card: 20px;   /* trail cards */
+  --radius-sheet: 24px;  /* bottom sheet top corners */
+  --radius-pill: 999px;  /* tabs, buttons, icon buttons */
+
+  /* ---- Elevation (soft, warm; nothing hard-edged) ----------------------- */
+  --shadow-card: 0 1px 2px rgba(27, 25, 22, 0.04), 0 4px 14px rgba(27, 25, 22, 0.04);
+  --shadow-float: 0 4px 14px rgba(27, 25, 22, 0.14);   /* buttons over the map */
+  --shadow-sheet: 0 -6px 24px rgba(27, 25, 22, 0.06);
+  --shadow-fab: 0 8px 20px rgba(194, 65, 12, 0.32);
+  --focus-ring: 0 0 0 3px var(--color-focus);
+
+  /* ---- Dotted trail ------------------------------------------------------ */
+  --trail-dot: 3px;          /* dot diameter (= stroke width) */
+  --trail-gap: 8.5px;        /* dot spacing */
+  --trail-ring: 7.5px;       /* stop ring radius on cards */
+  --trail-ring-stroke: 2.5px;
+  --stop-num-size: 28px;     /* numbered ring in lists and on the map */
+
+  /* ---- Motion ------------------------------------------------------------ */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+
+  /* ---- Layout ------------------------------------------------------------ */
+  --gutter: 16px;            /* screen side padding */
+  --tabbar-height: 64px;     /* plus the safe-area inset */
+  --container-max: 1120px;
+}
+
+/* ==========================================================================
+   Base + utilities
+   ========================================================================== */
+
+.font-title {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-heavy);
+  letter-spacing: var(--tracking-title);
+  line-height: var(--leading-tight);
+}
+
+/* Small colored line above a title: "Cafés · Anytime". */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  color: var(--color-anytime);
+}
+
+.text-muted { color: var(--color-text-muted); }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}

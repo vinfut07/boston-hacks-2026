@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Explore · breadcrumb</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+*{box-sizing:border-box}
+button,input,textarea{font:inherit;color:inherit}
+a{color:#C2410C}a:hover{color:#9A3412}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #F7F6F2; font-family: Inter, system-ui, sans-serif; color: #1B1916; -webkit-font-smoothing: antialiased">
+
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 20px 16px 4px">
+    <a href="Main.dc.html" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: #1B1916; text-decoration: none">
+      <svg width="30" height="12" viewBox="0 0 34 14" aria-hidden="true"><circle cx="3.6" cy="7" r="2.6" fill="#F7C2B1"></circle><circle cx="13.4" cy="7" r="3.2" fill="#F08A69"></circle><circle cx="26.6" cy="7" r="4.6" fill="#E8552D"></circle></svg>breadcrumb
+    </a>
+    <button type="button" aria-label="Search" style="display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border-radius: 50%; border: 1px solid #E7E4DD; background: #FFFFFF; cursor: pointer">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+    </button>
+  </header>
+
+  <div style="padding: 16px 16px 0">
+    <h1 style="margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.1">Trails for you</h1>
+    <p style="margin: 6px 0 0; font-size: 16px; color: #57534C">You've lived here. Have you explored it?</p>
+  </div>
+
+  <div role="tablist" aria-label="Feed" style="display: flex; gap: 8px; padding: 16px">
+    <button type="button" role="tab" aria-selected="true" style="height: 38px; padding: 0 16px; border-radius: 999px; border: 1px solid #1B1916; background: #1B1916; color: #FFFFFF; font-size: 15px; font-weight: 600; cursor: pointer">For you</button>
+    <button type="button" role="tab" aria-selected="false" style="height: 38px; padding: 0 16px; border-radius: 999px; border: 1px solid #D6D2C8; background: #FFFFFF; font-size: 15px; font-weight: 600; cursor: pointer">Nearby</button>
+    <button type="button" role="tab" aria-selected="false" style="height: 38px; padding: 0 16px; border-radius: 999px; border: 1px solid #D6D2C8; background: #FFFFFF; font-size: 15px; font-weight: 600; cursor: pointer">Friends</button>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 12px; padding: 0 16px">
+    <a href="Mobile-Detail.dc.html" style="display: block; padding: 16px 18px; background: #FFFFFF; border: 1px solid #E7E4DD; border-radius: 20px; box-shadow: 0 1px 2px rgba(27,25,22,0.04), 0 4px 14px rgba(27,25,22,0.04); color: #1B1916; text-decoration: none">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+        <span style="font-size: 13px; font-weight: 600; color: #C2410C">Cafés · Anytime</span>
+        <span style="font-size: 13px; color: #736E66">1.2 mi away</span>
+      </div>
+      <h2 style="margin: 6px 0 0; font-size: 21px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3">Sunday Café Hop</h2>
+      <svg width="320" height="40" viewBox="0 0 320 40" aria-hidden="true" style="display: block; margin-top: 10px"><path d="M9.5 23C62.2 14 107.3 8 160 17C212.7 26 257.8 29 310.5 20" fill="none" stroke="#E8552D" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 8.5"></path><circle cx="9.5" cy="23" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="160" cy="17" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="310.5" cy="20" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle></svg>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 4px; font-size: 12px; color: #736E66">
+        <span>Tatte</span><span style="text-align: center">Public Garden</span><span style="text-align: right">Newbury St</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #E7E4DD; font-size: 15px; font-weight: 600">
+        <span>~$20</span><span>2 hr</span><span>2 crumbs</span>
+        <span style="margin-left: auto; display: inline-flex; align-items: center; gap: 4px"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>4.6</span>
+      </div>
+    </a>
+
+    <a href="Mobile-Detail.dc.html" style="display: block; padding: 16px 18px; background: #FFFFFF; border: 1px solid #E7E4DD; border-radius: 20px; box-shadow: 0 1px 2px rgba(27,25,22,0.04), 0 4px 14px rgba(27,25,22,0.04); color: #1B1916; text-decoration: none">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+        <span style="font-size: 13px; font-weight: 600; color: #1D4ED8">Food · Sat 2:00 PM</span>
+        <span style="font-size: 13px; color: #736E66">6 going</span>
+      </div>
+      <h2 style="margin: 6px 0 0; font-size: 21px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3">Fenway Food Crawl</h2>
+      <svg width="320" height="40" viewBox="0 0 320 40" aria-hidden="true" style="display: block; margin-top: 10px"><path d="M9.5 19C44.6 28 74.7 27 109.8 18C145 9 175.1 14 210.2 23C245.3 32 275.4 28 310.5 19" fill="none" stroke="#E8552D" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 8.5"></path><circle cx="9.5" cy="19" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="109.8" cy="18" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="210.2" cy="23" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle><circle cx="310.5" cy="19" r="7.5" fill="#FFFFFF" stroke="#E8552D" stroke-width="2.5"></circle></svg>
+      <div style="display: flex; align-items: center; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #E7E4DD; font-size: 15px; font-weight: 600">
+        <span>~$35</span><span>3 hr</span><span>4 stops</span>
+        <span style="margin-left: auto; color: #1D4ED8">Going</span>
+      </div>
+    </a>
+
+    <a href="Mobile-Profile.dc.html" style="display: block; padding: 16px 18px; background: #FFFFFF; border: 1px solid #E7E4DD; border-radius: 20px; box-shadow: 0 1px 2px rgba(27,25,22,0.04), 0 4px 14px rgba(27,25,22,0.04); color: #1B1916; text-decoration: none">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+        <span style="font-size: 13px; font-weight: 600; color: #15803D">Finished · Nov 16</span>
+        <span style="font-size: 13px; color: #736E66">You rated 5</span>
+      </div>
+      <h2 style="margin: 6px 0 0; font-size: 21px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3">North End Cannoli Duel</h2>
+      <svg width="320" height="40" viewBox="0 0 320 40" aria-hidden="true" style="display: block; margin-top: 10px"><path d="M9.5 19C114.9 28 205.2 27 310.5 18" fill="none" stroke="#15803D" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 8.5"></path><circle cx="9.5" cy="19" r="7" fill="#15803D"></circle><circle cx="310.5" cy="18" r="7" fill="#15803D"></circle></svg>
+    </a>
+  </div>
+
+  <nav aria-label="App" style="position: absolute; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: end; height: 76px; padding: 0 8px 10px; background: #FFFFFF; border-top: 1px solid #E7E4DD">
+    <a href="Main.dc.html" aria-current="page" style="display: grid; justify-items: center; gap: 3px; font-size: 11px; font-weight: 700; color: #1B1916; text-decoration: none">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>Explore
+    </a>
+    <a href="Web-Explore.dc.html" style="display: grid; justify-items: center; gap: 3px; font-size: 11px; font-weight: 500; color: #736E66; text-decoration: none">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" x2="9" y1="3" y2="18"></line><line x1="15" x2="15" y1="6" y2="21"></line></svg>Map
+    </a>
+    <a href="Mobile-Create.dc.html" aria-label="Make a trail" style="justify-self: center; align-self: start; display: grid; place-items: center; width: 54px; height: 54px; margin-top: -20px; border-radius: 50%; background: #C2410C; color: #FFFFFF; box-shadow: 0 8px 20px rgba(194,65,12,0.32)">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+    </a>
+    <a href="Mobile-Profile.dc.html" style="display: grid; justify-items: center; gap: 3px; font-size: 11px; font-weight: 500; color: #736E66; text-decoration: none">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path></svg>Saved
+    </a>
+    <a href="Mobile-Profile.dc.html" style="display: grid; justify-items: center; gap: 3px; font-size: 11px; font-weight: 500; color: #736E66; text-decoration: none">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>You
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
